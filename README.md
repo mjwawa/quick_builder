@@ -23,7 +23,7 @@
   - Trudny – wzór widać tylko przed startem, trzeba go zapamiętać.
 - **Dwa języki:** polski i angielski, z przełącznikiem w grze.
 - **Komputer, tablet i telefon:** myszka albo palec. Na telefonie gra działa w poziomie.
-- **Apka na ekranie początkowym:** działa bez internetu i nie zbiera ani nie wysyła żadnych danych.
+- **Aplikacja (PWA):** instaluje się jednym przyciskiem na iPhonie, iPadzie, Androidzie i komputerze. Działa na pełnym ekranie i bez internetu, sama się aktualizuje, nie zbiera ani nie wysyła żadnych danych.
 - Dźwięki, konfetti, rekordy i gwiazdki dla każdej planszy.
 
 ## Kategorie
@@ -46,13 +46,15 @@
   <img src="screenshots/categories.png" alt="Wybór kategorii" width="49%">
 </p>
 
-## Instalacja na iPhonie / iPadzie
+## Instalacja
 
-1. Otwórz https://mjwawa.github.io/quick-builder/ w **Safari**.
-2. Stuknij **Udostępnij** → **Do ekranu początkowego** → **Dodaj**.
-3. Uruchom grę raz z internetem – potem działa także offline.
+Otwórz https://mjwawa.github.io/quick-builder/ i stuknij **Zainstaluj grę na ekranie** na ekranie powitalnym.
 
-Na Androidzie: Chrome → menu ⋮ → **Zainstaluj aplikację**.
+- **Android, komputer (Chrome/Edge):** otworzy się systemowe okno instalacji.
+- **iPhone/iPad (Safari):** **Udostępnij** (albo najpierw **⋯**) → **Do ekranu początkowego** → **Dodaj**.
+- **Mac (Safari):** **Plik → Dodaj do Docka**.
+
+Uruchom grę raz z internetem – potem działa także offline.
 
 Postęp (odblokowane plansze, gwiazdki) zapisuje się na danym urządzeniu. Usunięcie ikony z ekranu usuwa też postęp.
 
@@ -65,13 +67,14 @@ Postęp (odblokowane plansze, gwiazdki) zapisuje się na danym urządzeniu. Usun
 | `sw.js` | tryb offline (pamięć podręczna plików gry) |
 | `icons/` | ikony apki (180, 192, 512 px + wersja 1024 px) |
 | `fonts/` | czcionki Grandstander i Nunito wbudowane w grę |
+| `splash/` | ekrany startowe iPhone/iPad |
 | `screenshots/` | zrzuty ekranu do tego opisu |
 
 ## Publikacja i aktualizacja (GitHub Pages)
 
 1. Wrzuć pliki do repozytorium `quick-builder` (gałąź `main`, folder główny).
 2. **Settings → Pages** → *Deploy from a branch* → `main` / `(root)` → **Save**.
-3. Przy każdej nowej wersji podmień pliki w repozytorium. Zainstalowana apka pobierze nową wersję w tle i pokaże ją przy kolejnym uruchomieniu.
+3. Przy każdej nowej wersji podmień pliki w repozytorium. Zainstalowana apka pobierze nową wersję w tle i pokaże komunikat „Jest nowa wersja gry! – Odśwież”.
 
 ---
 
@@ -85,6 +88,6 @@ Postęp (odblokowane plansze, gwiazdki) zapisuje się na danym urządzeniu. Usun
 - 3 difficulty modes: color pattern, gray silhouette, or build from memory.
 - Polish and English, with a language switch in the game.
 - Works with a mouse or a finger. On phones, play in landscape.
-- Can be added to the home screen, works offline and collects no data.
+- Installable web app (PWA): one-tap install on iPhone, iPad, Android and desktop; full screen, works offline, updates itself, collects no data.
 
-**Install on iPhone/iPad:** open the link in Safari → Share → *Add to Home Screen*.
+**Install:** open the link and tap *Install the game* on the welcome screen (on iPhone/iPad: Share → *Add to Home Screen*).

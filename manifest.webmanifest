@@ -1,11 +1,17 @@
 {
+  "id": "./",
   "name": "Quick Builder",
   "short_name": "Quick Builder",
   "description": "Kolorowa gra w układanie klocków dla dzieci / A colorful block-building game for kids",
   "lang": "pl",
-  "start_url": "./",
+  "dir": "ltr",
+  "start_url": "./?source=app",
   "scope": "./",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "landscape",
   "background_color": "#fbf4ff",
   "theme_color": "#fbf4ff",
@@ -14,22 +20,56 @@
     "kids",
     "education"
   ],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
   "icons": [
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/phone.png",
+      "sizes": "1688x780",
+      "type": "image/png",
+      "label": "Quick Builder – gra na telefonie"
+    },
+    {
+      "src": "screenshots/desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Quick Builder – gra na komputerze"
+    },
+    {
+      "src": "screenshots/categories.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wybór kategorii"
     }
   ]
 }
