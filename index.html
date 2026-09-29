@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quick Builder</title>
+<meta name="description" content="Kolorowa gra w układanie klocków dla dzieci. A colorful block-building game for kids.">
+<meta name="theme-color" content="#fbf4ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Quick Builder">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<style>
+@font-face{font-family:'Grandstander';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/grandstander-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Grandstander';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/grandstander-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Grandstander';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/grandstander-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Grandstander';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/grandstander-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/nunito-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/nunito-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/nunito-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/nunito-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/nunito-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/nunito-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+/* Layout: trzy "tacki" zabawkowe obok siebie — Klocki | Pole budowy | Wzór; na telefonie w kolumnie (wzór, pole, klocki) */
+:root{
+  --bg:#fbf4ff; --panel:#ffffff; --ink:#4a3f6b; --ink-soft:#7d72a0;
+  --line:#ecdff9; --shadow:#e0cff5;
+  --pink:#ffb3c7; --peach:#ffcfa8; --butter:#ffe79a; --mint:#bdeccb; --sky:#bfe0ff; --lav:#d9ccff;
+  --accent:#8e6cf0; --good:#43b672; --bad:#ff6f86;
+  --board-top:#dff0ff; --board-bottom:#f5faff; --board-edge:#cfe4fa; --dot:rgba(125,114,160,.32);
+  --font-display:"Grandstander","Comic Sans MS","Chalkboard SE",system-ui,sans-serif;
+  --font-body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(var(--line) 1.6px,transparent 1.8px);
+  background-size:24px 24px;
+  color:var(--ink); font-family:var(--font-body); font-size:16px;
+  padding-inline:16px; padding-block:14px 28px;
+  -webkit-tap-highlight-color:transparent;
+}
+body.dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
+h1,h2,h3{font-family:var(--font-display);margin:0;text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.app{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:44px;height:44px;flex:none}
+.brand h1{font-size:30px;font-weight:800;letter-spacing:.5px;color:var(--ink)}
+.brand h1 span{color:var(--accent)}
+.level-chip{font-family:var(--font-display);font-weight:600;background:var(--lav);border:3px solid #c3b1f5;border-radius:999px;padding:4px 14px;font-size:15px}
+.stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.stat{display:flex;align-items:center;gap:8px;background:var(--panel);border:3px solid var(--line);box-shadow:0 4px 0 var(--shadow);border-radius:16px;padding:6px 14px;font-weight:700;color:var(--ink-soft)}
+.stat svg{width:22px;height:22px;flex:none}
+.stat b{font-family:var(--font-body);font-weight:800;font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums;min-width:2.6ch;text-align:right}
+.stat.bump b{animation:bump .4s}
+.icon-btn{width:46px;height:46px;display:grid;place-items:center;background:var(--panel);border:3px solid var(--line);box-shadow:0 4px 0 var(--shadow);border-radius:16px;cursor:pointer;transition:transform .08s}
+.icon-btn:hover{background:#fdfaff}
+.icon-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--shadow)}
+.icon-btn svg{width:24px;height:24px}
+
+/* ---------- panels ---------- */
+.game{display:grid;grid-template-columns:minmax(230px,1fr) minmax(0,2.3fr) minmax(210px,1fr);gap:18px;align-items:start}
+.panel{background:var(--panel);border:3px solid var(--line);border-radius:24px;box-shadow:0 6px 0 var(--shadow);padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tag{display:inline-block;align-self:flex-start;font-size:18px;font-weight:800;padding:3px 14px 4px;border-radius:12px;letter-spacing:.3px}
+.tag-pink{background:var(--pink)} .tag-mint{background:var(--mint)} .tag-sky{background:var(--sky)}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* tray */
+.tray{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;align-content:flex-start;min-height:120px}
+.tray-item{padding:8px;border-radius:14px;background:#faf6ff;border:2px dashed transparent;cursor:grab;touch-action:none;transition:transform .15s,opacity .2s,background .15s;display:grid;place-items:center}
+.tray-item:hover{transform:translateY(-3px);background:#f3ecff}
+.tray-item .pv{pointer-events:none}
+.tray-item.lifted{opacity:.22;transform:none}
+.tray-item.gone{animation:gone .28s forwards}
+.tray-item.shake{animation:shake .42s}
+.tray-item.hint{border-color:var(--accent);background:#efe8ff;animation:glow 1s ease-in-out infinite}
+.tray-empty{font-family:var(--font-display);color:var(--ink-soft);text-align:center;padding:20px 8px}
+
+/* boards */
+.board{position:relative;width:100%;aspect-ratio:var(--cols,14)/var(--rows,12);border-radius:16px;background:linear-gradient(var(--board-top),var(--board-bottom) 75%);border:3px solid var(--board-edge);overflow:hidden}
+.board::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 0 0,var(--dot) 1.7px,transparent 2.3px);background-size:calc(100% / var(--cols,14)) calc(100% / var(--rows,12));pointer-events:none}
+.board.over{border-color:var(--accent);box-shadow:0 0 0 4px #e6dcff}
+.piece{position:absolute}
+.piece svg,.pv svg,.ghost svg{display:block;width:100%;height:100%;overflow:visible}
+.piece.plop{animation:plop .38s ease-out;transform-origin:50% 100%}
+.mark{position:absolute;border-radius:10px;pointer-events:none;z-index:20}
+.mark.hint{border:4px dashed var(--accent);background:rgba(142,108,240,.12);animation:pulse 1s ease-in-out infinite}
+.mark.wrong{border:4px dashed var(--bad);background:rgba(255,111,134,.12);animation:fade 1.1s forwards}
+
+.progress{display:flex;align-items:center;gap:10px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.bar{width:140px;height:14px;background:#f1eafb;border-radius:999px;overflow:hidden;border:2px solid var(--line)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mint),#8fdca8);border-radius:999px;transition:width .35s}
+
+.helper{display:flex;align-items:center;gap:12px}
+.mascot{width:58px;height:58px;flex:none}
+.mascot.happy{animation:hop .5s}
+.mascot.oops{animation:wobble .5s}
+.mascot .m-sad{display:none}
+.mascot.sad .m-sad{display:inline}
+.mascot.sad .m-happy{display:none}
+.bubble{position:relative;margin:0;background:#fff8e0;border:3px solid #f5df94;border-radius:18px;padding:10px 14px;font-weight:700;font-size:17px;line-height:1.35;min-height:52px;display:flex;align-items:center;flex:1;min-width:0}
+.bubble::before{content:"";position:absolute;left:-11px;top:50%;width:16px;height:16px;background:#fff8e0;border-left:3px solid #f5df94;border-bottom:3px solid #f5df94;transform:translateY(-50%) rotate(45deg)}
+.bubble.good{background:#e9f9ee;border-color:#a9e2bb}.bubble.good::before{background:#e9f9ee;border-color:#a9e2bb}
+.bubble.bad{background:#fff0f3;border-color:#ffc2cd}.bubble.bad::before{background:#fff0f3;border-color:#ffc2cd}
+.bubble.tip{background:#f1ebff;border-color:#cdbcff}.bubble.tip::before{background:#f1ebff;border-color:#cdbcff}
+
+.note{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink-soft);font-weight:700}
+.rule{display:flex;gap:10px;align-items:flex-start;background:#f7f2ff;border-radius:14px;padding:10px 12px}
+.rule svg{width:34px;height:34px;flex:none}
+
+/* ghost while dragging */
+.ghost{position:fixed;left:0;top:0;z-index:60;pointer-events:none;filter:drop-shadow(0 10px 10px rgba(74,63,107,.28))}
+.ghost.anim{transition:transform .22s cubic-bezier(.3,.7,.4,1),width .22s,height .22s}
+
+/* ---------- overlays ---------- */
+.overlay{position:fixed;inset:0;z-index:80;display:flex;overflow-y:auto;overscroll-behavior:contain;padding:16px;background:rgba(74,63,107,.32);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.card{margin:auto;background:var(--panel);border:4px solid var(--line);box-shadow:0 8px 0 var(--shadow);border-radius:28px;padding:26px 24px;max-width:460px;width:100%;text-align:center;display:flex;flex-direction:column;gap:16px;animation:rise .35s ease-out}
+.card h2{font-size:32px;font-weight:800}
+.card .sub{margin:0;font-size:17px;color:var(--ink-soft);font-weight:700;line-height:1.45}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;text-align:left}
+.steps li{display:flex;gap:12px;align-items:center;background:#faf6ff;border-radius:16px;padding:10px 12px;font-weight:700;line-height:1.35}
+.steps .num{flex:none;width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:18px}
+.steps li:nth-child(1) .num{background:var(--sky)} .steps li:nth-child(2) .num{background:var(--pink)} .steps li:nth-child(3) .num{background:var(--mint)}
+.btn{font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:.3px;background:var(--butter);border:3px solid #f0cf5c;box-shadow:0 5px 0 #e3bd45;border-radius:18px;padding:12px 26px;cursor:pointer;transition:transform .08s;align-self:center}
+.btn:hover{background:#ffec9f}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #e3bd45}
+.btn.alt{background:var(--lav);border-color:#c3b1f5;box-shadow:0 5px 0 #b39ff0;font-size:18px;padding:10px 20px}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.stars{display:flex;justify-content:center;gap:6px}
+.stars svg{width:72px;height:72px}
+.stars .s{fill:#eee6f7;stroke:#dcd0ee;stroke-width:3;stroke-linejoin:round}
+.stars .on .s{fill:#ffd84d;stroke:#e9b92e}
+.stars .on{animation:starpop .5s both}
+.stars .on:nth-child(2){animation-delay:.25s}.stars .on:nth-child(3){animation-delay:.5s}
+.stars svg:nth-child(2){transform:translateY(-10px)}
+.result{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.result div{background:#faf6ff;border-radius:16px;padding:8px 16px;font-weight:700;color:var(--ink-soft)}
+.result b{display:block;font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}
+.record{font-family:var(--font-display);font-weight:800;color:var(--good);font-size:18px}
+.best{font-size:14.5px;color:var(--ink-soft);font-weight:700;margin:0}
+
+.btn-link{background:none;border:none;font-weight:800;color:var(--accent);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:10px;align-self:center}
+.btn-link:hover{background:#f3ecff}
+.count-chip{align-self:center;font-weight:800;background:#faf6ff;border-radius:999px;padding:4px 14px;color:var(--ink-soft)}
+
+/* level picker */
+.card.wide{max-width:900px;max-height:calc(100% - 8px);overflow:auto;text-align:left}
+.card.wide h2{text-align:center}
+.level-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.level-tile{position:relative;display:flex;flex-direction:column;gap:8px;background:#faf6ff;border:3px solid var(--line);box-shadow:0 4px 0 var(--shadow);border-radius:18px;padding:10px;cursor:pointer;text-align:left;transition:transform .12s}
+.level-tile:hover:not(:disabled){transform:translateY(-3px);background:#f3ecff}
+.level-tile.current{border-color:#c3b1f5;background:#f1ebff}
+.level-tile:disabled{cursor:not-allowed}
+.level-tile:disabled .board{filter:grayscale(1) opacity(.35)}
+.level-tile .board.mini{border-width:2px;border-radius:10px}
+.level-tile .board.mini::before{display:none}
+.lt-name{font-family:var(--font-display);font-weight:800;font-size:17px;line-height:1.15}
+.lt-meta{display:flex;flex-wrap:wrap;gap:2px 8px;justify-content:space-between;align-items:center;font-size:13.5px;font-weight:700;color:var(--ink-soft)}
+.lt-meta span{white-space:nowrap}
+.mini-stars{display:flex;gap:2px}
+.mini-stars svg{width:17px;height:17px}
+.mini-stars .s{fill:#eee6f7;stroke:#dcd0ee;stroke-width:4;stroke-linejoin:round}
+.mini-stars .on .s{fill:#ffd84d;stroke:#e9b92e}
+.lock{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:44px;height:44px}
+
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90}
+
+/* ---------- animations ---------- */
+@keyframes bump{50%{transform:scale(1.35);color:var(--bad)}}
+@keyframes gone{to{transform:scale(0);opacity:0}}
+@keyframes shake{20%{transform:translateX(-7px) rotate(-3deg)}40%{transform:translateX(7px) rotate(3deg)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+@keyframes glow{50%{box-shadow:0 0 0 6px rgba(142,108,240,.28);transform:translateY(-3px)}}
+@keyframes pulse{50%{background:rgba(142,108,240,.26)}}
+@keyframes fade{0%,60%{opacity:1}to{opacity:0}}
+@keyframes plop{0%{transform:scale(1.08,.9)}55%{transform:scale(.96,1.05)}to{transform:none}}
+@keyframes hop{40%{transform:translateY(-10px) rotate(-6deg)}}
+@keyframes wobble{25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+@keyframes rise{from{transform:translateY(18px) scale(.96);opacity:0}}
+@keyframes starpop{0%{transform:scale(0) rotate(-40deg)}70%{transform:scale(1.2)}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ---------- język ---------- */
+.lang{display:inline-flex;background:var(--panel);border:3px solid var(--line);border-radius:14px;overflow:hidden;flex:none}
+.lang button{border:0;background:none;font:inherit;font-weight:800;font-size:15px;padding:4px 12px;cursor:pointer;color:var(--ink-soft)}
+.lang button[aria-pressed="true"]{background:var(--lav);color:var(--ink)}
+.card>.lang{align-self:flex-end;margin-bottom:-10px}
+.lang-btn{font-weight:800;font-size:15px;color:var(--ink)}
+
+/* ---------- poziomy trudności ---------- */
+.diff{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.diff button{display:flex;flex-direction:column;align-items:center;gap:2px;background:#faf6ff;border:3px solid var(--line);border-radius:16px;padding:8px 6px;cursor:pointer;line-height:1.15;transition:transform .1s}
+.diff button:hover{background:#f3ecff}
+.diff button svg{width:36px;height:30px}
+.diff button b{font-family:var(--font-display);font-size:17px}
+.diff button small{font-size:12.5px;font-weight:700;color:var(--ink-soft)}
+.diff button[aria-checked="true"]{border-color:var(--accent);background:#efe8ff;box-shadow:0 4px 0 #cdbcff;transform:translateY(-2px)}
+.card.wide .diff{max-width:520px;width:100%;align-self:center}
+.sil-wrap{position:absolute;inset:0;filter:drop-shadow(1.2px 0 0 #9a91b6) drop-shadow(-1.2px 0 0 #9a91b6) drop-shadow(0 1.2px 0 #9a91b6) drop-shadow(0 -1.2px 0 #9a91b6)}
+.mystery{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:10px}
+.mystery .q{width:30%;max-width:74px;aspect-ratio:1;border-radius:22%;border:3px dashed #b8b0cf;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:clamp(20px,4vw,38px);color:var(--accent);background:rgba(255,255,255,.6)}
+.mystery b{font-family:var(--font-display);font-size:clamp(13px,1.6vw,17px)}
+.mystery span{font-size:12.5px;font-weight:700;color:var(--ink-soft);max-width:22ch}
+.memo{display:flex;gap:12px;align-items:center;background:#fff8e0;border:3px solid #f5df94;border-radius:18px;padding:10px;text-align:left}
+.memo .board{width:52%;flex:none}
+.memo p{margin:0;font-weight:800;line-height:1.35}
+.card:has(.memo:not([hidden])){gap:12px}
+
+/* ---------- dotyk ---------- */
+html{touch-action:manipulation}
+body{overscroll-behavior-y:none}
+.game,.ghost{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tray-item,.board{-webkit-touch-callout:none}
+.tray-item.selected{border:2px solid var(--accent);background:#efe8ff;box-shadow:0 0 0 4px rgba(142,108,240,.22);transform:translateY(-4px)}
+.board.awaiting{border-style:dashed;border-color:var(--accent);cursor:crosshair}
+.note-short{display:none}
+.dock-tip{display:none;font-size:13px;font-weight:700;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+
+/* ---------- responsive ---------- */
+/* szeroki ekran: kolumna z klockami przyklejona i przewijana w środku */
+@media (min-width:1021px){
+  .tray-panel{position:sticky;top:12px;max-height:calc(100vh - 24px)}
+  .tray{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:2px 2px 8px}
+}
+/* telefon poziomo: prośba o obrót */
+.rotate{display:none}
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  .rotate:not(.dismissed){display:flex;position:fixed;inset:0;z-index:95;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;text-align:center}
+  .rotate svg{width:72px;height:72px}
+  .rotate p{margin:0;font-family:var(--font-display);font-weight:800;font-size:22px}
+}
+/* tablet i telefon: klocki w "doku" przyklejonym do dołu ekranu, przewijane w bok */
+@media (max-width:1020px){
+  .game{grid-template-columns:minmax(0,.85fr) minmax(0,2.3fr);grid-template-areas:"preview board"}
+  .board-panel{grid-area:board}.preview-panel{grid-area:preview}
+  .tray-panel{position:fixed;left:0;right:0;bottom:0;z-index:45;border-radius:22px 22px 0 0;border-bottom:none;
+    box-shadow:0 -6px 18px rgba(74,63,107,.14);padding:8px 12px calc(6px + env(safe-area-inset-bottom,0px));gap:4px}
+  .tray-panel .tag{font-size:15px;padding:2px 10px}
+  .dock-tip{display:block}
+  .tray-panel .panel-head{flex-wrap:nowrap}
+  .tray{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;align-items:center;min-height:0;
+    height:128px;padding:4px 2px 8px;overscroll-behavior-x:contain;scroll-padding-inline:8px;touch-action:pan-x;scrollbar-width:thin;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 22px),transparent)}
+  .tray-item{flex:none;touch-action:none}
+  .tray-item:hover{transform:none}
+  .tray-item.selected{transform:translateY(-3px)}
+}
+@media (max-width:700px){
+  body{padding-block:8px 24px}
+  .app{gap:10px}
+  .topbar{gap:8px}
+  .brand svg{width:34px;height:34px}
+  .brand h1{font-size:22px}
+  .level-chip{font-size:13px;padding:2px 10px;border-width:2px}
+  .stats{width:100%;justify-content:space-between;gap:6px}
+  .stats{flex-wrap:nowrap}
+  .stat{padding:4px 8px;border-radius:14px;gap:6px}
+  .stat svg{width:20px;height:20px}
+  .stat span{display:none}
+  .stat b{font-size:18px;min-width:0}
+  .icon-btn{width:40px;height:40px;border-radius:14px;flex:none}
+  .icon-btn svg{width:22px;height:22px}
+  .game{grid-template-columns:minmax(0,1fr);grid-template-areas:"preview" "board";gap:10px}
+  .panel{padding:10px;gap:8px;border-radius:20px}
+  .preview-panel{display:grid;grid-template-columns:44% minmax(0,1fr);grid-template-areas:"b h" "b r";gap:6px 12px;align-items:start}
+  .preview-panel .panel-head{grid-area:h}.preview-panel .board{grid-area:b}.preview-panel .rule{grid-area:r;background:none;padding:0}
+  .preview-panel .rule svg{display:none}
+  .note-long{display:none}.note-short{display:inline}
+  .board-panel .panel-head{order:-2}
+  .helper{order:-1}
+  .note{font-size:13.5px}
+  .mascot{width:34px;height:34px}
+  .bubble{font-size:14.5px;padding:7px 12px;min-height:44px;line-height:1.3}
+  .bar{width:80px}
+  .tray{height:100px}
+  .preview-panel{grid-template-columns:40% minmax(0,1fr)}
+  .stars svg{width:60px;height:60px}
+  .card{padding:20px 16px}
+  #start-overlay .sub{display:none}
+  .steps li{padding:8px 10px}
+  .card h2{font-size:26px}
+}
+@media (max-width:380px){
+  .stats{gap:4px}
+  .stat{padding:4px 6px;gap:4px}
+  .icon-btn{width:36px;height:36px;border-radius:12px}
+  .icon-btn svg{width:20px;height:20px}
+  .lang-btn{font-size:14px}
+}
+</style>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <rect x="4" y="27" width="36" height="13" rx="4" fill="#ffb3c7" stroke="#b77d95" stroke-width="2.5"/>
+        <rect x="9" y="15" width="24" height="12" rx="4" fill="#bdeccb" stroke="#78a98a" stroke-width="2.5"/>
+        <rect x="14" y="4" width="14" height="11" rx="4" fill="#ffe79a" stroke="#c4a54e" stroke-width="2.5"/>
+      </svg>
+      <h1>Quick <span>Builder</span></h1>
+      <div class="level-chip" id="level-chip">Plansza 1 · Domek</div>
+    </div>
+    <div class="stats">
+      <div class="stat" data-i18n-title="time" title="Czas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#8e6cf0" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>
+        <span data-i18n="time">Czas</span><b id="time">0:00</b>
+      </div>
+      <div class="stat" id="stat-mistakes" data-i18n-title="mistakes" title="Pomyłki">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ff6f86" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+        <span data-i18n="mistakes">Pomyłki</span><b id="mistakes">0</b>
+      </div>
+      <button class="icon-btn lang-btn" id="btn-lang" type="button" data-i18n-aria="langSwitch" aria-label="Zmień język" data-i18n-title="langSwitch" title="Zmień język">PL</button>
+      <button class="icon-btn" id="btn-levels" type="button" data-i18n-aria="chooseLevel" aria-label="Wybierz planszę" data-i18n-title="levels" title="Plansze">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4a3f6b" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2" fill="#ffb3c7"/><rect x="13.5" y="3.5" width="7" height="7" rx="2" fill="#bdeccb"/><rect x="3.5" y="13.5" width="7" height="7" rx="2" fill="#bfe0ff"/><rect x="13.5" y="13.5" width="7" height="7" rx="2" fill="#ffe79a"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-sound" type="button" aria-label="Wycisz dźwięki" data-i18n-title="sounds" title="Dźwięki">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4a3f6b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="#ffe79a"/><path class="snd-on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="snd-off" d="M16 9.5l5 5M21 9.5l-5 5" style="display:none"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-restart" type="button" data-i18n-aria="restart" aria-label="Zacznij od nowa" data-i18n-title="restart" title="Zacznij od nowa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4a3f6b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="game">
+    <section class="panel tray-panel" data-i18n-aria="trayAria" aria-label="Klocki do wyboru">
+      <div class="panel-head"><h2 class="tag tag-pink" data-i18n="blocks">Klocki</h2><span class="dock-tip" data-i18n="dockTip">↔ przesuń · ↑ na pole</span></div>
+      <div class="tray" id="tray"></div>
+    </section>
+
+    <section class="panel board-panel" data-i18n-aria="board" aria-label="Pole budowy">
+      <div class="panel-head">
+        <h2 class="tag tag-mint" data-i18n="board">Pole budowy</h2>
+        <div class="progress"><div class="bar"><i id="bar"></i></div><span id="count">0 / 0</span></div>
+      </div>
+      <div class="board" id="board"></div>
+      <div class="helper">
+        <svg class="mascot" id="mascot" viewBox="0 0 60 60" aria-hidden="true">
+          <rect x="6" y="10" width="48" height="44" rx="13" fill="#d9ccff" stroke="#8a78c4" stroke-width="3"/>
+          <rect x="13" y="15" width="34" height="5" rx="2.5" fill="#fff" opacity=".65"/>
+          <circle cx="23" cy="32" r="3.6" fill="#4a3f6b"/><circle cx="37" cy="32" r="3.6" fill="#4a3f6b"/>
+          <circle cx="24.2" cy="30.8" r="1.1" fill="#fff"/><circle cx="38.2" cy="30.8" r="1.1" fill="#fff"/>
+          <circle cx="16.5" cy="40" r="3.2" fill="#ffb3c7"/><circle cx="43.5" cy="40" r="3.2" fill="#ffb3c7"/>
+          <path class="m-happy" d="M24.5 40.5q5.5 6 11 0" fill="none" stroke="#4a3f6b" stroke-width="2.8" stroke-linecap="round"/>
+          <path class="m-sad" d="M25 45q5 -4.5 10 0" fill="none" stroke="#4a3f6b" stroke-width="2.8" stroke-linecap="round"/>
+        </svg>
+        <p class="bubble" id="msg" aria-live="polite">Cześć! Zbudujmy razem domek.</p>
+      </div>
+    </section>
+
+    <section class="panel preview-panel" data-i18n-aria="pattern" aria-label="Wzór">
+      <div class="panel-head"><h2 class="tag tag-sky" data-i18n="pattern">Wzór</h2></div>
+      <div class="board preview" id="preview"></div>
+      <div class="rule">
+        <svg viewBox="0 0 34 34" aria-hidden="true">
+          <rect x="3" y="21" width="28" height="10" rx="3" fill="#bdeccb" stroke="#78a98a" stroke-width="2"/>
+          <rect x="9" y="11" width="16" height="10" rx="3" fill="#ffcfa8" stroke="#b98f6c" stroke-width="2"/>
+          <path d="M17 1.5v7M14 5.5l3 3 3-3" fill="none" stroke="#8e6cf0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="note"><span class="note-long" data-i18n="noteLong">Buduj od dołu. Klocek zostaje na polu, gdy to, na czym stoi, jest już na swoim miejscu.</span><span class="note-short" data-i18n="noteShort">Buduj od dołu do góry!</span></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="start-overlay">
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="start-title">
+    <div class="lang" role="group" data-i18n-aria="langAria" aria-label="Język"><button type="button" data-lang="pl">PL</button><button type="button" data-lang="en">EN</button></div>
+    <h2 id="start-title">Plansza 1: Domek</h2>
+    <div class="count-chip" id="start-count">Klocków do ułożenia: 12</div>
+    <ol class="steps">
+      <li><span class="num">1</span><span id="step-look">Popatrz na wzór – tak ma wyglądać budowla.</span></li>
+      <li><span class="num">2</span><span id="step-move">Przeciągnij klocek myszką na pole budowy, w to samo miejsce co na wzorze.</span></li>
+      <li><span class="num">3</span><span data-i18n="step3">Buduj od dołu do góry. Zła kolejność? Klocek wróci na swoje miejsce.</span></li>
+    </ol>
+    <div class="diff" role="radiogroup" data-i18n-aria="diffAria" aria-label="Poziom trudności">
+      <button type="button" role="radio" data-diff="easy"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10" fill="#ffa3b8" stroke="#b77d95" stroke-width="2" stroke-linejoin="round"/><rect x="8" y="14" width="20" height="13" rx="2" fill="#ffcfa8" stroke="#b98f6c" stroke-width="2"/><rect x="15" y="18" width="6" height="9" rx="1.5" fill="#cdb9ff"/></svg><b data-i18n="easy">Łatwy</b><small data-i18n="easySub">kolorowy wzór</small></button>
+      <button type="button" role="radio" data-diff="medium"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10v13H5z" fill="#b8b0cf" stroke="#8f86ab" stroke-width="2" stroke-linejoin="round"/></svg><b data-i18n="medium">Średni</b><small data-i18n="mediumSub">szary kształt</small></button>
+      <button type="button" role="radio" data-diff="hard"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10v13H5z" fill="none" stroke="#b8b0cf" stroke-width="2" stroke-dasharray="3 3" stroke-linejoin="round"/><text x="18" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#8e6cf0" font-family="sans-serif">?</text></svg><b data-i18n="hard">Trudny</b><small data-i18n="hardSub">bez wzoru</small></button>
+    </div>
+    <div class="memo" id="start-memo" hidden>
+      <div class="board" id="memo-board"></div>
+      <p data-i18n="memo">Zapamiętaj, jak to wygląda! Po starcie wzór zniknie.</p>
+    </div>
+    <p class="sub" data-i18n="starsInfo">Liczy się czas i liczba pomyłek. Możesz zdobyć 3 gwiazdki!</p>
+    <div class="btn-row">
+      <button class="btn" id="btn-start" type="button">Start!</button>
+      <button class="btn alt" id="btn-start-levels" type="button" data-i18n="chooseLevel">Wybierz planszę</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="levels-overlay" hidden>
+  <div class="card wide" role="dialog" aria-modal="true" aria-labelledby="levels-title">
+    <div class="lang" role="group" data-i18n-aria="langAria" aria-label="Język"><button type="button" data-lang="pl">PL</button><button type="button" data-lang="en">EN</button></div>
+    <h2 id="levels-title" data-i18n="chooseLevel">Wybierz planszę</h2>
+    <p class="sub" style="text-align:center" data-i18n="levelsSub">Każda plansza ma więcej klocków. Ułóż jedną, żeby odblokować następną.</p>
+    <div class="diff" role="radiogroup" data-i18n-aria="diffAria" aria-label="Poziom trudności">
+      <button type="button" role="radio" data-diff="easy"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10" fill="#ffa3b8" stroke="#b77d95" stroke-width="2" stroke-linejoin="round"/><rect x="8" y="14" width="20" height="13" rx="2" fill="#ffcfa8" stroke="#b98f6c" stroke-width="2"/><rect x="15" y="18" width="6" height="9" rx="1.5" fill="#cdb9ff"/></svg><b data-i18n="easy">Łatwy</b><small data-i18n="easySub">kolorowy wzór</small></button>
+      <button type="button" role="radio" data-diff="medium"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10v13H5z" fill="#b8b0cf" stroke="#8f86ab" stroke-width="2" stroke-linejoin="round"/></svg><b data-i18n="medium">Średni</b><small data-i18n="mediumSub">szary kształt</small></button>
+      <button type="button" role="radio" data-diff="hard"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10v13H5z" fill="none" stroke="#b8b0cf" stroke-width="2" stroke-dasharray="3 3" stroke-linejoin="round"/><text x="18" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#8e6cf0" font-family="sans-serif">?</text></svg><b data-i18n="hard">Trudny</b><small data-i18n="hardSub">bez wzoru</small></button>
+    </div>
+    <div class="level-grid" id="level-grid"></div>
+    <button class="btn alt" id="btn-levels-close" type="button" data-i18n="close">Zamknij</button>
+  </div>
+</div>
+
+<div class="overlay" id="win-overlay" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="win-title">
+    <div class="stars" id="stars"></div>
+    <h2 id="win-title">Brawo! Domek gotowy!</h2>
+    <div class="result">
+      <div><span data-i18n="time">Czas</span><b id="win-time">0:00</b></div>
+      <div><span data-i18n="mistakes">Pomyłki</span><b id="win-mistakes">0</b></div>
+      <div><span data-i18n="diffShort">Poziom</span><b id="win-diff">Łatwy</b></div>
+    </div>
+    <div class="record" id="win-record" hidden data-i18n="record">Nowy rekord!</div>
+    <p class="best" id="win-best"></p>
+    <p class="sub" id="win-tip"></p>
+    <div class="btn-row">
+      <button class="btn" id="btn-next" type="button" data-i18n="next">Następna plansza</button>
+      <button class="btn alt" id="btn-again" type="button" data-i18n="again">Jeszcze raz</button>
+      <button class="btn alt" id="btn-win-levels" type="button" data-i18n="levels">Plansze</button>
+    </div>
+  </div>
+</div>
+
+<div class="rotate" id="rotate" role="dialog" data-i18n-aria="rotateAria" aria-label="Obróć telefon">
+  <svg viewBox="0 0 72 72" aria-hidden="true"><rect x="22" y="8" width="28" height="50" rx="7" fill="#d9ccff" stroke="#8a78c4" stroke-width="3"/><circle cx="36" cy="51" r="2.5" fill="#8a78c4"/><path d="M10 40a26 26 0 0 0 16 22M60 30a26 26 0 0 0-14-20" fill="none" stroke="#8e6cf0" stroke-width="3" stroke-linecap="round"/><path d="M22 60l4 2-1 4M44 8l3 3-4 2" fill="none" stroke="#8e6cf0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <p data-i18n="rotateTitle">Obróć telefon pionowo</p>
+  <span class="note" data-i18n="rotateNote">Tak klocki i pole budowy zmieszczą się na ekranie.</span>
+  <button class="btn alt" id="btn-rotate-ok" type="button" data-i18n="rotateOk">Graj mimo to</button>
+</div>
+
+<canvas id="confetti" hidden></canvas>
+
+<script>
+(function(){
+/* ================= PLANSZE =================
+   Siatka 14 × 12 kratek. x, y, w, h – w kratkach (y liczone od góry).
+   deps – klocki, które muszą już stać, zanim ten klocek się utrzyma.
+   Klocki o tym samym kształcie, rozmiarze i kolorze są wymienne (np. dwa okna). */
+const C={coral:'#ffa3b8',pink:'#ffb3c7',rose:'#ff9fb2',red:'#ff8a9e',peach:'#ffcfa8',orange:'#f6b48c',butter:'#ffe08a',
+  sun:'#ffe27a',mint:'#a6e0b2',green:'#93d9a6',sky:'#b3e1ff',water:'#a9d8f5',lav:'#cdb9ff',lavLight:'#e4dbff',lavDeep:'#b9a6f2',
+  stone:'#d6cdea',brown:'#dcb48f',dark:'#8f84b8',white:'#fbf8ff',light:'#fff3b0'};
+function P(id,label,shape,x,y,w,h,color,deco,z,deps,extra){return Object.assign({id,label,shape,x,y,w,h,color,deco,z,deps},extra||{})}
+
+const LEVELS=[
+{id:'domek',acc:'domek',done:'gotowy',name:'Domek',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('wallL','ściana','rect',2,7,3,4,C.peach,'bricks',2,['ground']),
+  P('wallR','ściana','rect',7,7,3,4,C.peach,'bricks',2,['ground']),
+  P('door','drzwi','rect',5,8,2,3,C.lav,'door',2,['ground']),
+  P('lintel','belka','rect',5,7,2,1,C.butter,'dots',2,['door']),
+  P('winL','okno','rect',2.5,8,2,2,C.sky,'window',3,['wallL']),
+  P('winR','okno','rect',7.5,8,2,2,C.sky,'window',3,['wallR']),
+  P('roof','dach','tri',1,3,10,4,C.coral,'roof',3,['wallL','wallR','lintel']),
+  P('chimney','komin','rect',7.6,3,1,3,C.orange,'chimney',1,['roof']),
+  P('trunk','pień','rect',12,8,1,3,C.brown,'bark',2,['ground']),
+  P('crown','korona drzewa','circle',11,5,3,3,C.green,'apples',3,['trunk']),
+  P('sun','słońce','sun',0.5,0.5,2.5,2.5,C.sun,'',1,[])
+]},
+{id:'samochod',acc:'samochód',done:'gotowy',name:'Samochód',pieces:[
+  P('road','droga','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheelA','koło','circle',2.5,9,2,2,C.dark,'wheel',4,['road']),
+  P('wheelB','koło','circle',9.5,9,2,2,C.dark,'wheel',4,['road']),
+  P('chassis','karoseria','rect',1,6.8,12,2.6,C.coral,'',2,['wheelA','wheelB']),
+  P('stripe','pasek','rect',3,7.6,7,0.45,C.white,'',3,['chassis']),
+  P('cabin','kabina','trap',3,3.5,7,3.3,C.peach,'',2,['chassis'],{inset:1.3}),
+  P('winA','szyba','rect',4.5,4.2,1.9,1.9,C.sky,'window',3,['cabin']),
+  P('winB','szyba','rect',6.7,4.2,1.9,1.9,C.sky,'window',3,['cabin']),
+  P('headlight','reflektor','circle',12,7.2,0.9,0.9,C.butter,'glow',3,['chassis']),
+  P('taillight','lampka tylna','rect',1.1,7.2,0.5,0.9,C.red,'',3,['chassis']),
+  P('rack','bagażnik','rect',4.4,2.8,4.2,0.7,C.lav,'dots',2,['cabin']),
+  P('bag1','walizka','rect',4.8,1.4,1.6,1.4,C.mint,'box',2,['rack']),
+  P('bag2','torba','rect',6.7,1.7,1.5,1.1,C.butter,'box',2,['rack']),
+  P('cloud','chmurka','cloud',10,0.6,3.2,1.6,C.white,'',1,[])
+]},
+{id:'lodka',acc:'łódkę',done:'gotowa',name:'Łódka',pieces:[
+  P('water','woda','rect',0,10,14,2,C.water,'wave',4,[]),
+  P('hull','kadłub','trapInv',2,7.4,10,2.9,C.coral,'',2,['water'],{inset:1.4}),
+  P('stripe','pasek','rect',3,8,8,0.45,C.white,'',3,['hull']),
+  P('port1','bulaj','circle',3.8,8.75,0.9,0.9,C.sky,'porthole',3,['hull']),
+  P('port2','bulaj','circle',6.55,8.75,0.9,0.9,C.sky,'porthole',3,['hull']),
+  P('port3','bulaj','circle',9.3,8.75,0.9,0.9,C.sky,'porthole',3,['hull']),
+  P('cabin','kajuta','rect',8.4,5.4,2.6,2,C.butter,'planks',2,['hull']),
+  P('cabinRoof','daszek','rect',8.1,4.9,3.2,0.5,C.lav,'',2,['cabin']),
+  P('mast','maszt','rect',5.3,1,0.5,6.4,C.brown,'bark',1,['hull']),
+  P('sailL','żagiel','triL',1.9,1.6,3.3,5.2,C.white,'sail',2,['mast']),
+  P('sailR','mały żagiel','triR',5.9,2.2,2.2,3.2,C.peach,'sail',2,['mast']),
+  P('flag','flaga','pennant',5.8,1,1.2,0.8,C.red,'',2,['mast']),
+  P('buoy','koło ratunkowe','circle',9.2,5.9,1,1,C.rose,'buoy',3,['cabin']),
+  P('sun','słońce','sun',11.2,0.4,2.5,2.5,C.sun,'',1,[]),
+  P('cloud','chmurka','cloud',0.3,0.3,3,1.5,C.white,'',1,[]),
+  P('fish','rybka','fish',11.5,10.6,1.3,0.8,C.peach,'',5,['water'])
+]},
+{id:'rakieta',acc:'rakietę',done:'gotowa',name:'Rakieta',pieces:[
+  P('ground','płyta startowa','rect',0,11,14,1,C.stone,'dots',1,[]),
+  P('pad','podest','trap',3.5,10,7,1,C.lav,'',2,['ground'],{inset:0.6}),
+  P('body','kadłub rakiety','rect',5,4,4,6,C.white,'',2,['pad']),
+  P('finL','statecznik','triL',3.5,7.5,1.5,2.5,C.coral,'',3,['body']),
+  P('finR','statecznik','triR',9,7.5,1.5,2.5,C.coral,'',3,['body']),
+  P('nose','czubek','tri',5,1,4,3,C.coral,'',2,['body']),
+  P('antenna','antenka','rect',6.85,0.2,0.3,1,C.dark,'',1,['nose']),
+  P('win1','okienko','circle',6.2,5,1.6,1.6,C.sky,'porthole',3,['body']),
+  P('win2','okienko','circle',6.4,7,1.2,1.2,C.sky,'porthole',3,['body']),
+  P('band','pasek','rect',5,8.8,4,0.55,C.butter,'',3,['body']),
+  P('tower','wieża startowa','rect',11,3,0.8,8,C.peach,'ladder',2,['ground']),
+  P('arm1','ramię','rect',9,5,2,0.4,C.dark,'',2,['tower','body']),
+  P('arm2','ramię','rect',9,6.6,2,0.4,C.dark,'',2,['tower','body']),
+  P('towerLight','lampka','circle',11,2.2,0.8,0.8,C.red,'glow',2,['tower']),
+  P('moon','księżyc','moon',0.8,0.6,2.2,2.2,C.sun,'',1,[]),
+  P('star1','gwiazdka','star',3.4,2.6,1,1,C.butter,'',1,[]),
+  P('star2','gwiazdka','star',1.2,4.6,1,1,C.butter,'',1,[]),
+  P('star3','gwiazdka','star',12.4,0.5,1,1,C.butter,'',1,[])
+]},
+{id:'wiatrak',acc:'wiatrak',done:'gotowy',name:'Wiatrak',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('base','wieża młyna','trap',4,5,5,6,C.peach,'bricks',2,['ground'],{inset:1}),
+  P('door','drzwi','rect',5.75,8.8,1.5,2.2,C.lav,'door',3,['base']),
+  P('window','okno','rect',4.9,7,1,1,C.sky,'window',3,['base']),
+  P('roof','dach','tri',3.6,2.8,5.8,2.2,C.coral,'',3,['base']),
+  P('hub','oś','circle',5.9,3.4,1.2,1.2,C.butter,'wheel',5,['roof']),
+  P('bladeT','skrzydło','rect',6.1,0.1,0.8,3.3,C.white,'lattice',4,['hub']),
+  P('bladeB','skrzydło','rect',6.1,4.6,0.8,3.3,C.white,'lattice',4,['hub']),
+  P('bladeL','skrzydło','rect',2.6,3.6,3.3,0.8,C.white,'lattice',4,['hub']),
+  P('bladeR','skrzydło','rect',7.1,3.6,3.3,0.8,C.white,'lattice',4,['hub']),
+  P('post1','słupek','rect',0.6,9,0.5,2,C.brown,'',2,['ground']),
+  P('post2','słupek','rect',2.6,9,0.5,2,C.brown,'',2,['ground']),
+  P('rail','deska płotu','rect',0.3,9.5,3.1,0.4,C.brown,'',3,['post1','post2']),
+  P('barrel','beczka','rect',3.25,9.9,0.85,1.1,C.orange,'bands',2,['ground']),
+  P('flower','kwiatek','flower',9.3,9.5,0.7,1.5,C.rose,'',2,['ground']),
+  P('bush','krzak','semi',10.3,9.8,3,1.2,C.green,'',2,['ground']),
+  P('sun','słońce','sun',11.2,0.5,2.4,2.4,C.sun,'',1,[]),
+  P('cloud1','chmurka','cloud',0.3,0.8,3,1.4,C.white,'',1,[]),
+  P('cloud2','mała chmurka','cloud',0.2,5.4,2.4,1.2,C.white,'',1,[])
+]},
+{id:'pociag',acc:'pociąg',done:'gotowy',name:'Pociąg',pieces:[
+  P('rails','tory','rect',0,11,14,1,C.stone,'rails',1,[]),
+  P('lw1','koło','circle',1,9.6,1.4,1.4,C.dark,'wheel',4,['rails']),
+  P('lw2','koło','circle',2.8,9.6,1.4,1.4,C.dark,'wheel',4,['rails']),
+  P('lw3','koło','circle',4.6,9.6,1.4,1.4,C.dark,'wheel',4,['rails']),
+  P('chassis','podwozie lokomotywy','rect',0.5,8.6,6,1.4,C.lav,'',2,['lw1','lw2','lw3']),
+  P('boiler','kocioł','rect',0.8,6,3.5,2.6,C.coral,'bands',2,['chassis']),
+  P('cab','kabina','rect',4.3,4,2.2,4.6,C.peach,'',2,['chassis']),
+  P('cabWin','okno','rect',4.7,4.6,1.4,1.3,C.sky,'window',3,['cab']),
+  P('cabRoof','dach kabiny','rect',4,3.4,2.8,0.6,C.dark,'',2,['cab']),
+  P('chimney','komin','trapInv',1.2,4,1.2,2,C.dark,'',2,['boiler'],{inset:0.25}),
+  P('steam','dym','cloud',0.2,1.9,2.8,1.6,C.white,'',1,['chimney']),
+  P('dome','kopułka','semi',2.8,5.3,1.1,0.7,C.butter,'',2,['boiler']),
+  P('lamp','lampa','circle',0.25,6.5,0.7,0.7,C.butter,'glow',3,['boiler']),
+  P('ww1','koło','circle',8,9.6,1.4,1.4,C.dark,'wheel',4,['rails']),
+  P('ww2','koło','circle',11.2,9.6,1.4,1.4,C.dark,'wheel',4,['rails']),
+  P('wchassis','podwozie wagonu','rect',7.5,8.6,5.8,1.4,C.lav,'',2,['ww1','ww2']),
+  P('coupler','łącznik','rect',6.4,9,1.2,0.4,C.dark,'',1,['chassis','wchassis']),
+  P('wagon','wagon','rect',7.7,5,5.4,3.6,C.mint,'planks',2,['wchassis']),
+  P('box1','paczka','rect',8.1,3.6,1.6,1.4,C.peach,'box',2,['wagon']),
+  P('box2','skrzynia','rect',9.9,3.2,1.8,1.8,C.butter,'box',2,['wagon']),
+  P('ball','piłka','circle',11.8,3.8,1.2,1.2,C.rose,'ball',2,['wagon'])
+]},
+{id:'latarnia',acc:'latarnię morską',done:'gotowa',name:'Latarnia morska',pieces:[
+  P('sea','morze','rect',0,10.5,14,1.5,C.water,'wave',4,[]),
+  P('rocks','skały','semi',1.5,8.8,6,2.2,C.stone,'stones',2,['sea']),
+  P('seg1','piętro latarni','trap',2.5,7.4,4,1.8,C.coral,'',3,['rocks'],{inset:0.2}),
+  P('seg2','piętro latarni','trap',2.7,5.6,3.6,1.8,C.white,'',3,['seg1'],{inset:0.2}),
+  P('seg3','piętro latarni','trap',2.9,3.8,3.2,1.8,C.coral,'',3,['seg2'],{inset:0.2}),
+  P('balcony','balkon','rect',2.7,3.3,3.6,0.5,C.dark,'',3,['seg3']),
+  P('lantern','lampa','rect',3.3,1.8,2.4,1.5,C.light,'window',3,['balcony']),
+  P('dome','kopuła','semi',3.1,0.9,2.8,0.9,C.coral,'',3,['lantern']),
+  P('ball','kulka','circle',4.25,0.4,0.5,0.5,C.dark,'',2,['dome']),
+  P('beamL','światło','pennant',0,1.55,3.3,2,C.light,'',2,['lantern'],{opacity:.85}),
+  P('beamR','światło','pennantL',5.7,1.55,3.3,2,C.light,'',2,['lantern'],{opacity:.85}),
+  P('door','drzwi','rect',4,7.9,1,1.3,C.lav,'door',4,['seg1']),
+  P('win1','okienko','rect',4.15,6.1,0.7,0.9,C.sky,'window',4,['seg2']),
+  P('win2','okienko','rect',4.15,4.3,0.7,0.9,C.sky,'window',4,['seg3']),
+  P('hull','łódka','trapInv',9,9.6,3.6,1.1,C.peach,'',3,['sea'],{inset:0.5}),
+  P('mast','maszt','rect',10.7,6.3,0.25,3.3,C.brown,'',2,['hull']),
+  P('sailA','żagiel','triL',9.2,6.6,1.45,2.9,C.white,'sail',2,['mast']),
+  P('sailB','mały żagiel','triR',10.95,7.3,1.3,2.1,C.pink,'sail',2,['mast']),
+  P('flag','flaga','pennant',10.95,6.3,0.8,0.5,C.red,'',2,['mast']),
+  P('bird1','mewa','bird',8,1,1,0.5,C.dark,'',1,[]),
+  P('bird2','mewa','bird',11,2.8,1,0.5,C.dark,'',1,[]),
+  P('cloud','chmurka','cloud',10.5,0.4,3,1.4,C.white,'',1,[]),
+  P('fish','rybka','fish',7.2,10.9,1.2,0.7,C.pink,'',5,['sea'])
+]},
+{id:'farma',acc:'farmę',done:'gotowa',name:'Farma',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('barn','stodoła','rect',1,6.5,6,4.5,C.rose,'planks',2,['ground']),
+  P('barnDoor','wrota','rect',3,8.5,2,2.5,C.white,'xdoor',3,['barn']),
+  P('bw1','okienko','rect',1.6,7.2,1,1,C.sky,'window',3,['barn']),
+  P('bw2','okienko','rect',5.4,7.2,1,1,C.sky,'window',3,['barn']),
+  P('roof','dach stodoły','tri',0.5,3.5,7,3,C.lav,'',3,['barn']),
+  P('loft','okienko strychu','rect',3.4,5,1.2,1.2,C.butter,'window',4,['roof']),
+  P('vane','wiatrowskaz','rect',3.9,2.3,0.2,1.3,C.dark,'',2,['roof']),
+  P('vaneFlag','chorągiewka','pennant',4.1,2.3,0.9,0.5,C.red,'',2,['vane']),
+  P('silo','silos','rect',7.5,4.5,2,6.5,C.lavLight,'bands',2,['ground']),
+  P('siloDome','kopuła silosu','semi',7.5,3.5,2,1,C.coral,'',2,['silo']),
+  P('ladder','drabinka','rect',9.1,5,0.35,5.5,C.brown,'ladder',3,['silo']),
+  P('bale1','bela siana','circle',10.2,9.4,1.6,1.6,C.butter,'bale',1,['ground']),
+  P('bale2','bela siana','circle',12,9.4,1.6,1.6,C.butter,'bale',1,['ground']),
+  P('bale3','bela siana','circle',11.1,7.85,1.6,1.6,C.butter,'bale',1,['bale1','bale2']),
+  P('p1','słupek','rect',10,9,0.4,2,C.brown,'',4,['ground']),
+  P('p2','słupek','rect',11.8,9,0.4,2,C.brown,'',4,['ground']),
+  P('p3','słupek','rect',13.4,9,0.4,2,C.brown,'',4,['ground']),
+  P('r1','deska płotu','rect',9.8,9.4,4.1,0.35,C.brown,'',4,['p1','p2','p3']),
+  P('r2','deska płotu','rect',9.8,10.2,4.1,0.35,C.brown,'',4,['p1','p2','p3']),
+  P('flower','kwiatek','flower',0.2,9.5,0.6,1.5,C.pink,'',2,['ground']),
+  P('sun','słońce','sun',11.2,0.4,2.4,2.4,C.sun,'',1,[]),
+  P('cloud1','chmurka','cloud',6,0.6,3,1.4,C.white,'',1,[]),
+  P('cloud2','mała chmurka','cloud',0.4,0.6,2.6,1.2,C.white,'',1,[]),
+  P('bird','ptaszek','bird',9.6,2.7,1,0.5,C.dark,'',1,[])
+]},
+{id:'most',acc:'most',done:'gotowy',name:'Most',pieces:[
+  P('river','rzeka','rect',3,10.4,8,1.6,C.water,'wave',4,[]),
+  P('bankL','brzeg','rect',0,9,3.2,3,C.mint,'grass',3,[]),
+  P('bankR','brzeg','rect',10.8,9,3.2,3,C.mint,'grass',3,[]),
+  P('pilL','filar','rect',5.2,7,1,4,C.stone,'stones',2,['river']),
+  P('pilR','filar','rect',7.8,7,1,4,C.stone,'stones',2,['river']),
+  P('abutL','przyczółek','rect',2,7,1.2,2,C.stone,'stones',2,['bankL']),
+  P('abutR','przyczółek','rect',10.8,7,1.2,2,C.stone,'stones',2,['bankR']),
+  P('deck1','przęsło','rect',2,6.4,5,0.6,C.peach,'',3,['abutL','pilL']),
+  P('deck2','przęsło','rect',7,6.4,5,0.6,C.peach,'',3,['pilR','abutR']),
+  P('post1','słupek','rect',2.3,5.5,0.25,0.9,C.dark,'',3,['deck1']),
+  P('post2','słupek','rect',6.6,5.5,0.25,0.9,C.dark,'',3,['deck1']),
+  P('post3','słupek','rect',7.3,5.5,0.25,0.9,C.dark,'',3,['deck2']),
+  P('post4','słupek','rect',11.5,5.5,0.25,0.9,C.dark,'',3,['deck2']),
+  P('rail','poręcz','rect',2,5.4,10,0.3,C.dark,'',3,['post1','post2','post3','post4']),
+  P('cw1','kółko','circle',3.6,5.6,0.8,0.8,C.dark,'wheel',6,['deck1']),
+  P('cw2','kółko','circle',5,5.6,0.8,0.8,C.dark,'wheel',6,['deck1']),
+  P('carBody','autko','rect',3.3,4.6,2.8,1.1,C.sky,'',5,['cw1','cw2']),
+  P('carTop','dach autka','trap',3.8,3.7,1.8,0.9,C.lavLight,'',5,['carBody'],{inset:0.3}),
+  P('fish','rybka','fish',3.6,10.9,1.2,0.7,C.peach,'',5,['river']),
+  P('trunk','pień','rect',0.7,7,0.5,2,C.brown,'bark',2,['bankL']),
+  P('crown','korona drzewa','circle',0,5.2,1.9,1.9,C.green,'apples',3,['trunk']),
+  P('bush','krzak','semi',12.2,8.2,1.6,0.8,C.green,'',2,['bankR']),
+  P('cloud','chmurka','cloud',8,0.7,3,1.4,C.white,'',1,[]),
+  P('bird1','ptaszek','bird',4.8,1.3,1,0.5,C.dark,'',1,[]),
+  P('bird2','ptaszek','bird',6.4,2.2,1,0.5,C.dark,'',1,[]),
+  P('sun','słońce','sun',1,0.8,2.4,2.4,C.sun,'',1,[])
+]},
+{id:'zamek',acc:'zamek',done:'gotowy',name:'Zamek',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('towerL','wieża','rect',0.8,4,3,7,C.lav,'bricks',2,['ground']),
+  P('towerR','wieża','rect',10.2,4,3,7,C.lav,'bricks',2,['ground']),
+  P('crenL','blanki wieży','crenel',0.6,3,3.4,1,C.lavDeep,'',2,['towerL']),
+  P('crenR','blanki wieży','crenel',10,3,3.4,1,C.lavDeep,'',2,['towerR']),
+  P('roofL','dach wieży','tri',0.6,1.2,3.4,1.8,C.coral,'',2,['crenL']),
+  P('roofR','dach wieży','tri',10,1.2,3.4,1.8,C.coral,'',2,['crenR']),
+  P('flagL','flaga','flag',2.24,0.05,1,1.2,C.butter,'',1,['roofL']),
+  P('flagR','flaga','flag',11.64,0.05,1,1.2,C.butter,'',1,['roofR']),
+  P('wall','mur','rect',3.8,6,6.4,5,C.peach,'bricks',2,['ground']),
+  P('wallCren','blanki muru','crenel',3.8,5,6.4,1,C.orange,'',2,['wall']),
+  P('keep','wieża główna','rect',5.5,2,3,3,C.lavLight,'bricks',1,['wallCren']),
+  P('keepRoof','dach wieży głównej','tri',5.3,0.4,3.4,1.6,C.coral,'',2,['keep']),
+  P('keepWin','okrągłe okno','circle',6.5,2.8,1,1,C.sky,'porthole',3,['keep']),
+  P('gate','brama','arch',5.8,7.5,2.4,3.5,C.brown,'gate',3,['wall']),
+  P('path','ścieżka','trap',5.4,11,3.2,1,C.lavLight,'stones',2,['gate'],{inset:0.4}),
+  P('tw1','okno wieży','arch',1.8,5.5,1,1.5,C.sky,'',3,['towerL']),
+  P('tw2','okno wieży','arch',1.8,8.2,1,1.5,C.sky,'',3,['towerL']),
+  P('tw3','okno wieży','arch',11.2,5.5,1,1.5,C.sky,'',3,['towerR']),
+  P('tw4','okno wieży','arch',11.2,8.2,1,1.5,C.sky,'',3,['towerR']),
+  P('ww1','okienko','arch',4.2,7.2,0.8,1.2,C.sky,'',3,['wall']),
+  P('ww2','okienko','arch',9,7.2,0.8,1.2,C.sky,'',3,['wall']),
+  P('lamp1','lampion','circle',5,8.8,0.6,0.6,C.butter,'glow',3,['wall']),
+  P('lamp2','lampion','circle',8.4,8.8,0.6,0.6,C.butter,'glow',3,['wall']),
+  P('banner','sztandar','banner',6.5,6,1,1.3,C.red,'',3,['wallCren']),
+  P('bush1','krzak','semi',4,10.2,1.6,0.8,C.green,'',4,['ground']),
+  P('bush2','krzak','semi',8.4,10.2,1.6,0.8,C.green,'',4,['ground'])
+]}
+];
+LEVELS.forEach(l=>{l.cols=l.cols||14;l.rows=l.rows||12;const n=l.pieces.length;
+  l.stars=l.stars||{three:{time:n*5,mistakes:Math.max(2,Math.round(n/8))},two:{time:n*10,mistakes:Math.round(n/2)}}});
+
+const TOL=1.5;        // tolerancja upuszczenia (w kratkach)
+const HINT_AFTER=3;   // podpowiedź po tylu pomyłkach z rzędu
+const INK='#5b4a7a';
+
+/* ================= RYSOWANIE KLOCKÓW ================= */
+function hexToRgb(h){const n=parseInt(h.slice(1),16);return[n>>16,n>>8&255,n&255]}
+function mix(a,b,t){const A=hexToRgb(a),B=hexToRgb(b);return'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')'}
+const f=n=>+(+n).toFixed(3);
+const S=0.09,HS=S/2;
+let uid=0;
+const poly=(pts,a)=>`<polygon points="${pts.map(p=>f(p[0])+','+f(p[1])).join(' ')}" stroke-linejoin="round" ${a}/>`;
+
+function cloudParts(w,h){
+  return[[.1*w,.48*h,.8*w,h*.52-HS,.25*h],[.3*w,.58*h,.3*h],[.55*w,.42*h,.38*h],[.77*w,.6*h,.27*h]];
+}
+function geom(p,a){
+  const w=p.w,h=p.h;
+  switch(p.shape){
+    case'rect':{const r=Math.min(.28,w/4,h/4);return`<rect x="${HS}" y="${HS}" width="${f(w-S)}" height="${f(h-S)}" rx="${f(r)}" ${a}/>`}
+    case'tri':return poly([[HS,h-HS],[w/2,S*1.2],[w-HS,h-HS]],a);
+    case'triL':return poly([[w-HS,HS],[w-HS,h-HS],[HS,h-HS]],a);
+    case'triR':return poly([[HS,HS],[HS,h-HS],[w-HS,h-HS]],a);
+    case'trap':{const i=p.inset??w*.15;return poly([[HS,h-HS],[i,HS],[w-i,HS],[w-HS,h-HS]],a)}
+    case'trapInv':{const i=p.inset??w*.15;return poly([[HS,HS],[w-HS,HS],[w-i,h-HS],[i,h-HS]],a)}
+    case'pennant':return poly([[HS,HS],[w-HS,h/2],[HS,h-HS]],a);
+    case'pennantL':return poly([[w-HS,HS],[HS,h/2],[w-HS,h-HS]],a);
+    case'banner':return poly([[HS,HS],[w-HS,HS],[w-HS,h-HS],[w/2,h*.7],[HS,h-HS]],a);
+    case'semi':return`<path d="M${HS} ${f(h-HS)} A${f(w/2-HS)} ${f(h-S)} 0 0 1 ${f(w-HS)} ${f(h-HS)} Z" ${a}/>`;
+    case'arch':{const r=w/2-HS;return`<path d="M${HS} ${f(h-HS)} V${f(w/2)} A${f(r)} ${f(r)} 0 0 1 ${f(w-HS)} ${f(w/2)} V${f(h-HS)} Z" ${a}/>`}
+    case'circle':case'sun':{const r=p.shape==='sun'?w*.3:0;
+      return r?`<circle cx="${w/2}" cy="${h/2}" r="${f(r)}" ${a}/>`:`<ellipse cx="${w/2}" cy="${h/2}" rx="${f(w/2-HS)}" ry="${f(h/2-HS)}" ${a}/>`}
+    case'crenel':{let k=Math.max(3,Math.round(w/0.8));if(k%2===0)k++;const seg=(w-S)/k,dep=h*.42;
+      let d=`M${HS} ${f(h-HS)} L${HS} ${HS}`;
+      for(let i=0;i<k;i++){const x1=f(HS+(i+1)*seg);
+        if(i%2===0){d+=` L${x1} ${HS}`;if(i<k-1)d+=` L${x1} ${f(HS+dep)}`}else d+=` L${x1} ${f(HS+dep)} L${x1} ${HS}`}
+      return`<path d="${d} L${f(w-HS)} ${f(h-HS)} Z" stroke-linejoin="round" ${a}/>`}
+    case'star':{const cx=w/2,cy=h/2+.04,R=w/2-HS,r=R*.45,pts=[];
+      for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5,rr=i%2?r:R;pts.push([cx+Math.cos(ang)*rr,cy+Math.sin(ang)*rr])}
+      return poly(pts,a)}
+    case'moon':{const R=Math.min(w,h)/2-HS,c=w/2+R*.25,top=h/2-R,bot=h/2+R;
+      return`<path d="M${f(c)} ${f(top)} A${f(R)} ${f(R)} 0 0 0 ${f(c)} ${f(bot)} A${f(R*1.25)} ${f(R*1.25)} 0 0 1 ${f(c)} ${f(top)} Z" ${a}/>`}
+    case'cloud':return cloudParts(w,h).map(c=>c.length===5?`<rect x="${f(c[0])}" y="${f(c[1])}" width="${f(c[2])}" height="${f(c[3])}" rx="${f(c[4])}" ${a}/>`:`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="${f(c[2])}" ${a}/>`).join('');
+    case'fish':return`<ellipse cx="${f(w*.42)}" cy="${h/2}" rx="${f(w*.4)}" ry="${f(h*.45)}" ${a}/>`+poly([[w*.7,h/2],[w-HS,HS+.05],[w-HS,h-HS-.05]],a);
+    case'flag':return`<rect x="0" y="0" width=".12" height="${h}" rx=".05" ${a}/>`+poly([[.12,HS],[w-HS,h*.22],[.12,h*.46]],a);
+    case'flower':{const cx=w/2,cy=w/2,pr=w*.2;let o=`<rect x="${f(cx-.05)}" y="${f(cy)}" width=".1" height="${f(h-cy)}" ${a}/>`;
+      for(let i=0;i<5;i++){const ang=i*Math.PI*2/5-Math.PI/2;o+=`<circle cx="${f(cx+Math.cos(ang)*pr*1.05)}" cy="${f(cy+Math.sin(ang)*pr*1.05)}" r="${f(pr)}" ${a}/>`}
+      return o}
+    case'bird':return'';
+  }
+  return'';
+}
+
+function svgFor(p){
+  const w=p.w,h=p.h,dk=mix(p.color,INK,.42),lt=mix(p.color,'#ffffff',.55),id='k'+(++uid);
+  let o='',d='';
+  const clip=`<clipPath id="${id}">${geom(p,'')}</clipPath>`;
+  if(p.shape==='bird'){
+    o=`<path d="M${HS} ${f(h*.75)} Q${f(w*.25)} ${f(-h*.1)} ${f(w/2)} ${f(h*.6)} Q${f(w*.75)} ${f(-h*.1)} ${f(w-HS)} ${f(h*.75)}" fill="none" stroke="${p.color}" stroke-width=".11" stroke-linecap="round" stroke-linejoin="round"/>`;
+    return wrap(p,o,'');
+  }
+  if(p.shape==='sun'){
+    const c=w/2,r=w*.3;
+    for(let i=0;i<8;i++){const a=i*Math.PI/4;
+      o+=`<line x1="${f(c+Math.cos(a)*r*1.3)}" y1="${f(c+Math.sin(a)*r*1.3)}" x2="${f(c+Math.cos(a)*r*1.62)}" y2="${f(c+Math.sin(a)*r*1.62)}" stroke="#f6c64a" stroke-width=".17" stroke-linecap="round"/>`}
+    o+=geom(p,`fill="${p.color}" stroke="#e5b33c" stroke-width="${S}"`);
+    o+=`<circle cx="${f(c-.22)}" cy="${f(c-.08)}" r=".075" fill="${INK}"/><circle cx="${f(c+.22)}" cy="${f(c-.08)}" r=".075" fill="${INK}"/>`;
+    o+=`<path d="M${f(c-.2)} ${f(c+.14)} q.2 .2 .4 0" fill="none" stroke="${INK}" stroke-width=".07" stroke-linecap="round"/>`;
+    o+=`<circle cx="${f(c-.42)}" cy="${f(c+.12)}" r=".09" fill="#ffb3c7"/><circle cx="${f(c+.42)}" cy="${f(c+.12)}" r=".09" fill="#ffb3c7"/>`;
+    return wrap(p,o,'');
+  }
+  // obrys + wypełnienie (dla kształtów złożonych obrys rysujemy pod spodem)
+  if(['cloud','fish','flag','flower'].includes(p.shape)){
+    o+=geom(p,`fill="${dk}" stroke="${dk}" stroke-width="${S*2}"`)+geom(p,`fill="${p.color}"`);
+  } else o+=geom(p,`fill="${p.color}" stroke="${dk}" stroke-width="${S}"`);
+
+  // połysk i cień
+  if(p.shape==='rect'){
+    const hi=Math.min(.14,h*.14),sh=Math.min(.17,h*.18);
+    d+=`<rect x="${f(S+.1)}" y="${f(S+.08)}" width="${f(Math.max(0,w-2*S-.2))}" height="${f(hi)}" rx="${f(hi/2)}" fill="#fff" opacity=".6"/>`;
+    d+=`<rect x="0" y="${f(h-S-sh)}" width="${w}" height="${f(sh+S)}" fill="${dk}" opacity=".16"/>`;
+  } else if(p.shape==='circle'){
+    d+=`<ellipse cx="${f(w*.36)}" cy="${f(h*.3)}" rx="${f(w*.2)}" ry="${f(h*.12)}" fill="#fff" opacity=".45" transform="rotate(-25 ${f(w*.36)} ${f(h*.3)})"/>`;
+  } else if(p.shape==='tri'){
+    d+=poly([[w*.2,h-.35],[w/2,h*.22],[w*.8,h-.35]],`fill="${lt}" opacity=".45"`);
+  } else if(['trap','trapInv','arch','semi','crenel','banner'].includes(p.shape)){
+    d+=`<rect x="0" y="${f(S)}" width="${w}" height="${f(Math.min(.14,h*.14))}" fill="#fff" opacity=".45"/>`;
+    d+=`<rect x="0" y="${f(h-S-Math.min(.16,h*.16))}" width="${w}" height="${f(.3)}" fill="${dk}" opacity=".16"/>`;
+  } else if(p.shape==='cloud'){
+    d+=`<ellipse cx="${f(w*.48)}" cy="${f(h*.3)}" rx="${f(w*.14)}" ry="${f(h*.08)}" fill="#fff" opacity=".9"/>`;
+  }
+  d+=deco(p,dk,lt);
+  if(d)o+=`<g clip-path="url(#${id})">${d}</g>`;
+  if(p.shape==='fish')o+=`<circle cx="${f(w*.22)}" cy="${f(h*.42)}" r=".07" fill="${INK}"/>`;
+  if(p.shape==='flower')o+=`<circle cx="${f(w/2)}" cy="${f(w/2)}" r="${f(w*.14)}" fill="#ffe08a" stroke="${dk}" stroke-width=".04"/><ellipse cx="${f(w/2+.14)}" cy="${f(h*.72)}" rx=".16" ry=".08" fill="#93d9a6" transform="rotate(-30 ${f(w/2+.14)} ${f(h*.72)})"/>`;
+  return wrap(p,o,clip);
+}
+function wrap(p,o,clip){
+  return`<svg viewBox="0 0 ${p.w} ${p.h}" preserveAspectRatio="none" aria-hidden="true"${p.opacity?` style="opacity:${p.opacity}"`:''}>${clip?'<defs>'+clip+'</defs>':''}${o}</svg>`;
+}
+
+function deco(p,dk,lt){
+  const w=p.w,h=p.h;let o='';
+  switch(p.deco){
+    case'grass':
+      for(let x=.6,i=0;x<w-.3;x+=1.15,i++){const col=['#ffb3c7','#ffffff','#fff2a8'][i%3];
+        o+=`<circle cx="${f(x)}" cy=".55" r=".13" fill="${col}"/><circle cx="${f(x)}" cy=".55" r=".05" fill="#f6c64a"/>`} break;
+    case'bricks':
+      for(let y=.5,row=0;y<h-.45;y+=.85,row++)for(let x=row%2?.25:.9;x<w-.6;x+=1.5)
+        o+=`<rect x="${f(x)}" y="${f(y)}" width=".75" height=".28" rx=".12" fill="${dk}" opacity=".2"/>`; break;
+    case'door':{const m=w*.19;
+      o+=`<path d="M${f(m)} ${f(h-.12)} V${f(w/2)} a${f(w/2-m)} ${f(w/2-m)} 0 0 1 ${f(w-2*m)} 0 V${f(h-.12)}" fill="${lt}" opacity=".6" stroke="${dk}" stroke-width=".06"/>`;
+      o+=`<circle cx="${f(w*.69)}" cy="${f(h*.6)}" r="${f(Math.min(.13,w*.08))}" fill="#ffe08a" stroke="${dk}" stroke-width=".05"/>`;break}
+    case'dots':{const n=Math.max(3,Math.floor(w/.9));for(let i=0;i<n;i++)o+=`<circle cx="${f(w*(i+1)/(n+1))}" cy="${f(h/2)}" r="${f(Math.min(.09,h*.15))}" fill="${dk}" opacity=".35"/>`;break}
+    case'window':{const m=Math.min(w,h)*.16,iw=w-2*m,ih=h-2*m,sill=h>=1.5;
+      o+=`<rect x="${f(m)}" y="${f(m)}" width="${f(iw)}" height="${f(sill?ih-.1:ih)}" rx="${f(m*.5)}" fill="#eef8ff" stroke="${dk}" stroke-width=".07"/>`;
+      o+=`<path d="M${f(w/2)} ${f(m)}V${f(m+(sill?ih-.1:ih))}M${f(m)} ${f(m+(sill?ih-.1:ih)/2)}H${f(w-m)}" stroke="${dk}" stroke-width=".08"/>`;
+      o+=`<path d="M${f(m+iw*.12)} ${f(m+ih*.3)} l${f(iw*.15)} ${f(-ih*.15)}" stroke="#fff" stroke-width=".08" stroke-linecap="round"/>`;
+      if(p.color===C.light)o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(Math.min(w,h)*.22)}" fill="#ffe27a"/>`;
+      break}
+    case'roof':
+      o+=`<circle cx="${w/2}" cy="${f(h*.63)}" r=".55" fill="#eef8ff" stroke="${dk}" stroke-width=".08"/>`;
+      o+=`<path d="M${w/2} ${f(h*.63-.53)}v1.06M${f(w/2-.53)} ${f(h*.63)}h1.06" stroke="${dk}" stroke-width=".07"/>`;break;
+    case'chimney':o+=`<rect x="0" y="0" width="${w}" height=".38" fill="${dk}" opacity=".35"/>`;break;
+    case'bark':for(let y=.4,i=0;y<h-.3;y+=.7,i++)o+=`<path d="M${f(w*(i%2?.62:.35))} ${f(y)}v.4" stroke="${dk}" stroke-width=".08" stroke-linecap="round" opacity=".45"/>`;break;
+    case'apples':[[.33,.6],[.67,.38],[.65,.72],[.45,.32]].forEach(([x,y])=>{o+=`<circle cx="${f(w*x)}" cy="${f(h*y)}" r="${f(w*.057)}" fill="#ff93ab" stroke="${dk}" stroke-width=".04"/>`});break;
+    case'road':for(let x=.4;x<w-.4;x+=1.4)o+=`<rect x="${f(x)}" y="${f(h/2-.06)}" width=".7" height=".12" rx=".06" fill="#fff" opacity=".9"/>`;break;
+    case'rails':
+      for(let x=.3;x<w;x+=.8)o+=`<rect x="${f(x)}" y=".35" width=".32" height="${f(h-.35)}" fill="${dk}" opacity=".3"/>`;
+      o+=`<rect x="0" y=".22" width="${w}" height=".14" fill="${dk}" opacity=".7"/>`;break;
+    case'wave':for(let y=.45;y<h-.2;y+=.6){let dd=`M-.2 ${f(y)}`;for(let x=-.2;x<w+.5;x+=.7)dd+=` q.175 -.18 .35 0 t.35 0`;o+=`<path d="${dd}" fill="none" stroke="#fff" stroke-width=".08" opacity=".75"/>`}break;
+    case'stones':[[.2,.25],[.6,.55],[.3,.8],[.75,.2],[.5,.4]].forEach(([x,y],i)=>{o+=`<ellipse cx="${f(w*x)}" cy="${f(h*y)}" rx="${f(Math.min(.28,w*.14))}" ry="${f(Math.min(.16,h*.08))}" fill="${dk}" opacity="${i%2?.16:.24}"/>`});break;
+    case'planks':for(let x=.6;x<w-.2;x+=.6)o+=`<path d="M${f(x)} 0V${h}" stroke="${dk}" stroke-width=".05" opacity=".25"/>`;break;
+    case'bands':if(w>h){for(let x=.7;x<w-.3;x+=.9)o+=`<rect x="${f(x)}" y="0" width=".14" height="${h}" fill="${dk}" opacity=".25"/>`}
+      else{for(let y=.6;y<h-.2;y+=.9)o+=`<rect x="0" y="${f(y)}" width="${w}" height=".12" fill="${dk}" opacity=".25"/>`}break;
+    case'ladder':{const a=w*.2,b=w*.8;o+=`<path d="M${f(a)} 0V${h}M${f(b)} 0V${h}" stroke="${dk}" stroke-width=".06" opacity=".6"/>`;
+      for(let y=.3;y<h;y+=.5)o+=`<path d="M${f(a)} ${f(y)}H${f(b)}" stroke="${dk}" stroke-width=".05" opacity=".6"/>`;break}
+    case'lattice':{const vert=h>w,L=vert?h:w,sw=vert?w:h;
+      for(let t=.45;t<L-.1;t+=.45)o+=vert?`<path d="M0 ${f(t)}H${w}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`:`<path d="M${f(t)} 0V${h}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`;
+      o+=vert?`<path d="M${f(w/2)} 0V${h}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`:`<path d="M0 ${f(h/2)}H${w}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`;break}
+    case'sail':o+=`<path d="M0 ${f(h*.36)}H${w}M0 ${f(h*.68)}H${w}" stroke="${dk}" stroke-width=".05" opacity=".3"/>`;break;
+    case'buoy':o+=`<path d="M${f(w/2)} 0V${h}M0 ${f(h/2)}H${w}" stroke="#fff" stroke-width="${f(w*.2)}" opacity=".95"/>`;
+      o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*.2)}" fill="#fff8e0" stroke="${dk}" stroke-width=".06"/>`;break;
+    case'box':o+=`<path d="M${f(w/2)} 0V${h}M0 ${f(h*.35)}H${w}" stroke="#fff" stroke-width=".12" opacity=".7"/>`;break;
+    case'ball':o+=`<path d="M${f(w*.15)} ${f(h*.3)}Q${f(w*.5)} ${f(h*.75)} ${f(w*.9)} ${f(h*.45)}" fill="none" stroke="#fff" stroke-width=".14" opacity=".9"/>`;break;
+    case'bale':[.5,.33,.16].forEach(r=>{o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*r*.8)}" fill="none" stroke="${dk}" stroke-width=".06" opacity=".35"/>`});break;
+    case'xdoor':{const m=.2;o+=`<rect x="${m}" y="${m}" width="${f(w-2*m)}" height="${f(h-2*m)}" fill="none" stroke="${dk}" stroke-width=".08" opacity=".7"/>`;
+      o+=`<path d="M${m} ${m}L${f(w-m)} ${f(h-m)}M${f(w-m)} ${m}L${m} ${f(h-m)}" stroke="${dk}" stroke-width=".08" opacity=".7"/>`;break}
+    case'gate':for(let x=w/6;x<w-.05;x+=w/6)o+=`<path d="M${f(x)} 0V${h}" stroke="${dk}" stroke-width=".1" opacity=".5"/>`;
+      o+=`<path d="M0 ${f(h*.5)}H${w}" stroke="${dk}" stroke-width=".1" opacity=".5"/>`;break;
+    case'glow':o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*.22)}" fill="#fff" opacity=".7"/>`;break;
+    case'porthole':o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*.3)}" fill="#eef8ff" stroke="${dk}" stroke-width=".06"/>`;
+      o+=`<path d="M${f(w*.35)} ${f(h*.42)} l${f(w*.1)} ${f(-h*.1)}" stroke="#fff" stroke-width=".07" stroke-linecap="round"/>`;break;
+    case'wheel':o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*.25)}" fill="${lt}" stroke="${dk}" stroke-width=".05"/><circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*.08)}" fill="${dk}"/>`;break;
+  }
+  return o;
+}
+
+/* ================= DŹWIĘKI ================= */
+const sfx=(()=>{
+  let ctx=null,muted=false;
+  function ensure(){try{if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume()}catch(e){ctx=null}return ctx}
+  function tone(freq,t0,dur,type,vol,slide){
+    if(muted)return;const c=ensure();if(!c)return;
+    const t=c.currentTime+t0,o=c.createOscillator(),g=c.createGain();
+    o.type=type||'sine';o.frequency.setValueAtTime(freq,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+dur);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.15,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g).connect(c.destination);o.start(t);o.stop(t+dur+.03);
+  }
+  return{
+    unlock:ensure,
+    pick(){tone(480,0,.09,'triangle',.1,720)},
+    place(){tone(660,0,.1,'triangle',.18);tone(990,.07,.16,'triangle',.15)},
+    error(){tone(260,0,.16,'square',.06,170);tone(200,.13,.22,'square',.055,120)},
+    back(){tone(520,0,.1,'sine',.07,360)},
+    hint(){[880,1109,1319].forEach((fq,i)=>tone(fq,i*.09,.25,'sine',.1))},
+    win(){[523,659,784,1047].forEach((fq,i)=>tone(fq,i*.13,.28,'triangle',.17));tone(1319,.55,.6,'triangle',.14);tone(1568,.7,.7,'sine',.08)},
+    toggle(){muted=!muted;return muted}
+  };
+})();
+
+
+/* ================= JĘZYKI (PL / EN) ================= */
+const T={pl:{"time": "Czas", "mistakes": "Pomyłki", "levels": "Plansze", "chooseLevel": "Wybierz planszę", "sounds": "Dźwięki", "mute": "Wycisz dźwięki", "unmute": "Włącz dźwięki", "restart": "Zacznij od nowa", "langSwitch": "Zmień język (PL/EN)", "langAria": "Język", "trayAria": "Klocki do wyboru", "blocks": "Klocki", "dockTip": "↔ przesuń · ↑ na pole", "board": "Pole budowy", "pattern": "Wzór", "noteLong": "Buduj od dołu. Klocek zostaje na polu, gdy to, na czym stoi, jest już na swoim miejscu.", "noteShort": "Buduj od dołu do góry!", "step3": "Buduj od dołu do góry. Zła kolejność? Klocek wróci na swoje miejsce.", "diffAria": "Poziom trudności", "diffShort": "Poziom", "easy": "Łatwy", "medium": "Średni", "hard": "Trudny", "easySub": "kolorowy wzór", "mediumSub": "szary kształt", "hardSub": "bez wzoru", "memo": "Zapamiętaj, jak to wygląda! Po starcie wzór zniknie.", "starsInfo": "Liczy się czas i liczba pomyłek. Możesz zdobyć 3 gwiazdki!", "levelsSub": "Każda plansza ma więcej klocków. Ułóż jedną, żeby odblokować następną.", "close": "Zamknij", "record": "Nowy rekord!", "next": "Następna plansza", "again": "Jeszcze raz", "rotateAria": "Obróć telefon", "rotateTitle": "Obróć telefon pionowo", "rotateNote": "Tak klocki i pole budowy zmieszczą się na ekranie.", "rotateOk": "Graj mimo to", "chip": "Plansza {n} · {name} · {diff}", "startTitle": "Plansza {n}: {name}", "startCount": "Klocków do ułożenia: {n}", "lookEasy": "Popatrz na wzór – tak ma wyglądać budowla.", "lookMedium": "Wzór jest szary: widać kształt, ale nie widać, gdzie który klocek.", "lookHard": "Zapamiętaj wzór poniżej. W trakcie gry go nie zobaczysz!", "moveMouse": "Przeciągnij klocek myszką na pole budowy, w to samo miejsce co na wzorze.", "moveTouch": "Przeciągnij klocek palcem na pole budowy albo dotknij klocka, a potem miejsca na polu.", "mysteryTitle": "Buduj z pamięci", "mysteryNote": "Wzór był widoczny tylko przed startem.", "hello": "Cześć! Zbudujmy razem {acc}.", "startTouch": "Zacznij od dołu. Przeciągnij klocek palcem na pole albo dotknij klocka, a potem miejsca na polu.", "startMouse": "Zacznij od tego, co leży na samym dole. Przeciągnij klocek na pole!", "pickBlock": "Wybierz klocek: przeciągnij go albo dotknij.", "tapSpot": "Teraz dotknij pola w miejscu, gdzie ma stanąć: {label}.", "allPlaced": "Wszystkie klocki na miejscu!", "order": "Dobre miejsce, ale za wcześnie! Najpierw połóż to, co jest pod spodem.", "placeEasy": "Ten klocek pasuje gdzie indziej. Zerknij na wzór!", "placeMedium": "Ten klocek pasuje gdzie indziej. Popatrz na szary kształt!", "placeHard": "Ten klocek pasuje gdzie indziej. Przypomnij sobie wzór!", "hint": "Podpowiedź: weź świecący klocek ({label}) i połóż go w migającym miejscu.", "hooray": "Hura! {ready}!", "winAll": "Brawo! Wszystkie plansze ułożone!", "winLevel": "Brawo! {ready}!", "best": "Najlepszy wynik ({diff}): {time} · pomyłki: {m} · gwiazdki: {s}/3", "master": "Mistrzowska budowa!", "tileAria": "Plansza {n}: {name}", "locked": " (zablokowana)", "blockAria": "Klocek: {label}"},en:{"time": "Time", "mistakes": "Mistakes", "levels": "Levels", "chooseLevel": "Choose a level", "sounds": "Sounds", "mute": "Mute sounds", "unmute": "Turn sounds on", "restart": "Start over", "langSwitch": "Change language (PL/EN)", "langAria": "Language", "trayAria": "Blocks to choose from", "blocks": "Blocks", "dockTip": "↔ swipe · ↑ drag to build", "board": "Building area", "pattern": "Pattern", "noteLong": "Build from the bottom up. A block stays on the board once the block it rests on is in place.", "noteShort": "Build from the bottom up!", "step3": "Build from the bottom up. Wrong order? The block jumps back.", "diffAria": "Difficulty", "diffShort": "Difficulty", "easy": "Easy", "medium": "Medium", "hard": "Hard", "easySub": "color pattern", "mediumSub": "gray shape", "hardSub": "no pattern", "memo": "Remember what it looks like! The pattern disappears when you start.", "starsInfo": "Time and mistakes count. You can earn 3 stars!", "levelsSub": "Every level has more blocks. Finish one to unlock the next.", "close": "Close", "record": "New record!", "next": "Next level", "again": "Play again", "rotateAria": "Rotate your phone", "rotateTitle": "Turn your phone upright", "rotateNote": "That way the blocks and the building area fit on the screen.", "rotateOk": "Play anyway", "chip": "Level {n} · {name} · {diff}", "startTitle": "Level {n}: {name}", "startCount": "Blocks to place: {n}", "lookEasy": "Look at the pattern – that's what you will build.", "lookMedium": "The pattern is gray: you can see the shape, but not where each block goes.", "lookHard": "Remember the pattern below. You won't see it during the game!", "moveMouse": "Drag a block with the mouse onto the building area, to the same spot as in the pattern.", "moveTouch": "Drag a block with your finger onto the building area, or tap a block and then tap its spot.", "mysteryTitle": "Build from memory", "mysteryNote": "The pattern was only shown before the start.", "hello": "Hi! Let's build {acc} together.", "startTouch": "Start at the bottom! Drag a block up, or tap it and then its spot.", "startMouse": "Start with what goes at the very bottom. Drag a block onto the board!", "pickBlock": "Pick a block: drag it or tap it.", "tapSpot": "Now tap the spot on the board where the {label} goes.", "allPlaced": "All blocks in place!", "order": "Right spot, but too early! First place what goes underneath.", "placeEasy": "This block goes somewhere else. Take a look at the pattern!", "placeMedium": "This block goes somewhere else. Look at the gray shape!", "placeHard": "This block goes somewhere else. Try to remember the pattern!", "hint": "Hint: take the glowing block ({label}) and put it in the flashing spot.", "hooray": "Hooray! {ready}!", "winAll": "Great job! You finished every level!", "winLevel": "Great job! {ready}!", "best": "Best score ({diff}): {time} · mistakes: {m} · stars: {s}/3", "master": "Master builder!", "tileAria": "Level {n}: {name}", "locked": " (locked)", "blockAria": "Block: {label}"}};
+const LABELS_EN={"antenka": "antenna", "autko": "toy car", "bagażnik": "roof rack", "balkon": "balcony", "beczka": "barrel", "bela siana": "hay bale", "belka": "beam", "blanki muru": "wall battlements", "blanki wieży": "tower battlements", "brama": "gate", "brzeg": "riverbank", "bulaj": "porthole", "chmurka": "cloud", "chorągiewka": "pennant", "czubek": "nose cone", "dach": "roof", "dach autka": "car roof", "dach kabiny": "cab roof", "dach stodoły": "barn roof", "dach wieży": "tower roof", "dach wieży głównej": "main tower roof", "daszek": "cabin roof", "deska płotu": "fence rail", "drabinka": "ladder", "droga": "road", "drzwi": "door", "dym": "smoke", "filar": "pillar", "flaga": "flag", "gwiazdka": "star", "kabina": "cabin", "kadłub": "hull", "kadłub rakiety": "rocket body", "kajuta": "cabin", "karoseria": "car body", "kocioł": "boiler", "komin": "chimney", "kopuła": "dome", "kopuła silosu": "silo dome", "kopułka": "little dome", "korona drzewa": "treetop", "koło": "wheel", "koło ratunkowe": "life ring", "krzak": "bush", "księżyc": "moon", "kulka": "little ball", "kwiatek": "flower", "kółko": "small wheel", "lampa": "lamp", "lampion": "lantern", "lampka": "light", "lampka tylna": "tail light", "maszt": "mast", "mała chmurka": "small cloud", "mały żagiel": "small sail", "mewa": "seagull", "morze": "sea", "mur": "wall", "okienko": "small window", "okienko strychu": "loft window", "okno": "window", "okno wieży": "tower window", "okrągłe okno": "round window", "oś": "hub", "paczka": "parcel", "pasek": "stripe", "pień": "trunk", "piętro latarni": "lighthouse level", "piłka": "ball", "podest": "platform", "podwozie lokomotywy": "engine base", "podwozie wagonu": "wagon base", "poręcz": "railing", "przyczółek": "bank support", "przęsło": "bridge deck", "ptaszek": "bird", "płyta startowa": "launch pad", "ramię": "arm", "reflektor": "headlight", "rybka": "fish", "rzeka": "river", "silos": "silo", "skały": "rocks", "skrzydło": "sail blade", "skrzynia": "crate", "statecznik": "fin", "stodoła": "barn", "sztandar": "banner", "szyba": "window", "słońce": "sun", "słupek": "post", "torba": "bag", "tory": "tracks", "trawa": "grass", "wagon": "wagon", "walizka": "suitcase", "wiatrowskaz": "weather vane", "wieża": "tower", "wieża główna": "main tower", "wieża młyna": "mill tower", "wieża startowa": "launch tower", "woda": "water", "wrota": "barn door", "łódka": "boat", "łącznik": "coupling", "ściana": "wall", "ścieżka": "path", "światło": "light beam", "żagiel": "sail"};
+const LVL_EN={"domek": ["House", "a house"], "samochod": ["Car", "a car"], "lodka": ["Boat", "a boat"], "rakieta": ["Rocket", "a rocket"], "wiatrak": ["Windmill", "a windmill"], "pociag": ["Train", "a train"], "latarnia": ["Lighthouse", "a lighthouse"], "farma": ["Farm", "a farm"], "most": ["Bridge", "a bridge"], "zamek": ["Castle", "a castle"]};
+let lang='pl';
+try{const s=localStorage.getItem('quickbuilder-lang');if(s==='pl'||s==='en')lang=s;else if(!/^pl/i.test(navigator.language||'pl'))lang='en'}catch(e){}
+function tt(k,v){const s=(T[lang][k]??T.pl[k]??k);return s.replace(/\{(\w+)\}/g,(m,x)=>v&&v[x]!==undefined?v[x]:m)}
+const lab=p=>lang==='en'?(LABELS_EN[p.label]||p.label):p.label;          // nazwa klocka
+const lvName=L=>lang==='en'?LVL_EN[L.id][0]:L.name;                          // nazwa planszy
+const lvAcc=L=>lang==='en'?LVL_EN[L.id][1]:L.acc;                            // „zbudujmy razem …”
+const lvReady=L=>lang==='en'?`The ${LVL_EN[L.id][0].toLowerCase()} is ready`:`${L.name} ${L.done}`;
+function plural(n,forms){ // forms: [pl1, pl2-4, pl5+] albo [en1, enN]
+  if(lang==='en')return n===1?forms[0]:forms[1];
+  if(n===1)return forms[0];const a=n%10,b=n%100;return(a>=2&&a<=4&&(b<12||b>14))?forms[1]:forms[2];
+}
+const blocksWord=n=>lang==='en'?plural(n,['block','blocks']):plural(n,['klocek','klocki','klocków']);
+const mistakesWord=n=>lang==='en'?plural(n,['mistake','mistakes']):plural(n,['pomyłka','pomyłki','pomyłek']);
+const cheers=()=>lang==='en'?['Super!','It fits!','Great job!','Awesome!','Brilliant!','Keep it up!']:['Super!','Pasuje!','Brawo!','Świetnie!','Ekstra!','Tak trzymaj!'];
+
+/* ================= STAN GRY ================= */
+const $=s=>document.querySelector(s);
+const boardEl=$('#board'),previewEl=$('#preview'),trayEl=$('#tray'),msgEl=$('#msg'),mascot=$('#mascot');
+let li=0,level=LEVELS[0];
+const st={filled:new Set(),mistakes:0,streak:0,start:0,running:false,timer:null,hint:null};
+const keyOf=p=>[p.shape,p.w,p.h,p.color,p.inset||0].join('|');
+const byId=id=>level.pieces.find(p=>p.id===id);
+
+function fmt(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function leftText(n){if(lang==='en')return n===1?'1 block left':`${n} blocks left`;
+  return n===1?'Został 1 klocek':`${plural(n,['','Zostały','Zostało'])} ${n} ${blocksWord(n)}`}
+function pct(v,t){return(v/t*100)+'%'}
+function place(el,p,L){L=L||level;el.style.left=pct(p.x,L.cols);el.style.top=pct(p.y,L.rows);el.style.width=pct(p.w,L.cols);el.style.height=pct(p.h,L.rows)}
+function pieceEl(p,L){const d=document.createElement('div');d.className='piece';d.style.zIndex=p.z;place(d,p,L);d.innerHTML=svgFor(p);return d}
+
+let lastSay=null;
+// tekst podajemy jako funkcję, żeby po zmianie języka dało się go wyświetlić ponownie
+function say(text,mood,quiet){
+  const fn=typeof text==='function'?text:()=>text;lastSay={fn,mood};
+  msgEl.textContent=fn();msgEl.className='bubble'+(mood?' '+mood:'');
+  if(quiet)return;
+  mascot.classList.remove('happy','oops','sad');void mascot.getBoundingClientRect();
+  if(mood==='good')mascot.classList.add('happy');
+  if(mood==='bad')mascot.classList.add('oops','sad');
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ---- wyniki i odblokowanie ---- */
+/* ---- poziomy trudności ---- */
+const DIFFS={
+  easy:  {suffix:'',       time:1,   extra:0},  // kolorowy wzór
+  medium:{suffix:'-medium',time:1.4, extra:2},  // szara sylwetka
+  hard:  {suffix:'-hard',  time:1.8, extra:4}   // bez wzoru
+};
+let diff='easy';
+try{const d=localStorage.getItem('quickbuilder-diff');if(DIFFS[d])diff=d}catch(e){}
+
+const mem={};
+const bestKey=(id,d)=>'klockowo-best-'+id+DIFFS[d||diff].suffix;
+function readBest(id,d){const k=bestKey(id,d);try{const v=localStorage.getItem(k);if(v)return JSON.parse(v)}catch(e){}return mem[k]||null}
+function writeBest(id,v){const k=bestKey(id);mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+const doneAny=id=>Object.keys(DIFFS).some(d=>readBest(id,d));
+const unlocked=i=>i===0||doneAny(LEVELS[i-1].id);
+
+// sylwetka: każdy klocek w jednym szarym kolorze, bez obrysów i ozdób – widać kształt, nie widać podziału na klocki
+const SIL='#c3bbd8';
+function silFor(p){
+  const w=p.w,h=p.h;let o='';
+  if(p.shape==='bird')o=`<path d="M${HS} ${f(h*.75)} Q${f(w*.25)} ${f(-h*.1)} ${f(w/2)} ${f(h*.6)} Q${f(w*.75)} ${f(-h*.1)} ${f(w-HS)} ${f(h*.75)}" fill="none" stroke="${SIL}" stroke-width=".13" stroke-linecap="round"/>`;
+  else if(p.shape==='sun'){const c=w/2,r=w*.3;
+    for(let i=0;i<8;i++){const a=i*Math.PI/4;o+=`<line x1="${f(c+Math.cos(a)*r*1.3)}" y1="${f(c+Math.sin(a)*r*1.3)}" x2="${f(c+Math.cos(a)*r*1.62)}" y2="${f(c+Math.sin(a)*r*1.62)}" stroke="${SIL}" stroke-width=".17" stroke-linecap="round"/>`}
+    o+=`<circle cx="${c}" cy="${c}" r="${f(r+HS)}" fill="${SIL}"/>`}
+  else o=geom(p,`fill="${SIL}" stroke="${SIL}" stroke-width="${f(S*3)}" stroke-linejoin="round"`);
+  return`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true" style="overflow:visible">${o}</svg>`;
+}
+function silEl(p,L){const d=document.createElement('div');d.className='piece';d.style.zIndex=p.z;place(d,p,L);d.innerHTML=silFor(p);return d}
+
+// rysuje wzór w danym trybie do kontenera planszy
+function renderPattern(el,L,mode){
+  el.innerHTML='';
+  if(mode==='hard'){el.innerHTML='<div class="mystery"><div class="q">?</div><b>'+tt('mysteryTitle')+'</b><span>'+tt('mysteryNote')+'</span></div>';return}
+  if(mode==='medium'){const w=document.createElement('div');w.className='sil-wrap';L.pieces.forEach(p=>w.appendChild(silEl(p,L)));el.appendChild(w);return}
+  L.pieces.forEach(p=>el.appendChild(pieceEl(p,L)));
+}
+function refreshDiffUI(){
+  document.querySelectorAll('.diff [data-diff]').forEach(b=>b.setAttribute('aria-checked',b.dataset.diff===diff?'true':'false'));
+  renderPattern(previewEl,level,diff);
+  const memoOn=diff==='hard';$('#start-memo').hidden=!memoOn;
+  if(memoOn){const mb=$('#memo-board');mb.style.setProperty('--cols',level.cols);mb.style.setProperty('--rows',level.rows);renderPattern(mb,level,'easy')}
+  $('#level-chip').textContent=tt('chip',{n:li+1,name:lvName(level),diff:tt(diff)});
+  $('#start-title').textContent=tt('startTitle',{n:li+1,name:lvName(level)});
+  $('#start-count').textContent=tt('startCount',{n:level.pieces.length});
+  $('#step-look').textContent=tt(diff==='easy'?'lookEasy':diff==='medium'?'lookMedium':'lookHard');
+}
+function setDiff(d){
+  if(!DIFFS[d]||d===diff)return;
+  diff=d;try{localStorage.setItem('quickbuilder-diff',d)}catch(e){}
+  sfx.pick();
+  const pickerOpen=!$('#levels-overlay').hidden;
+  if(st.running||st.filled.size){newGame(false);if(pickerOpen)$('#start-overlay').hidden=true} // zmiana w trakcie gry = od nowa
+  refreshDiffUI();
+  if(pickerOpen)openLevels();
+}
+document.querySelectorAll('.diff [data-diff]').forEach(b=>b.addEventListener('click',()=>setDiff(b.dataset.diff)));
+
+function setLevel(i){
+  li=i;level=LEVELS[i];
+  [boardEl,previewEl].forEach(b=>{b.style.setProperty('--cols',level.cols);b.style.setProperty('--rows',level.rows)});
+  refreshDiffUI();
+  newGame(false);
+}
+
+function buildTray(){
+  trayEl.innerHTML='';
+  shuffle(level.pieces.slice()).forEach(p=>{
+    const it=document.createElement('div');
+    it.className='tray-item';it.dataset.pid=p.id;it.dataset.key=keyOf(p);
+    it.setAttribute('role','img');it.setAttribute('aria-label',tt('blockAria',{label:lab(p)}));it.title=lab(p);
+    it.innerHTML=`<div class="pv">${svgFor(p)}</div>`;
+    it.addEventListener('pointerdown',e=>onItemDown(it,e));
+    trayEl.appendChild(it);
+  });
+  sizeTray();
+}
+function sizeTray(){
+  const n=level.pieces.length,docked=isDocked(),phone=innerWidth<=700;
+  const W=docked?Math.min(300,innerWidth*.7):Math.max(150,trayEl.clientWidth-24);
+  const maxH=docked?(phone?72:100):100;
+  const s0=docked?(phone?18:26):(n<=14?24:n<=20?21:18);
+  trayEl.querySelectorAll('.tray-item').forEach(it=>{
+    const p=byId(it.dataset.pid),s=Math.min(s0,W/p.w,maxH/p.h),pv=it.firstElementChild;
+    pv.style.width=p.w*s+'px';pv.style.height=p.h*s+'px';
+  });
+  dockPad();
+}
+// miejsce na dole strony, żeby dok z klockami nie zasłaniał pola budowy
+function dockPad(){document.body.style.paddingBottom=isDocked()?(trayPanel.offsetHeight+14)+'px':''}
+function hud(){
+  $('#mistakes').textContent=st.mistakes;
+  const n=st.filled.size,t=level.pieces.length;
+  $('#count').textContent=`${n} / ${t}`;$('#bar').style.width=pct(n,t);
+}
+function newGame(autoStart){
+  clearInterval(st.timer);
+  st.filled=new Set();st.mistakes=0;st.streak=0;st.running=false;st.hint=null;selected=null;boardEl.classList.remove('awaiting');
+  boardEl.querySelectorAll('.piece,.mark').forEach(n=>n.remove());
+  $('#time').textContent='0:00';
+  buildTray();hud();
+  $('#win-overlay').hidden=true;$('#levels-overlay').hidden=true;
+  if(autoStart)startRun();
+  else{$('#start-overlay').hidden=false;say(()=>tt('hello',{acc:lvAcc(level)}))}
+}
+function startRun(){
+  $('#start-overlay').hidden=true;
+  st.running=true;st.start=performance.now();
+  clearInterval(st.timer);
+  st.timer=setInterval(()=>{if(st.running)$('#time').textContent=fmt(performance.now()-st.start)},200);
+  // telefon/tablet z dokiem: przewiń tak, żeby całe pole budowy było widoczne nad paskiem z klockami
+  requestAnimationFrame(()=>{if(!isDocked())return;const b=boardEl.getBoundingClientRect(),dt=trayPanel.getBoundingClientRect().top;
+    if(b.bottom>dt-6)window.scrollBy({top:Math.min(b.top-8,b.bottom-dt+10),behavior:'smooth'})});
+  say(()=>tt(coarse.matches?'startTouch':'startMouse'));
+}
+
+/* ================= PRZECIĄGANIE I DOTYK =================
+   Klocek można (1) przeciągnąć myszką albo palcem, (2) dotknąć, a potem dotknąć miejsca na polu. */
+const coarse=matchMedia('(pointer: coarse)');
+const trayPanel=document.querySelector('.tray-panel');
+const TOUCH_LIFT=34;   // przy dotyku klocek unosi się nad palec, żeby było go widać
+let drag=null,pending=null,selected=null,scrollRaf=0;
+
+function isDocked(){return getComputedStyle(trayPanel).position==='fixed'}
+function buzz(p){try{if(navigator.vibrate)navigator.vibrate(p)}catch(e){}}
+function inBoard(x,y){const b=boardEl.getBoundingClientRect();return x>=b.left&&x<=b.right&&y>=b.top&&y<=b.bottom}
+
+function onItemDown(it,e){
+  if(!st.running||drag||pending||it.classList.contains('gone'))return;
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  if(e.pointerType==='mouse')e.preventDefault(); // na dotyku nie blokujemy, żeby dok dało się przewijać w bok
+  pending={it,id:e.pointerId,x:e.clientX,y:e.clientY,type:e.pointerType||'mouse'};
+  window.addEventListener('pointermove',onMove,{passive:false});
+  window.addEventListener('pointerup',onUp);
+  window.addEventListener('pointercancel',onCancel);
+}
+function startDrag(e){
+  const {it,type}=pending;clearSelection();
+  const p=byId(it.dataset.pid),unit=boardEl.clientWidth/level.cols,r=it.firstElementChild.getBoundingClientRect();
+  const W=p.w*unit,H=p.h*unit,touch=type!=='mouse';
+  const cl=v=>Math.min(1,Math.max(0,v));
+  const g=document.createElement('div');g.className='ghost';g.style.width=W+'px';g.style.height=H+'px';g.innerHTML=svgFor(p);
+  document.body.appendChild(g);
+  drag={it,p,g,W,H,unit,touch,id:e.pointerId,
+    relX:touch?.5:cl((pending.x-r.left)/r.width),relY:touch?1:cl((pending.y-r.top)/r.height),
+    lift:touch?TOUCH_LIFT:0,x:0,y:0,cx:e.clientX,cy:e.clientY};
+  pending=null;
+  moveGhost(e.clientX,e.clientY);
+  it.classList.add('lifted');it.classList.remove('shake');
+  document.body.classList.add('dragging');
+  sfx.pick();buzz(8);
+  scrollRaf=requestAnimationFrame(autoScroll);
+}
+function moveGhost(cx,cy){
+  drag.cx=cx;drag.cy=cy;
+  drag.x=cx-drag.relX*drag.W;drag.y=cy-drag.relY*drag.H-drag.lift;
+  drag.g.style.transform=`translate(${drag.x}px,${drag.y}px)`;
+  boardEl.classList.toggle('over',inBoard(drag.x+drag.W/2,drag.y+drag.H/2)||inBoard(cx,cy));
+}
+// przewijanie strony przy górnej krawędzi (i dolnej, gdy nie ma doku)
+function autoScroll(){
+  if(!drag)return;
+  const edge=60,y=drag.touch?drag.y+Math.min(drag.H,40):drag.cy;
+  if(y<edge)window.scrollBy(0,-Math.ceil((edge-y)/4));
+  else if(!isDocked()&&drag.cy>innerHeight-edge)window.scrollBy(0,Math.ceil((drag.cy-innerHeight+edge)/4));
+  scrollRaf=requestAnimationFrame(autoScroll);
+}
+function onMove(e){
+  if(pending&&e.pointerId===pending.id){
+    const dx=e.clientX-pending.x,dy=e.clientY-pending.y;
+    if(pending.pan){panTray(e);return}
+    if(Math.hypot(dx,dy)>(pending.type==='mouse'?4:8)){
+      // w doku: ruch głównie w bok = przewijanie klocków, ruch w górę = podniesienie klocka
+      const ax=trayAxis();
+      if(pending.type!=='mouse'&&ax&&(ax==='x'?Math.abs(dx)>Math.abs(dy)*1.2:Math.abs(dy)>Math.abs(dx)*1.2)){
+        pending.pan=ax;pending.sl=ax==='x'?trayEl.scrollLeft:trayEl.scrollTop;pending.v=0;pending.lp=ax==='x'?e.clientX:e.clientY;pending.lt=performance.now();panTray(e);
+      } else startDrag(e);
+    }
+    return;
+  }
+  if(drag&&e.pointerId===drag.id){if(e.cancelable)e.preventDefault();moveGhost(e.clientX,e.clientY)}
+}
+function endListeners(){
+  cancelAnimationFrame(scrollRaf);
+  window.removeEventListener('pointermove',onMove);window.removeEventListener('pointerup',onUp);window.removeEventListener('pointercancel',onCancel);
+  document.body.classList.remove('dragging');boardEl.classList.remove('over');
+}
+function onCancel(e){
+  if(pending&&e.pointerId===pending.id){pending=null;endListeners();return}
+  if(!drag||e.pointerId!==drag.id)return;endListeners();sendBack(false);
+}
+// kierunek, w którym da się przewijać listę klocków (dok: w bok, kolumna: w pionie)
+function trayAxis(){
+  if(isDocked())return'x';
+  return trayEl.scrollHeight>trayEl.clientHeight+2?'y':null;
+}
+function panTray(e){
+  const x=pending.pan==='x',pos=x?e.clientX:e.clientY,now=performance.now(),dt=Math.max(1,now-pending.lt);
+  pending.v=.8*(pos-pending.lp)/dt+.2*pending.v;pending.lp=pos;pending.lt=now;
+  const d=pos-(x?pending.x:pending.y);
+  if(x)trayEl.scrollLeft=pending.sl-d;else trayEl.scrollTop=pending.sl-d;
+}
+function glide(v,ax){ // bezwładność po puszczeniu palca
+  let last=performance.now();
+  (function step(now){const dt=now-last;last=now;if(ax==='x')trayEl.scrollLeft-=v*dt;else trayEl.scrollTop-=v*dt;
+    v*=Math.pow(.994,dt);if(Math.abs(v)>.02)requestAnimationFrame(step)})(last);
+}
+function onUp(e){
+  if(pending&&e.pointerId===pending.id){const pd=pending;pending=null;endListeners();
+    if(pd.pan){if(performance.now()-pd.lt<80)glide(pd.v,pd.pan);return}
+    toggleSelect(pd.it);return}
+  if(!drag||e.pointerId!==drag.id)return;endListeners();
+  const gcx=drag.x+drag.W/2,gcy=drag.y+drag.H/2;
+  if(!inBoard(gcx,gcy)&&!inBoard(e.clientX,e.clientY)){sendBack(false);return}
+  const b=boardEl.getBoundingClientRect(),unit=boardEl.clientWidth/level.cols;
+  judge((drag.x-b.left-boardEl.clientLeft)/unit,(drag.y-b.top-boardEl.clientTop)/unit);
+}
+// iOS: blokada przewijania strony w trakcie przeciągania
+document.addEventListener('touchmove',e=>{if(drag&&e.cancelable)e.preventDefault()},{passive:false});
+
+/* ---- tryb „dotknij klocka, potem dotknij miejsca” ---- */
+function toggleSelect(it){
+  if(!st.running)return;
+  if(selected===it){clearSelection();say(()=>tt('pickBlock'));return}
+  clearSelection();
+  selected=it;it.classList.add('selected');boardEl.classList.add('awaiting');
+  it.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});
+  sfx.pick();buzz(8);
+  {const bp=byId(it.dataset.pid);say(()=>tt('tapSpot',{label:lab(bp)}),'tip')};
+}
+function clearSelection(){if(selected){selected.classList.remove('selected');selected=null}boardEl.classList.remove('awaiting')}
+boardEl.addEventListener('click',e=>{
+  if(!selected||!st.running||drag)return;
+  const it=selected;clearSelection();
+  const p=byId(it.dataset.pid),b=boardEl.getBoundingClientRect(),unit=boardEl.clientWidth/level.cols;
+  const r=it.firstElementChild.getBoundingClientRect();
+  const g=document.createElement('div');g.className='ghost';g.innerHTML=svgFor(p);
+  g.style.width=r.width+'px';g.style.height=r.height+'px';g.style.transform=`translate(${r.left}px,${r.top}px)`;
+  document.body.appendChild(g);
+  drag={it,p,g,W:p.w*unit,H:p.h*unit,unit,touch:true,tap:true,x:r.left,y:r.top};
+  it.classList.add('lifted');
+  void g.offsetWidth;g.classList.add('anim');g.style.width=drag.W+'px';g.style.height=drag.H+'px';
+  // środek klocka ląduje tam, gdzie dotknięto pola
+  judge((e.clientX-b.left-boardEl.clientLeft)/unit-p.w/2,(e.clientY-b.top-boardEl.clientTop)/unit-p.h/2);
+});
+document.addEventListener('pointerdown',e=>{
+  if(selected&&!e.target.closest('.tray-item')&&!e.target.closest('#board'))clearSelection();
+});
+
+function judge(gx,gy){
+  const p=drag.p,key=keyOf(p);
+  let best=null,bd=Infinity;
+  level.pieces.forEach(t=>{
+    if(keyOf(t)!==key||st.filled.has(t.id))return;
+    const d=Math.hypot(gx-t.x,gy-t.y);if(d<bd){bd=d;best=t}
+  });
+  const tol=drag.touch?TOL+0.4:TOL; // palec jest mniej precyzyjny niż myszka
+  if(best&&bd<=tol){
+    if(best.deps.every(d=>st.filled.has(d)))accept(best);
+    else miss('order',best);
+  } else miss('place',null);
+}
+function targetRect(t){
+  const b=boardEl.getBoundingClientRect(),u=boardEl.clientWidth/level.cols;
+  return{x:b.left+boardEl.clientLeft+t.x*u,y:b.top+boardEl.clientTop+t.y*u};
+}
+function accept(t){
+  const d=drag;drag=null;
+  const r=targetRect(t);
+  d.g.classList.add('anim');d.g.style.transform=`translate(${r.x}px,${r.y}px)`;
+  st.filled.add(t.id);st.streak=0;clearHint();
+  d.it.classList.remove('lifted');d.it.classList.add('gone');
+  setTimeout(()=>d.it.remove(),300);
+  sfx.place();buzz(15);
+  setTimeout(()=>{d.g.remove();const el=pieceEl(t);el.classList.add('plop');boardEl.appendChild(el)},200);
+  hud();
+  const left=level.pieces.length-st.filled.size;
+  if(left===0){setTimeout(()=>{trayEl.innerHTML='<div class="tray-empty">'+tt('allPlaced')+'</div>'},320);win();return}
+  const ci=Math.floor(Math.random()*6);
+  say(()=>`${cheers()[ci]} ${leftText(left)}.`,'good');
+}
+function miss(kind,t){
+  st.mistakes++;st.streak++;
+  const s=$('#stat-mistakes');s.classList.remove('bump');void s.offsetWidth;s.classList.add('bump');
+  hud();sfx.error();buzz([40,50,40]);
+  if(kind==='order'){say(()=>tt('order'),'bad');mark(t,'wrong')}
+  else say(()=>tt(diff==='easy'?'placeEasy':diff==='medium'?'placeMedium':'placeHard'),'bad');
+  sendBack(true);
+  if(st.streak>=HINT_AFTER)setTimeout(showHint,450);
+}
+function sendBack(shake){
+  const d=drag;drag=null;if(!d)return;
+  const r=d.it.firstElementChild.getBoundingClientRect();
+  d.g.classList.add('anim');
+  d.g.style.width=r.width+'px';d.g.style.height=r.height+'px';
+  d.g.style.transform=`translate(${r.left}px,${r.top}px)`;
+  if(!shake)sfx.back();
+  setTimeout(()=>{d.g.remove();d.it.classList.remove('lifted');if(shake){void d.it.offsetWidth;d.it.classList.add('shake')}},230);
+}
+function mark(t,cls){
+  const m=document.createElement('div');m.className='mark '+cls;place(m,t);boardEl.appendChild(m);
+  if(cls==='wrong')setTimeout(()=>m.remove(),1150);
+  return m;
+}
+
+/* ================= PODPOWIEDŹ ================= */
+function showHint(){
+  if(!st.running)return;
+  clearHint();
+  const ready=level.pieces.filter(t=>!st.filled.has(t.id)&&t.deps.every(d=>st.filled.has(d)));
+  if(!ready.length)return;
+  ready.sort((a,b)=>(b.y+b.h)-(a.y+a.h));
+  const t=ready[0];
+  const it=[...trayEl.querySelectorAll('.tray-item:not(.gone)')].find(i=>i.dataset.key===keyOf(t));
+  if(!it)return;
+  it.classList.add('hint');
+  it.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  st.hint={it,m:mark(t,'hint')};st.streak=0;
+  sfx.hint();
+  say(()=>T_hint(t),'tip');
+}
+function T_hint(target){return tt('hint',{label:lab(target)})}
+function clearHint(){if(!st.hint)return;st.hint.it.classList.remove('hint');st.hint.m.remove();st.hint=null}
+
+/* ================= WYGRANA ================= */
+// progi gwiazdek: trudniejszy tryb = więcej czasu i pomyłek
+function starCfg(){const d=DIFFS[diff],c=level.stars;
+  return{three:{time:Math.round(c.three.time*d.time),mistakes:c.three.mistakes+d.extra},two:{time:Math.round(c.two.time*d.time),mistakes:c.two.mistakes+d.extra*2}}}
+function starsFor(sec,m){
+  const c=starCfg();
+  if(sec<=c.three.time&&m<=c.three.mistakes)return 3;
+  if(sec<=c.two.time&&m<=c.two.mistakes)return 2;
+  return 1;
+}
+const STAR='<svg viewBox="0 0 60 60"><path class="s" d="M30 5l7.6 15.5 17 2.5-12.3 12 2.9 17L30 44l-15.2 8 2.9-17L5.4 23l17-2.5z"/></svg>';
+const starRow=n=>[0,1,2].map(i=>STAR.replace('<svg','<svg class="'+(i<n?'on':'')+'"')).join('');
+
+function win(){
+  st.running=false;clearInterval(st.timer);
+  const ms=performance.now()-st.start,sec=ms/1000;
+  $('#time').textContent=fmt(ms);
+  const stars=starsFor(sec,st.mistakes);
+  say(()=>tt('hooray',{ready:lvReady(level)}),'good');
+  setTimeout(()=>{sfx.win();confetti()},250);
+  const prev=readBest(level.id);
+  const better=!prev||stars>prev.stars||(stars===prev.stars&&(ms<prev.ms||(ms===prev.ms&&st.mistakes<prev.mistakes)));
+  if(better)writeBest(level.id,{ms,stars,mistakes:st.mistakes});
+  lastWin={ms,stars,mistakes:st.mistakes,best:better?{ms,stars,mistakes:st.mistakes}:prev,record:!!(better&&prev)};
+  setTimeout(()=>{
+    $('#stars').innerHTML=starRow(stars);
+    renderWin();
+    $('#win-overlay').hidden=false;
+    (li===LEVELS.length-1?$('#btn-again'):$('#btn-next')).focus();
+  },1300);
+}
+let lastWin=null;
+function renderWin(){
+  if(!lastWin)return;const w=lastWin,last=li===LEVELS.length-1,b=w.best,c=starCfg();
+  $('#win-title').textContent=last?tt('winAll'):tt('winLevel',{ready:lvReady(level)});
+  $('#win-time').textContent=fmt(w.ms);
+  $('#win-mistakes').textContent=w.mistakes;
+  $('#win-record').hidden=!w.record;
+  $('#win-best').textContent=tt('best',{diff:tt(diff).toLowerCase(),time:fmt(b.ms),m:b.mistakes,s:b.stars});
+  $('#win-diff').textContent=tt(diff);
+  $('#win-tip').textContent=w.stars===3?tt('master'):
+    (lang==='en'?`For 3 stars: ${c.three.time} seconds at most and no more than ${c.three.mistakes} ${mistakesWord(c.three.mistakes)}.`
+                :`Na 3 gwiazdki: najwyżej ${c.three.time} sekund i nie więcej niż ${c.three.mistakes} ${mistakesWord(c.three.mistakes)}.`);
+  $('#btn-next').hidden=last;
+}
+
+/* ================= WYBÓR PLANSZ ================= */
+function openLevels(){
+  const grid=$('#level-grid');grid.innerHTML='';
+  LEVELS.forEach((L,i)=>{
+    const open=unlocked(i),best=readBest(L.id);
+    const b=document.createElement('button');b.type='button';b.className='level-tile'+(i===li?' current':'');b.disabled=!open;
+    b.setAttribute('aria-label',tt('tileAria',{n:i+1,name:lvName(L)})+(open?'':tt('locked')));
+    const mini=document.createElement('div');mini.className='board mini';
+    mini.style.setProperty('--cols',L.cols);mini.style.setProperty('--rows',L.rows);
+    renderPattern(mini,L,diff==='easy'?'easy':'medium');
+    b.appendChild(mini);
+    b.insertAdjacentHTML('beforeend',`<div class="lt-name">${i+1}. ${lvName(L)}</div><div class="lt-meta"><span>${L.pieces.length} ${blocksWord(L.pieces.length)}</span><span class="mini-stars">${starRow(best?best.stars:0)}</span></div>`+
+      (open?'':`<svg class="lock" viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="6" fill="#d9ccff" stroke="#8a78c4" stroke-width="3"/><path d="M15 19v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#8a78c4" stroke-width="3.5" stroke-linecap="round"/><circle cx="22" cy="28" r="3" fill="#4a3f6b"/></svg>`));
+    b.addEventListener('click',()=>{sfx.unlock();setLevel(i)});
+    grid.appendChild(b);
+  });
+  $('#levels-overlay').hidden=false;
+  const cur=grid.querySelector('.current');if(cur)cur.focus();
+}
+function closeLevels(){
+  $('#levels-overlay').hidden=true;
+  // jeśli gra nie trwa i nie ma wygranej na ekranie – wróć do ekranu startu
+  if(!st.running&&$('#win-overlay').hidden&&st.filled.size<level.pieces.length)$('#start-overlay').hidden=false;
+}
+
+/* ================= KONFETTI ================= */
+function confetti(){
+  const cv=$('#confetti'),ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1,W=innerWidth,H=innerHeight;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);cv.hidden=false;
+  const cols=['#ffb3c7','#ffcfa8','#ffe79a','#bdeccb','#bfe0ff','#d9ccff','#ff93ab','#8fdca8'];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const N=reduce?50:180,parts=[];
+  for(let i=0;i<N;i++){const left=i%2===0;parts.push({x:left?-10:W+10,y:H*.8,vx:(left?1:-1)*(4+Math.random()*11),vy:-(9+Math.random()*13),s:5+Math.random()*7,r:Math.random()*6,vr:(Math.random()-.5)*.35,c:cols[i%cols.length],round:Math.random()<.4})}
+  const t0=performance.now();
+  (function frame(now){
+    ctx.clearRect(0,0,W,H);
+    parts.forEach(p=>{p.vy+=.3;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;
+      if(p.round){ctx.beginPath();ctx.arc(0,0,p.s/2,0,Math.PI*2);ctx.fill()}else ctx.fillRect(-p.s/2,-p.s/3,p.s,p.s*.66);
+      ctx.restore()});
+    if(now-t0<4200)requestAnimationFrame(frame);else{ctx.clearRect(0,0,W,H);cv.hidden=true}
+  })(t0);
+}
+
+/* ================= PRZYCISKI ================= */
+$('#btn-start').addEventListener('click',()=>{sfx.unlock();startRun()});
+$('#btn-again').addEventListener('click',()=>{sfx.unlock();newGame(true)});
+$('#btn-next').addEventListener('click',()=>{sfx.unlock();setLevel(Math.min(li+1,LEVELS.length-1))});
+$('#btn-restart').addEventListener('click',()=>{sfx.unlock();newGame(true)});
+$('#btn-levels').addEventListener('click',()=>{if(drag)return;$('#start-overlay').hidden=true;$('#win-overlay').hidden=true;openLevels()});
+$('#btn-start-levels').addEventListener('click',()=>{$('#start-overlay').hidden=true;openLevels()});
+$('#btn-win-levels').addEventListener('click',()=>{$('#win-overlay').hidden=true;openLevels()});
+$('#btn-levels-close').addEventListener('click',closeLevels);
+$('#btn-sound').addEventListener('click',e=>{
+  const m=sfx.toggle(),b=e.currentTarget;
+  b.querySelector('.snd-on').style.display=m?'none':'';b.querySelector('.snd-off').style.display=m?'':'none';
+  b.setAttribute('aria-label',tt(m?'unmute':'mute'));b.dataset.muted=m?'1':'';
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#levels-overlay').hidden)closeLevels()});
+window.addEventListener('resize',sizeTray);
+$('#btn-rotate-ok').addEventListener('click',()=>$('#rotate').classList.add('dismissed'));
+if(window.ResizeObserver)new ResizeObserver(dockPad).observe(trayPanel);
+/* ---- przełączanie języka ---- */
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{e.textContent=tt(e.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',tt(e.dataset.i18nAria)));
+  document.querySelectorAll('[data-i18n-title]').forEach(e=>{e.title=tt(e.dataset.i18nTitle)});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false'));
+  $('#btn-lang').textContent=lang.toUpperCase();
+  const sb=$('#btn-sound');sb.setAttribute('aria-label',tt(sb.dataset.muted?'unmute':'mute'));
+  $('#step-move').textContent=tt(coarse.matches?'moveTouch':'moveMouse');
+  refreshDiffUI();
+  trayEl.querySelectorAll('.tray-item').forEach(it=>{const p=byId(it.dataset.pid);it.setAttribute('aria-label',tt('blockAria',{label:lab(p)}));it.title=lab(p)});
+  const te=trayEl.querySelector('.tray-empty');if(te)te.textContent=tt('allPlaced');
+  if(lastSay)say(lastSay.fn,lastSay.mood,true);
+  if(!$('#win-overlay').hidden)renderWin();
+  if(!$('#levels-overlay').hidden)openLevels();
+}
+function setLang(l){if(l===lang)return;lang=l;try{localStorage.setItem('quickbuilder-lang',l)}catch(e){}applyLang()}
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+$('#btn-lang').addEventListener('click',()=>setLang(lang==='pl'?'en':'pl'));
+
+// start: pierwsza odblokowana, jeszcze nieukończona plansza
+let startAt=0;
+for(let i=0;i<LEVELS.length;i++){if(unlocked(i))startAt=i;if(!doneAny(LEVELS[i].id))break}
+setLevel(startAt);
+applyLang();
+window.__quickBuilder={LEVELS};
+})();
+</script>
+
+<script>
+// tryb offline: rejestracja service workera (działa tylko z adresu https / localhost)
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
