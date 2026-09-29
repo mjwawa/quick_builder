@@ -186,6 +186,14 @@ button{font:inherit;color:inherit}
 .mini-stars svg{width:17px;height:17px}
 .mini-stars .s{fill:#eee6f7;stroke:#dcd0ee;stroke-width:4;stroke-linejoin:round}
 .mini-stars .on .s{fill:#ffd84d;stroke:#e9b92e}
+.picker-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.picker-head h2{grid-column:2}
+.picker-head .btn-link{grid-column:1;justify-self:start}
+.level-tile.soon .board{filter:grayscale(1) opacity(.35)}
+.soon-badge,.prog-badge{position:absolute;top:14px;right:14px;white-space:nowrap;font-size:11.5px;font-weight:800;border-radius:999px;padding:2px 9px;background:#fff;border:2px solid var(--line);color:var(--ink-soft)}
+.prog-badge{background:#fff8e0;border-color:#f5df94;color:#8a6d1c}
+.cat-tile .lt-name{font-size:16px}
+.mini-q{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:34px;color:#c3b8dc}
 .lock{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:44px;height:44px}
 
 #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90}
@@ -210,6 +218,37 @@ button{font:inherit;color:inherit}
 .lang button[aria-pressed="true"]{background:var(--lav);color:var(--ink)}
 .card>.lang{align-self:flex-end;margin-bottom:-10px}
 .lang-btn{font-weight:800;font-size:15px;color:var(--ink)}
+
+.welcome{max-width:760px;display:grid;grid-template-columns:1fr 1.15fr;gap:18px 26px;align-items:center;text-align:left}
+.w-hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.w-logo{width:120px;height:110px;animation:hop 2.4s ease-in-out infinite}
+.welcome h2{font-size:36px}
+.welcome h2 span{color:var(--accent)}
+.welcome h3{font-family:var(--font-display);font-size:20px;margin:0}
+.w-body{display:flex;flex-direction:column;gap:10px}
+.w-body .steps{gap:7px}
+.w-body .steps li{padding:7px 10px}
+.steps li:nth-child(4) .num{background:var(--butter)} .steps li:nth-child(5) .num{background:var(--lav)}
+.w-lang{display:flex;gap:10px}
+.w-lang button{display:flex;flex-direction:column;align-items:center;gap:0;min-width:96px;padding:8px 14px;border-radius:16px;border:3px solid var(--line);background:#faf6ff;cursor:pointer;font:inherit;color:var(--ink)}
+.w-lang button b{font-family:var(--font-display);font-size:20px}
+.w-lang button span{font-size:13px;font-weight:700;color:var(--ink-soft)}
+.w-lang button[aria-pressed="true"]{border-color:var(--accent);background:#efe8ff;box-shadow:0 4px 0 #cdbcff}
+#btn-play{align-self:stretch;font-size:26px}
+@media (max-width:640px){.welcome{grid-template-columns:1fr;text-align:center}.welcome .steps{text-align:left}}
+@media (orientation:landscape) and (max-width:1020px){
+  .welcome{max-width:760px;gap:10px 18px}
+  .w-logo{width:78px;height:72px}
+  .welcome h2{font-size:26px}
+  .w-lang button{min-width:80px;padding:5px 10px}
+  .w-lang button b{font-size:16px}
+  .welcome h3{font-size:16px}
+  .w-body{gap:6px}
+  .w-body .steps{gap:4px}
+  .w-body .steps li{padding:5px 8px;font-size:13px}
+  #btn-play{font-size:20px;padding:8px 18px}
+}
+@media (prefers-reduced-motion:reduce){.w-logo{animation:none}}
 
 /* ---------- poziomy trudności ---------- */
 .diff{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -326,7 +365,7 @@ body{overscroll-behavior-y:none}
   :root{--H:calc(100vh - 22px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
   @supports (height:100dvh){:root{--H:calc(100dvh - 22px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}}
   .app{max-width:none;height:var(--H);display:grid;gap:6px 10px;
-    grid-template-columns:minmax(168px,1.15fr) auto minmax(150px,1fr);
+    grid-template-columns:minmax(138px,.8fr) auto minmax(190px,1.4fr);
     grid-template-rows:minmax(0,1fr);grid-template-areas:"left board right"}
   .side{display:flex;flex-direction:column;gap:6px;min-height:0;min-width:0}
   #side-left{grid-area:left}#side-right{grid-area:right}
@@ -336,7 +375,7 @@ body{overscroll-behavior-y:none}
   .brand{gap:6px;flex-wrap:nowrap;min-width:0;max-width:100%;overflow:hidden;align-self:start;padding-top:2px}
   .brand svg{width:22px;height:22px;flex:none}
   .brand h1{display:none}
-  .level-chip{font-size:11.5px;line-height:1.2;padding:2px 8px;border-width:2px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+  .level-chip{font-size:11.5px;line-height:1.2;padding:2px 8px;border-width:2px;min-width:0;white-space:normal;overflow:hidden;flex:0 1 auto;border-radius:12px}
 
   .stats{width:auto;flex-wrap:wrap;justify-content:flex-end;align-content:flex-start;gap:5px;padding:2px 0 0 0}
   .stat{padding:3px 7px;gap:4px;border-radius:11px;border-width:2px;box-shadow:0 3px 0 var(--shadow)}
@@ -354,7 +393,7 @@ body{overscroll-behavior-y:none}
   .tray-item{padding:4px;border-radius:10px}
 
   #board{grid-area:board;align-self:center;justify-self:center;
-    width:min(calc(var(--H) * var(--cols,14) / var(--rows,12)), calc(100vw - 372px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)))}
+    width:min(calc(var(--H) * .9 * var(--cols,14) / var(--rows,12)), calc(100vw - 380px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)))}
 
   .preview-panel{flex:none;display:flex;flex-direction:column;padding:5px;gap:4px;border-radius:14px;border-width:2px;box-shadow:0 3px 0 var(--shadow)}
   .preview-panel .panel-head,.preview-panel .rule{display:none}
@@ -398,6 +437,9 @@ body{overscroll-behavior-y:none}
   .card.wide{max-width:900px}
   .level-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
   .lt-name{font-size:14.5px}
+  .cat-tile .lt-name{font-size:13.5px}
+  .lt-meta{font-size:12px}
+  .soon-badge,.prog-badge{font-size:10px;top:10px;right:10px;padding:1px 6px}
 }
 </style>
 
@@ -477,6 +519,40 @@ body{overscroll-behavior-y:none}
   <div class="side" id="side-right"></div>
 </div>
 
+<div class="overlay" id="welcome-overlay">
+  <div class="card welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <div class="w-hero">
+      <svg class="w-logo" viewBox="0 0 120 110" aria-hidden="true">
+        <ellipse cx="60" cy="102" rx="44" ry="5" fill="#d9c9f5"/>
+        <rect x="10" y="70" width="100" height="30" rx="9" fill="#ffb3c7" stroke="#c98aa3" stroke-width="4"/>
+        <rect x="18" y="75" width="84" height="5" rx="2.5" fill="#fff" opacity=".6"/>
+        <rect x="24" y="40" width="72" height="30" rx="9" fill="#bdeccb" stroke="#80b394" stroke-width="4"/>
+        <rect x="31" y="45" width="58" height="5" rx="2.5" fill="#fff" opacity=".6"/>
+        <rect x="38" y="10" width="44" height="30" rx="9" fill="#ffe79a" stroke="#c9a74c" stroke-width="4"/>
+        <rect x="44" y="15" width="32" height="5" rx="2.5" fill="#fff" opacity=".65"/>
+        <path d="M100 8q2 9 11 11q-9 2-11 11q-2-9-11-11q9-2 11-11z" fill="#8e6cf0"/>
+      </svg>
+      <h2 id="welcome-title">Quick <span>Builder</span></h2>
+      <p class="sub" data-i18n="wSub">Buduj z klocków domki, pojazdy, zwierzęta i wiele więcej!</p>
+      <div class="w-lang" role="group" data-i18n-aria="langAria" aria-label="Język">
+        <button type="button" data-lang="pl"><b>PL</b><span>Polski</span></button>
+        <button type="button" data-lang="en"><b>EN</b><span>English</span></button>
+      </div>
+    </div>
+    <div class="w-body">
+      <h3 data-i18n="wHow">Jak grać?</h3>
+      <ol class="steps">
+        <li><span class="num">1</span><span data-i18n="w1">Wybierz kategorię i planszę.</span></li>
+        <li><span class="num">2</span><span data-i18n="w2">Popatrz na wzór – tak ma wyglądać budowla.</span></li>
+        <li><span class="num">3</span><span data-i18n="w3">Przeciągnij klocek na pole albo dotknij klocka, a potem jego miejsca.</span></li>
+        <li><span class="num">4</span><span data-i18n="w4">Buduj od dołu do góry – klocek musi na czymś stać.</span></li>
+        <li><span class="num">5</span><span data-i18n="w5">Szybko i bez pomyłek = 3 gwiazdki!</span></li>
+      </ol>
+      <button class="btn" id="btn-play" type="button" data-i18n="wPlay">Graj!</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="start-overlay">
   <div class="card" role="dialog" aria-modal="true" aria-labelledby="start-title">
     <div class="lang" role="group" data-i18n-aria="langAria" aria-label="Język"><button type="button" data-lang="pl">PL</button><button type="button" data-lang="en">EN</button></div>
@@ -507,13 +583,14 @@ body{overscroll-behavior-y:none}
 <div class="overlay" id="levels-overlay" hidden>
   <div class="card wide" role="dialog" aria-modal="true" aria-labelledby="levels-title">
     <div class="lang" role="group" data-i18n-aria="langAria" aria-label="Język"><button type="button" data-lang="pl">PL</button><button type="button" data-lang="en">EN</button></div>
-    <h2 id="levels-title" data-i18n="chooseLevel">Wybierz planszę</h2>
-    <p class="sub" style="text-align:center" data-i18n="levelsSub">Każda plansza ma więcej klocków. Ułóż jedną, żeby odblokować następną.</p>
+    <div class="picker-head"><button class="btn-link" id="btn-cats" type="button" data-i18n="backCats">← Kategorie</button><h2 id="levels-title">Wybierz planszę</h2></div>
+    <p class="sub" style="text-align:center" id="levels-sub">Każda plansza ma więcej klocków. Ułóż jedną, żeby odblokować następną.</p>
     <div class="diff" role="radiogroup" data-i18n-aria="diffAria" aria-label="Poziom trudności">
       <button type="button" role="radio" data-diff="easy"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10" fill="#ffa3b8" stroke="#b77d95" stroke-width="2" stroke-linejoin="round"/><rect x="8" y="14" width="20" height="13" rx="2" fill="#ffcfa8" stroke="#b98f6c" stroke-width="2"/><rect x="15" y="18" width="6" height="9" rx="1.5" fill="#cdb9ff"/></svg><b data-i18n="easy">Łatwy</b><small data-i18n="easySub">kolorowy wzór</small></button>
       <button type="button" role="radio" data-diff="medium"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10v13H5z" fill="#b8b0cf" stroke="#8f86ab" stroke-width="2" stroke-linejoin="round"/></svg><b data-i18n="medium">Średni</b><small data-i18n="mediumSub">szary kształt</small></button>
       <button type="button" role="radio" data-diff="hard"><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M5 14 18 4l13 10v13H5z" fill="none" stroke="#b8b0cf" stroke-width="2" stroke-dasharray="3 3" stroke-linejoin="round"/><text x="18" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#8e6cf0" font-family="sans-serif">?</text></svg><b data-i18n="hard">Trudny</b><small data-i18n="hardSub">bez wzoru</small></button>
     </div>
+    <div class="level-grid" id="cat-grid"></div>
     <div class="level-grid" id="level-grid"></div>
     <button class="btn alt" id="btn-levels-close" type="button" data-i18n="close">Zamknij</button>
   </div>
@@ -556,10 +633,218 @@ body{overscroll-behavior-y:none}
    Klocki o tym samym kształcie, rozmiarze i kolorze są wymienne (np. dwa okna). */
 const C={coral:'#ffa3b8',pink:'#ffb3c7',rose:'#ff9fb2',red:'#ff8a9e',peach:'#ffcfa8',orange:'#f6b48c',butter:'#ffe08a',
   sun:'#ffe27a',mint:'#a6e0b2',green:'#93d9a6',sky:'#b3e1ff',water:'#a9d8f5',lav:'#cdb9ff',lavLight:'#e4dbff',lavDeep:'#b9a6f2',
-  stone:'#d6cdea',brown:'#dcb48f',dark:'#8f84b8',white:'#fbf8ff',light:'#fff3b0'};
+  stone:'#d6cdea',sand:'#f4d994',sand2:'#e9c47c',ice:'#e2efff',pine:'#86cf98',brown:'#dcb48f',dark:'#8f84b8',white:'#fbf8ff',light:'#fff3b0'};
 function P(id,label,shape,x,y,w,h,color,deco,z,deps,extra){return Object.assign({id,label,shape,x,y,w,h,color,deco,z,deps},extra||{})}
 
 const LEVELS=[
+{id:'hulajnoga',acc:'hulajnogę',done:'gotowa',name:'Hulajnoga',pieces:[
+  P('road','droga','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheelB','koło','circle',2.9,9.4,1.6,1.6,C.dark,'wheel',4,['road']),
+  P('wheelF','koło','circle',9.5,9.4,1.6,1.6,C.dark,'wheel',4,['road']),
+  P('deck','deska','rect',3.3,9.2,6.8,0.6,C.coral,'',3,['wheelB','wheelF']),
+  P('stem','drążek','rect',9.7,3.8,0.6,5.4,C.lav,'',2,['deck']),
+  P('handle','kierownica','rect',8.8,3.4,2.4,0.5,C.dark,'',3,['stem']),
+  P('sun','słońce','sun',0.6,0.6,2.4,2.4,C.sun,'',1,[]),
+  P('cloud','chmurka','cloud',5,1,3,1.4,C.white,'',1,[])
+]},
+{id:'rower',acc:'rower',done:'gotowy',name:'Rower',pieces:[
+  P('road','droga','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheelB','koło','circle',1.2,7.4,3.6,3.6,C.dark,'wheel',2,['road']),
+  P('wheelF','koło','circle',9.2,7.4,3.6,3.6,C.dark,'wheel',2,['road']),
+  P('bar','belka ramy','rect',3,8.95,8,0.5,C.coral,'',3,['wheelB','wheelF']),
+  P('frame','rama','tri',4.6,6.2,5.2,2.75,C.coral,'',3,['bar']),
+  P('seat','siodełko','semi',6.1,5.5,2.2,0.7,C.dark,'',4,['frame']),
+  P('fork','widelec','rect',10.8,5.5,0.4,3.7,C.lav,'',3,['wheelF']),
+  P('handle','kierownica','rect',10.2,5.1,1.8,0.45,C.dark,'',4,['fork']),
+  P('sun','słońce','sun',0.5,0.5,2.4,2.4,C.sun,'',1,[]),
+  P('cloud','chmurka','cloud',9.5,0.8,3,1.4,C.white,'',1,[])
+]},
+{id:'motocykl',acc:'motocykl',done:'gotowy',name:'Motocykl',pieces:[
+  P('road','droga','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheelB','koło','circle',1,8,3,3,C.dark,'wheel',4,['road']),
+  P('wheelF','koło','circle',10,8,3,3,C.dark,'wheel',4,['road']),
+  P('engine','silnik','rect',5,8,3.4,2,C.stone,'bands',2,['wheelB','wheelF']),
+  P('body','obudowa','rect',3.2,6.2,7,1.8,C.coral,'',3,['engine']),
+  P('seat','siodełko','rect',3.6,5.5,3.4,0.7,C.dark,'',3,['body']),
+  P('tank','bak','semi',6.9,5,2.6,1.2,C.red,'',4,['body']),
+  P('exhaust','rura wydechowa','rect',1.6,7.5,3,0.45,C.stone,'',1,['engine']),
+  P('fork','widelec','rect',11.25,5,0.5,4.5,C.lav,'',2,['wheelF']),
+  P('handle','kierownica','rect',10.5,4.6,1.9,0.45,C.dark,'',3,['fork']),
+  P('headlight','reflektor','circle',11.9,5.6,0.9,0.9,C.butter,'glow',3,['fork']),
+  P('cloud','chmurka','cloud',0.4,0.7,3,1.4,C.white,'',1,[])
+]},
+{id:'autobus',acc:'autobus',done:'gotowy',name:'Autobus',pieces:[
+  P('road','droga','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheel1','koło','circle',2.2,9,2,2,C.dark,'wheel',4,['road']),
+  P('wheel2','koło','circle',9.8,9,2,2,C.dark,'wheel',4,['road']),
+  P('body','nadwozie','rect',0.8,4,12.4,5.8,C.butter,'',2,['wheel1','wheel2']),
+  P('roof','dach','rect',1.1,3.4,11.8,0.6,C.coral,'',2,['body']),
+  P('sign','tablica','rect',4,2.6,6,0.8,C.white,'dots',2,['roof']),
+  P('win1','szyba','rect',1.6,4.8,1.8,1.6,C.sky,'window',3,['body']),
+  P('win2','szyba','rect',3.9,4.8,1.8,1.6,C.sky,'window',3,['body']),
+  P('win3','szyba','rect',6.2,4.8,1.8,1.6,C.sky,'window',3,['body']),
+  P('win4','szyba','rect',8.5,4.8,1.8,1.6,C.sky,'window',3,['body']),
+  P('door','drzwi','rect',10.8,5,1.8,4.4,C.lav,'door',4,['body']),
+  P('stripe','pasek','rect',0.8,7.2,12.4,0.45,C.coral,'',3,['body']),
+  P('headlight','reflektor','circle',12.3,8.3,0.8,0.8,C.white,'glow',4,['body']),
+  P('taillight','lampka tylna','rect',0.95,8.2,0.4,0.8,C.red,'',4,['body']),
+  P('mirror','lusterko','rect',13.25,4.6,0.3,1.2,C.dark,'',2,['body']),
+  P('sun','słońce','sun',0.4,0.2,2.2,2.2,C.sun,'',1,[]),
+  P('cloud','chmurka','cloud',10.6,0.6,3,1.4,C.white,'',1,[]),
+  P('bird','ptaszek','bird',7.6,1,1,0.5,C.dark,'',1,[])
+]},
+{id:'helikopter',acc:'helikopter',done:'gotowy',name:'Helikopter',pieces:[
+  P('pad','lądowisko','rect',0,11,14,1,C.stone,'dots',1,[]),
+  P('skid','płoza','rect',3,10.4,6.5,0.35,C.dark,'',2,['pad']),
+  P('strut1','wspornik','rect',4.3,9.05,0.3,1.35,C.dark,'',2,['skid']),
+  P('strut2','wspornik','rect',7.6,9.05,0.3,1.35,C.dark,'',2,['skid']),
+  P('body','kabina','circle',2.8,5.2,6.4,4.2,C.coral,'',3,['strut1','strut2']),
+  P('window','okno','circle',6.3,5.8,2.4,2.4,C.sky,'porthole',4,['body']),
+  P('stripe','pasek','rect',3.4,7.6,3.8,0.4,C.white,'',3,['body']),
+  P('light','lampka','circle',7.9,8.4,0.6,0.6,C.butter,'glow',4,['body']),
+  P('boom','belka ogonowa','rect',9,6.6,4,0.8,C.coral,'',2,['body']),
+  P('rotorT','śmigło ogonowe','circle',12.2,6.4,1.2,1.2,C.dark,'wheel',4,['boom']),
+  P('mast','maszt','rect',5.7,4.3,0.6,0.95,C.dark,'',2,['body']),
+  P('bladeL','łopata wirnika','rect',0.6,3.9,5.4,0.4,C.dark,'',3,['mast']),
+  P('bladeR','łopata wirnika','rect',6,3.9,5.4,0.4,C.dark,'',3,['mast']),
+  P('hub','piasta','circle',5.6,3.7,0.8,0.8,C.butter,'',4,['bladeL','bladeR']),
+  P('pole','słupek','rect',0.6,7.5,0.25,3.5,C.dark,'',2,['pad']),
+  P('sock','rękaw wiatrowy','pennant',0.85,7.5,0.9,0.6,C.orange,'stripes',2,['pole']),
+  P('sun','słońce','sun',4.8,0.4,2.4,2.4,C.sun,'',1,[]),
+  P('cloud1','chmurka','cloud',0.4,0.6,3,1.4,C.white,'',1,[]),
+  P('cloud2','chmurka','cloud',9.6,1,3,1.4,C.white,'',1,[])
+]},
+{id:'samolot',acc:'samolot',done:'gotowy',name:'Samolot',pieces:[
+  P('runway','pas startowy','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheel1','kółko','circle',3.4,10.1,0.9,0.9,C.dark,'wheel',3,['runway']),
+  P('wheel2','kółko','circle',8.8,10.1,0.9,0.9,C.dark,'wheel',3,['runway']),
+  P('strut1','wspornik','rect',3.7,9.2,0.3,0.95,C.dark,'',2,['wheel1']),
+  P('strut2','wspornik','rect',9.1,9.2,0.3,0.95,C.dark,'',2,['wheel2']),
+  P('fuselage','kadłub samolotu','rect',1.5,6.6,10,2.6,C.white,'',2,['strut1','strut2']),
+  P('nose','nos samolotu','circle',10.2,6.6,2.6,2.6,C.white,'',1,['fuselage']),
+  P('cockpit','kokpit','rect',10.9,7,1.2,0.8,C.sky,'',3,['nose']),
+  P('w1','okienko','circle',3.2,7.2,0.7,0.7,C.sky,'porthole',3,['fuselage']),
+  P('w2','okienko','circle',4.4,7.2,0.7,0.7,C.sky,'porthole',3,['fuselage']),
+  P('w3','okienko','circle',5.6,7.2,0.7,0.7,C.sky,'porthole',3,['fuselage']),
+  P('w4','okienko','circle',6.8,7.2,0.7,0.7,C.sky,'porthole',3,['fuselage']),
+  P('door','drzwi','rect',8.3,7,1,1.9,C.lav,'',3,['fuselage']),
+  P('stripe','pasek','rect',1.5,8.3,10,0.4,C.coral,'',3,['fuselage']),
+  P('wing','skrzydło samolotu','trap',4.5,8.6,4.2,0.9,C.coral,'',4,['fuselage'],{inset:0.9}),
+  P('engine','silnik','rect',5.4,9.5,2.2,0.8,C.stone,'bands',4,['wing']),
+  P('fin','statecznik','triR',1.4,3.6,2.4,3,C.coral,'',2,['fuselage']),
+  P('tailplane','ster wysokości','rect',0.8,6.2,2.4,0.45,C.coral,'',3,['fuselage']),
+  P('sun','słońce','sun',11.3,0.4,2.4,2.4,C.sun,'',1,[]),
+  P('cloud1','chmurka','cloud',0.3,0.6,3,1.4,C.white,'',1,[]),
+  P('cloud2','chmurka','cloud',6,1.6,3,1.4,C.white,'',1,[]),
+  P('bird1','ptaszek','bird',4.4,1,1,0.5,C.dark,'',1,[]),
+  P('bird2','ptaszek','bird',9.6,2.6,1,0.5,C.dark,'',1,[])
+]},
+{id:'wozstrazacki',acc:'wóz strażacki',done:'gotowy',name:'Wóz strażacki',pieces:[
+  P('road','droga','rect',0,11,14,1,C.stone,'road',1,[]),
+  P('wheel1','koło','circle',1.8,9,2,2,C.dark,'wheel',4,['road']),
+  P('wheel2','koło','circle',7.4,9,2,2,C.dark,'wheel',4,['road']),
+  P('wheel3','koło','circle',10.2,9,2,2,C.dark,'wheel',4,['road']),
+  P('chassis','podwozie','rect',0.8,8.4,12.4,1.2,C.stone,'',2,['wheel1','wheel2','wheel3']),
+  P('body','skrzynia wozu','rect',0.8,5.2,8.2,3.2,C.red,'',2,['chassis']),
+  P('cab','kabina','rect',9.2,4.2,4,4.2,C.red,'',2,['chassis']),
+  P('cabWin','szyba','rect',10.6,4.8,2.2,1.6,C.sky,'window',3,['cab']),
+  P('door','drzwi','rect',9.5,6.6,1.2,1.7,C.rose,'',3,['cab']),
+  P('lights','światła alarmowe','rect',10,3.5,2.4,0.7,C.sky,'glow',2,['cab']),
+  P('headlight','reflektor','circle',12.55,7.2,0.6,0.6,C.butter,'glow',4,['cab']),
+  P('bumper','zderzak','rect',12.9,8.3,1,0.5,C.stone,'',3,['chassis']),
+  P('stripe','pasek','rect',0.8,7.5,12.4,0.4,C.white,'',3,['body','cab']),
+  P('reel','zwijadło węża','circle',1.4,5.8,2,2,C.butter,'bale',4,['body']),
+  P('locker1','schowek','rect',4,5.8,1.6,1.6,C.rose,'planks',3,['body']),
+  P('locker2','schowek','rect',6.2,5.8,1.6,1.6,C.rose,'planks',3,['body']),
+  P('taillight','lampka tylna','rect',0.9,5.5,0.35,0.8,C.orange,'',3,['body']),
+  P('base','podstawa drabiny','rect',6.8,4.6,1.8,0.6,C.dark,'',3,['body']),
+  P('ladder','drabina','rect',1.2,3.9,7.8,0.9,C.white,'lattice',3,['base']),
+  P('ladder2','drabina','rect',2,3.1,6,0.8,C.white,'lattice',3,['ladder']),
+  P('sun','słońce','sun',0.3,0.3,2.2,2.2,C.sun,'',1,[]),
+  P('cloud1','chmurka','cloud',4.5,0.5,3,1.4,C.white,'',1,[]),
+  P('cloud2','chmurka','cloud',9.8,0.4,3,1.4,C.white,'',1,[]),
+  P('bird1','ptaszek','bird',8,2.2,1,0.5,C.dark,'',1,[]),
+  P('bird2','ptaszek','bird',2.9,2.2,1,0.5,C.dark,'',1,[])
+]},
+{id:'budka',acc:'budkę dla ptaków',done:'gotowa',name:'Budka dla ptaków',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('post','słupek','rect',6.5,7,1,4,C.brown,'bark',2,['ground']),
+  P('box','budka','rect',4.5,3.5,5,3.5,C.peach,'planks',2,['post']),
+  P('roof','dach','tri',3.8,1.5,6.4,2,C.coral,'',3,['box']),
+  P('hole','otwór','circle',6.3,4.1,1.4,1.4,C.dark,'',3,['box']),
+  P('perch','patyczek','rect',6,5.9,2,0.4,C.brown,'',3,['box']),
+  P('bird','ptaszek','bird',10.6,1.2,1.2,0.6,C.dark,'',1,[]),
+  P('sun','słońce','sun',0.6,0.6,2.4,2.4,C.sun,'',1,[])
+]},
+{id:'namiot',acc:'namiot',done:'gotowy',name:'Namiot',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('tent','namiot','tri',3,4.5,8,6.5,C.peach,'',2,['ground']),
+  P('flap','wejście do namiotu','tri',5.8,7.6,2.4,3.4,C.orange,'',3,['tent']),
+  P('flag','flaga','flag',6.94,3.3,1,1.3,C.red,'',1,['tent']),
+  P('logs','drewno','rect',10.6,10.4,2.2,0.6,C.brown,'bark',2,['ground']),
+  P('fire','ogień','tri',11.1,8.9,1.2,1.5,C.orange,'',3,['logs']),
+  P('trunk','pień','rect',1,9.2,0.6,1.8,C.brown,'bark',2,['ground']),
+  P('pine','choinka','tri',0.2,4.8,2.2,4.4,C.pine,'',2,['trunk']),
+  P('moon','księżyc','moon',11,0.8,2,2,C.sun,'',1,[]),
+  P('star','gwiazdka','star',8.8,1.4,0.9,0.9,C.butter,'',1,[])
+]},
+{id:'igloo',acc:'igloo',done:'gotowe',name:'Igloo',pieces:[
+  P('snow','śnieg','rect',0,11,14,1,C.white,'dots',1,[]),
+  P('igloo','igloo','semi',2.5,5,8,6,C.ice,'bricks',2,['snow']),
+  P('tunnel','tunel','arch',8.8,8.4,2.8,2.6,C.ice,'bricks',3,['igloo']),
+  P('door','wejście','arch',9.55,9.3,1.3,1.7,C.dark,'',4,['tunnel']),
+  P('flag','flaga','flag',6.44,3.9,1,1.2,C.red,'',1,['igloo']),
+  P('sBase','dół bałwana','circle',0.3,8.8,2.2,2.2,C.white,'',2,['snow']),
+  P('sMid','brzuch bałwana','circle',0.6,7.3,1.6,1.6,C.white,'',3,['sBase']),
+  P('sHead','głowa bałwana','circle',0.85,6.3,1.1,1.1,C.white,'',4,['sMid']),
+  P('hat','kapelusz','rect',0.9,5.75,1,0.6,C.dark,'',5,['sHead']),
+  P('nose','nos-marchewka','pennant',1.4,6.72,0.65,0.25,C.orange,'',5,['sHead']),
+  P('flake1','płatek śniegu','star',4,1,0.9,0.9,C.sky,'',1,[]),
+  P('flake2','płatek śniegu','star',8,2.2,0.9,0.9,C.sky,'',1,[]),
+  P('flake3','płatek śniegu','star',11.8,1,0.9,0.9,C.sky,'',1,[]),
+  P('cloud','chmurka','cloud',0.3,0.6,3,1.4,C.white,'',1,[])
+]},
+{id:'drzewo',acc:'domek na drzewie',done:'gotowy',name:'Domek na drzewie',pieces:[
+  P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
+  P('trunk','pień','rect',6,6.7,2,4.3,C.brown,'bark',2,['ground']),
+  P('platform','podest','rect',2.5,6,9,0.7,C.peach,'planks',3,['trunk']),
+  P('house','domek','rect',4,3,5,3,C.butter,'planks',3,['platform']),
+  P('roof','dach','tri',3.4,1,6.2,2,C.coral,'',3,['house']),
+  P('window','okno','rect',4.6,3.7,1.4,1.4,C.sky,'window',4,['house']),
+  P('door','drzwi','rect',7,3.8,1.3,2.2,C.lav,'door',4,['house']),
+  P('crownL','korona drzewa','circle',0.8,1.6,4,4,C.green,'apples',1,['trunk']),
+  P('crownR','korona drzewa','circle',9.2,1.3,4,4,C.green,'apples',1,['trunk']),
+  P('ladder','drabinka','rect',9.4,6.7,0.8,4.3,C.brown,'ladder',2,['platform']),
+  P('post1','słupek','rect',10.2,5.2,0.22,0.8,C.dark,'',4,['platform']),
+  P('post2','słupek','rect',11.1,5.2,0.22,0.8,C.dark,'',4,['platform']),
+  P('rail','poręcz','rect',9.9,5.15,1.6,0.25,C.dark,'',4,['post1','post2']),
+  P('bush','krzak','semi',11.6,10,2.2,1,C.green,'',2,['ground']),
+  P('sun','słońce','sun',0.1,0,1.8,1.8,C.sun,'',2,[]),
+  P('bird','ptaszek','bird',6.2,0.2,1,0.5,C.dark,'',1,[])
+]},
+{id:'piramida',acc:'piramidę',done:'gotowa',name:'Piramida',pieces:[
+  P('sand','piasek','rect',0,11,14,1,C.sand,'dots',1,[]),
+  P('l1','warstwa piramidy','trap',2.5,9.5,10,1.5,C.sand,'bricks',3,['sand'],{inset:0.7}),
+  P('l2','warstwa piramidy','trap',3.2,8,8.6,1.5,C.sand2,'bricks',3,['l1'],{inset:0.7}),
+  P('l3','warstwa piramidy','trap',3.9,6.5,7.2,1.5,C.sand,'bricks',3,['l2'],{inset:0.7}),
+  P('l4','warstwa piramidy','trap',4.6,5,5.8,1.5,C.sand2,'bricks',3,['l3'],{inset:0.7}),
+  P('l5','warstwa piramidy','trap',5.3,3.5,4.4,1.5,C.sand,'bricks',3,['l4'],{inset:0.7}),
+  P('top','szczyt piramidy','tri',6,1.5,3,2,C.sand2,'',3,['l5']),
+  P('door','wejście','arch',6.9,9.6,1.2,1.4,C.dark,'',4,['l1']),
+  P('band','pas ze znakami','rect',5.3,7,4.4,0.4,C.orange,'dots',4,['l3']),
+  P('flag','flaga','flag',7.44,0.3,1,1.2,C.red,'',2,['top']),
+  P('palm','pień palmy','rect',0.9,6.9,0.5,4.1,C.brown,'bark',2,['sand']),
+  P('leafL','liść palmy','pennantL',0,6.4,1.15,1.1,C.green,'',3,['palm']),
+  P('leafR','liść palmy','pennant',1.15,6.4,1.3,1.1,C.green,'',3,['palm']),
+  P('coconut','kokos','circle',0.83,6.75,0.64,0.64,C.brown,'',4,['palm']),
+  P('small','mała piramida','tri',11,8.6,3,2.4,C.sand2,'',1,['sand']),
+  P('cactus','kaktus','rect',12.9,8.8,0.7,2.2,C.pine,'bands',4,['sand']),
+  P('arm','ramię kaktusa','rect',12.4,9.4,0.5,0.3,C.pine,'',4,['cactus']),
+  P('sun','słońce','sun',0.4,0.4,2.4,2.4,C.sun,'',1,[]),
+  P('cloud','chmurka','cloud',9.8,0.6,3,1.4,C.white,'',1,[]),
+  P('bird1','ptaszek','bird',3.5,1.2,1,0.5,C.dark,'',1,[]),
+  P('bird2','ptaszek','bird',4.6,2.2,1,0.5,C.dark,'',1,[])
+]},
 {id:'domek',acc:'domek',done:'gotowy',name:'Domek',pieces:[
   P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
   P('wallL','ściana','rect',2,7,3,4,C.peach,'bricks',2,['ground']),
@@ -697,7 +982,7 @@ const LEVELS=[
   P('cloud','chmurka','cloud',10.5,0.4,3,1.4,C.white,'',1,[]),
   P('fish','rybka','fish',7.2,10.9,1.2,0.7,C.pink,'',5,['sea'])
 ]},
-{id:'farma',acc:'farmę',done:'gotowa',name:'Farma',pieces:[
+{id:'farma',acc:'stodołę',done:'gotowa',name:'Stodoła',pieces:[
   P('ground','trawa','rect',0,11,14,1,C.mint,'grass',1,[]),
   P('barn','stodoła','rect',1,6.5,6,4.5,C.rose,'planks',2,['ground']),
   P('barnDoor','wrota','rect',3,8.5,2,2.5,C.white,'xdoor',3,['barn']),
@@ -782,6 +1067,10 @@ const LEVELS=[
   P('bush2','krzak','semi',8.4,10.2,1.6,0.8,C.green,'',4,['ground'])
 ]}
 ];
+/* ================= KATEGORIE =================
+   Każda kategoria to 10 miejsc na plansze, od najłatwiejszej do najtrudniejszej.
+   null = plansza jeszcze nie zrobiona (w grze widać ją jako „wkrótce”). plan = nazwy wszystkich 10 plansz (PL/EN). */
+const CATS=[{"id": "budowle", "pl": "Budowle", "en": "Buildings", "levels": ["budka", "namiot", "domek", "igloo", "drzewo", "wiatrak", "piramida", "latarnia", "most", "zamek"], "plan": {"pl": ["Budka dla ptaków", "Namiot", "Domek", "Igloo", "Domek na drzewie", "Wiatrak", "Piramida", "Latarnia morska", "Most", "Zamek"], "en": ["Birdhouse", "Tent", "House", "Igloo", "Treehouse", "Windmill", "Pyramid", "Lighthouse", "Bridge", "Castle"]}}, {"id": "maszyny", "pl": "Maszyny budowlane", "en": "Construction machines", "levels": [null, null, null, null, null, null, null, null, null, null], "plan": {"pl": ["Taczka", "Betoniarka", "Walec", "Wózek widłowy", "Wywrotka", "Spychacz", "Koparka", "Dźwig", "Gruszka do betonu", "Plac budowy"], "en": ["Wheelbarrow", "Cement mixer", "Road roller", "Forklift", "Dump truck", "Bulldozer", "Excavator", "Crane", "Concrete mixer truck", "Construction site"]}}, {"id": "pojazdy", "pl": "Pojazdy", "en": "Vehicles", "levels": ["hulajnoga", "rower", "motocykl", "samochod", "lodka", "autobus", "helikopter", "pociag", "samolot", "wozstrazacki"], "plan": {"pl": ["Hulajnoga", "Rower", "Motocykl", "Samochód", "Łódka", "Autobus", "Helikopter", "Pociąg", "Samolot", "Wóz strażacki"], "en": ["Scooter", "Bike", "Motorbike", "Car", "Boat", "Bus", "Helicopter", "Train", "Airplane", "Fire truck"]}}, {"id": "farma", "pl": "Farma", "en": "Farm", "levels": [null, null, null, null, null, null, null, null, "farma", null], "plan": {"pl": ["Kaczka", "Kura", "Świnka", "Owca", "Krowa", "Koń", "Traktor", "Kurnik", "Stodoła", "Wiejskie podwórko"], "en": ["Duck", "Hen", "Piglet", "Sheep", "Cow", "Horse", "Tractor", "Henhouse", "Barn", "Farmyard"]}}, {"id": "zoo", "pl": "Zoo i dzikie zwierzęta", "en": "Zoo & wild animals", "levels": [null, null, null, null, null, null, null, null, null, null], "plan": {"pl": ["Ślimak", "Żółw", "Sowa", "Lis", "Miś", "Lew", "Zebra", "Słoń", "Żyrafa", "Zoo"], "en": ["Snail", "Turtle", "Owl", "Fox", "Bear", "Lion", "Zebra", "Elephant", "Giraffe", "Zoo"]}}, {"id": "ocean", "pl": "Podwodny świat", "en": "Underwater world", "levels": [null, null, null, null, null, null, null, null, null, null], "plan": {"pl": ["Rybka", "Meduza", "Krab", "Ośmiornica", "Konik morski", "Delfin", "Wieloryb", "Łódź podwodna", "Rafa koralowa", "Skrzynia skarbów"], "en": ["Fish", "Jellyfish", "Crab", "Octopus", "Seahorse", "Dolphin", "Whale", "Submarine", "Coral reef", "Treasure chest"]}}, {"id": "kosmos", "pl": "Kosmos", "en": "Space", "levels": [null, null, null, null, null, "rakieta", null, null, null, null], "plan": {"pl": ["Planeta z pierścieniem", "Księżyc z flagą", "Satelita", "UFO", "Łazik marsjański", "Rakieta", "Astronauta", "Stacja kosmiczna", "Baza na Księżycu", "Układ Słoneczny"], "en": ["Ringed planet", "Moon with a flag", "Satellite", "UFO", "Mars rover", "Rocket", "Astronaut", "Space station", "Moon base", "Solar system"]}}, {"id": "park", "pl": "Plac zabaw i park", "en": "Playground & park", "levels": [null, null, null, null, null, null, null, null, null, null], "plan": {"pl": ["Huśtawka", "Zjeżdżalnia", "Piaskownica", "Karuzela", "Ławka z latarnią", "Tor przeszkód", "Fontanna", "Diabelski młyn", "Kolejka górska", "Wesołe miasteczko"], "en": ["Swing", "Slide", "Sandbox", "Merry-go-round", "Bench & lamp", "Obstacle course", "Fountain", "Ferris wheel", "Roller coaster", "Funfair"]}}, {"id": "miasto", "pl": "Miasto", "en": "City", "levels": [null, null, null, null, null, null, null, null, null, null], "plan": {"pl": ["Sygnalizator", "Budka z lodami", "Sklepik", "Przystanek", "Kawiarnia", "Remiza strażacka", "Szkoła", "Ratusz z zegarem", "Wieżowiec", "Ulica miasta"], "en": ["Traffic light", "Ice-cream stand", "Little shop", "Bus stop", "Café", "Fire station", "School", "Town hall", "Skyscraper", "City street"]}}, {"id": "dino", "pl": "Dinozaury", "en": "Dinosaurs", "levels": [null, null, null, null, null, null, null, null, null, null], "plan": {"pl": ["Jajko dinozaura", "Mały dinozaur", "Pterodaktyl", "Stegozaur", "Triceratops", "Diplodok", "Tyranozaur", "Wulkan", "Gniazdo z mamą", "Dolina dinozaurów"], "en": ["Dino egg", "Baby dino", "Pterodactyl", "Stegosaurus", "Triceratops", "Diplodocus", "T-rex", "Volcano", "Dino nest", "Dino valley"]}}];
 LEVELS.forEach(l=>{l.cols=l.cols||14;l.rows=l.rows||12;const n=l.pieces.length;
   l.stars=l.stars||{three:{time:n*5,mistakes:Math.max(2,Math.round(n/8))},two:{time:n*10,mistakes:Math.round(n/2)}}});
 
@@ -924,6 +1213,7 @@ function deco(p,dk,lt){
     case'lattice':{const vert=h>w,L=vert?h:w,sw=vert?w:h;
       for(let t=.45;t<L-.1;t+=.45)o+=vert?`<path d="M0 ${f(t)}H${w}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`:`<path d="M${f(t)} 0V${h}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`;
       o+=vert?`<path d="M${f(w/2)} 0V${h}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`:`<path d="M0 ${f(h/2)}H${w}" stroke="${dk}" stroke-width=".05" opacity=".45"/>`;break}
+    case'stripes':[.3,.62].forEach(t=>{o+=`<rect x="${f(w*t)}" y="0" width="${f(w*.14)}" height="${h}" fill="#fff" opacity=".85"/>`});break;
     case'sail':o+=`<path d="M0 ${f(h*.36)}H${w}M0 ${f(h*.68)}H${w}" stroke="${dk}" stroke-width=".05" opacity=".3"/>`;break;
     case'buoy':o+=`<path d="M${f(w/2)} 0V${h}M0 ${f(h/2)}H${w}" stroke="#fff" stroke-width="${f(w*.2)}" opacity=".95"/>`;
       o+=`<circle cx="${f(w/2)}" cy="${f(h/2)}" r="${f(w*.2)}" fill="#fff8e0" stroke="${dk}" stroke-width=".06"/>`;break;
@@ -967,9 +1257,9 @@ const sfx=(()=>{
 
 
 /* ================= JĘZYKI (PL / EN) ================= */
-const T={pl:{"time": "Czas", "mistakes": "Pomyłki", "levels": "Plansze", "chooseLevel": "Wybierz planszę", "sounds": "Dźwięki", "mute": "Wycisz dźwięki", "unmute": "Włącz dźwięki", "restart": "Zacznij od nowa", "langSwitch": "Zmień język (PL/EN)", "langAria": "Język", "trayAria": "Klocki do wyboru", "blocks": "Klocki", "dockTip": "↔ przesuń · ↑ na pole", "board": "Pole budowy", "pattern": "Wzór", "noteLong": "Buduj od dołu. Klocek zostaje na polu, gdy to, na czym stoi, jest już na swoim miejscu.", "noteShort": "Buduj od dołu do góry!", "step3": "Buduj od dołu do góry. Zła kolejność? Klocek wróci na swoje miejsce.", "diffAria": "Poziom trudności", "diffShort": "Poziom", "easy": "Łatwy", "medium": "Średni", "hard": "Trudny", "easySub": "kolorowy wzór", "mediumSub": "szary kształt", "hardSub": "bez wzoru", "memo": "Zapamiętaj, jak to wygląda! Po starcie wzór zniknie.", "starsInfo": "Liczy się czas i liczba pomyłek. Możesz zdobyć 3 gwiazdki!", "levelsSub": "Każda plansza ma więcej klocków. Ułóż jedną, żeby odblokować następną.", "close": "Zamknij", "record": "Nowy rekord!", "next": "Następna plansza", "again": "Jeszcze raz", "rotateAria": "Obróć urządzenie", "rotateTitle": "Obróć urządzenie poziomo", "rotateNote": "W poziomie lepiej widać klocki, pole budowy i wzór.", "rotateOk": "Graj mimo to", "chip": "Plansza {n} · {name} · {diff}", "startTitle": "Plansza {n}: {name}", "startCount": "Klocków do ułożenia: {n}", "lookEasy": "Popatrz na wzór – tak ma wyglądać budowla.", "lookMedium": "Wzór jest szary: widać kształt, ale nie widać, gdzie który klocek.", "lookHard": "Zapamiętaj wzór poniżej. W trakcie gry go nie zobaczysz!", "moveMouse": "Przeciągnij klocek myszką na pole budowy, w to samo miejsce co na wzorze.", "moveTouch": "Przeciągnij klocek palcem na pole budowy albo dotknij klocka, a potem miejsca na polu.", "mysteryTitle": "Buduj z pamięci", "mysteryNote": "Wzór był widoczny tylko przed startem.", "hello": "Cześć! Zbudujmy razem {acc}.", "startTouch": "Zacznij od dołu! Przeciągnij klocek na pole albo dotknij go, a potem jego miejsca.", "startMouse": "Zacznij od tego, co leży na samym dole. Przeciągnij klocek na pole!", "pickBlock": "Wybierz klocek: przeciągnij go albo dotknij.", "tapSpot": "Teraz dotknij pola w miejscu, gdzie ma stanąć: {label}.", "allPlaced": "Wszystkie klocki na miejscu!", "order": "Dobre miejsce, ale za wcześnie! Najpierw połóż to, co jest pod spodem.", "placeEasy": "Ten klocek pasuje gdzie indziej. Zerknij na wzór!", "placeMedium": "Ten klocek pasuje gdzie indziej. Popatrz na szary kształt!", "placeHard": "Ten klocek pasuje gdzie indziej. Przypomnij sobie wzór!", "hint": "Podpowiedź: weź świecący klocek ({label}) i połóż go w migającym miejscu.", "hooray": "Hura! {ready}!", "winAll": "Brawo! Wszystkie plansze ułożone!", "winLevel": "Brawo! {ready}!", "best": "Najlepszy wynik ({diff}): {time} · pomyłki: {m} · gwiazdki: {s}/3", "master": "Mistrzowska budowa!", "tileAria": "Plansza {n}: {name}", "locked": " (zablokowana)", "blockAria": "Klocek: {label}"},en:{"time": "Time", "mistakes": "Mistakes", "levels": "Levels", "chooseLevel": "Choose a level", "sounds": "Sounds", "mute": "Mute sounds", "unmute": "Turn sounds on", "restart": "Start over", "langSwitch": "Change language (PL/EN)", "langAria": "Language", "trayAria": "Blocks to choose from", "blocks": "Blocks", "dockTip": "↔ swipe · ↑ drag to build", "board": "Building area", "pattern": "Pattern", "noteLong": "Build from the bottom up. A block stays on the board once the block it rests on is in place.", "noteShort": "Build from the bottom up!", "step3": "Build from the bottom up. Wrong order? The block jumps back.", "diffAria": "Difficulty", "diffShort": "Difficulty", "easy": "Easy", "medium": "Medium", "hard": "Hard", "easySub": "color pattern", "mediumSub": "gray shape", "hardSub": "no pattern", "memo": "Remember what it looks like! The pattern disappears when you start.", "starsInfo": "Time and mistakes count. You can earn 3 stars!", "levelsSub": "Every level has more blocks. Finish one to unlock the next.", "close": "Close", "record": "New record!", "next": "Next level", "again": "Play again", "rotateAria": "Rotate your device", "rotateTitle": "Turn your device sideways", "rotateNote": "In landscape the blocks, the building area and the pattern are easier to see.", "rotateOk": "Play anyway", "chip": "Level {n} · {name} · {diff}", "startTitle": "Level {n}: {name}", "startCount": "Blocks to place: {n}", "lookEasy": "Look at the pattern – that's what you will build.", "lookMedium": "The pattern is gray: you can see the shape, but not where each block goes.", "lookHard": "Remember the pattern below. You won't see it during the game!", "moveMouse": "Drag a block with the mouse onto the building area, to the same spot as in the pattern.", "moveTouch": "Drag a block with your finger onto the building area, or tap a block and then tap its spot.", "mysteryTitle": "Build from memory", "mysteryNote": "The pattern was only shown before the start.", "hello": "Hi! Let's build {acc} together.", "startTouch": "Start at the bottom! Drag a block onto the board, or tap it and then its spot.", "startMouse": "Start with what goes at the very bottom. Drag a block onto the board!", "pickBlock": "Pick a block: drag it or tap it.", "tapSpot": "Now tap the spot on the board where the {label} goes.", "allPlaced": "All blocks in place!", "order": "Right spot, but too early! First place what goes underneath.", "placeEasy": "This block goes somewhere else. Take a look at the pattern!", "placeMedium": "This block goes somewhere else. Look at the gray shape!", "placeHard": "This block goes somewhere else. Try to remember the pattern!", "hint": "Hint: take the glowing block ({label}) and put it in the flashing spot.", "hooray": "Hooray! {ready}!", "winAll": "Great job! You finished every level!", "winLevel": "Great job! {ready}!", "best": "Best score ({diff}): {time} · mistakes: {m} · stars: {s}/3", "master": "Master builder!", "tileAria": "Level {n}: {name}", "locked": " (locked)", "blockAria": "Block: {label}"}};
-const LABELS_EN={"antenka": "antenna", "autko": "toy car", "bagażnik": "roof rack", "balkon": "balcony", "beczka": "barrel", "bela siana": "hay bale", "belka": "beam", "blanki muru": "wall battlements", "blanki wieży": "tower battlements", "brama": "gate", "brzeg": "riverbank", "bulaj": "porthole", "chmurka": "cloud", "chorągiewka": "pennant", "czubek": "nose cone", "dach": "roof", "dach autka": "car roof", "dach kabiny": "cab roof", "dach stodoły": "barn roof", "dach wieży": "tower roof", "dach wieży głównej": "main tower roof", "daszek": "cabin roof", "deska płotu": "fence rail", "drabinka": "ladder", "droga": "road", "drzwi": "door", "dym": "smoke", "filar": "pillar", "flaga": "flag", "gwiazdka": "star", "kabina": "cabin", "kadłub": "hull", "kadłub rakiety": "rocket body", "kajuta": "cabin", "karoseria": "car body", "kocioł": "boiler", "komin": "chimney", "kopuła": "dome", "kopuła silosu": "silo dome", "kopułka": "little dome", "korona drzewa": "treetop", "koło": "wheel", "koło ratunkowe": "life ring", "krzak": "bush", "księżyc": "moon", "kulka": "little ball", "kwiatek": "flower", "kółko": "small wheel", "lampa": "lamp", "lampion": "lantern", "lampka": "light", "lampka tylna": "tail light", "maszt": "mast", "mała chmurka": "small cloud", "mały żagiel": "small sail", "mewa": "seagull", "morze": "sea", "mur": "wall", "okienko": "small window", "okienko strychu": "loft window", "okno": "window", "okno wieży": "tower window", "okrągłe okno": "round window", "oś": "hub", "paczka": "parcel", "pasek": "stripe", "pień": "trunk", "piętro latarni": "lighthouse level", "piłka": "ball", "podest": "platform", "podwozie lokomotywy": "engine base", "podwozie wagonu": "wagon base", "poręcz": "railing", "przyczółek": "bank support", "przęsło": "bridge deck", "ptaszek": "bird", "płyta startowa": "launch pad", "ramię": "arm", "reflektor": "headlight", "rybka": "fish", "rzeka": "river", "silos": "silo", "skały": "rocks", "skrzydło": "sail blade", "skrzynia": "crate", "statecznik": "fin", "stodoła": "barn", "sztandar": "banner", "szyba": "window", "słońce": "sun", "słupek": "post", "torba": "bag", "tory": "tracks", "trawa": "grass", "wagon": "wagon", "walizka": "suitcase", "wiatrowskaz": "weather vane", "wieża": "tower", "wieża główna": "main tower", "wieża młyna": "mill tower", "wieża startowa": "launch tower", "woda": "water", "wrota": "barn door", "łódka": "boat", "łącznik": "coupling", "ściana": "wall", "ścieżka": "path", "światło": "light beam", "żagiel": "sail"};
-const LVL_EN={"domek": ["House", "a house"], "samochod": ["Car", "a car"], "lodka": ["Boat", "a boat"], "rakieta": ["Rocket", "a rocket"], "wiatrak": ["Windmill", "a windmill"], "pociag": ["Train", "a train"], "latarnia": ["Lighthouse", "a lighthouse"], "farma": ["Farm", "a farm"], "most": ["Bridge", "a bridge"], "zamek": ["Castle", "a castle"]};
+const T={pl:{"wSub": "Buduj z klocków domki, pojazdy, zwierzęta i wiele więcej!", "wHow": "Jak grać?", "w1": "Wybierz kategorię i planszę.", "w2": "Popatrz na wzór – tak ma wyglądać budowla.", "w3": "Przeciągnij klocek na pole albo dotknij klocka, a potem jego miejsca.", "w4": "Buduj od dołu do góry – klocek musi na czymś stać.", "w5": "Szybko i bez pomyłek = 3 gwiazdki!", "wPlay": "Graj!", "chooseCat": "Wybierz kategorię", "catsSub": "Każda kategoria to 10 plansz – od najłatwiejszej do najtrudniejszej.", "backCats": "← Kategorie", "soon": "Wkrótce", "inProgress": "W budowie", "winCat": "Brawo! Cała kategoria ułożona!", "catCount": "{cat} · Klocków do ułożenia: {n}", "doneOf": "{d}/{all} ułożone", "time": "Czas", "mistakes": "Pomyłki", "levels": "Plansze", "chooseLevel": "Wybierz planszę", "sounds": "Dźwięki", "mute": "Wycisz dźwięki", "unmute": "Włącz dźwięki", "restart": "Zacznij od nowa", "langSwitch": "Zmień język (PL/EN)", "langAria": "Język", "trayAria": "Klocki do wyboru", "blocks": "Klocki", "dockTip": "↔ przesuń · ↑ na pole", "board": "Pole budowy", "pattern": "Wzór", "noteLong": "Buduj od dołu. Klocek zostaje na polu, gdy to, na czym stoi, jest już na swoim miejscu.", "noteShort": "Buduj od dołu do góry!", "step3": "Buduj od dołu do góry. Zła kolejność? Klocek wróci na swoje miejsce.", "diffAria": "Poziom trudności", "diffShort": "Poziom", "easy": "Łatwy", "medium": "Średni", "hard": "Trudny", "easySub": "kolorowy wzór", "mediumSub": "szary kształt", "hardSub": "bez wzoru", "memo": "Zapamiętaj, jak to wygląda! Po starcie wzór zniknie.", "starsInfo": "Liczy się czas i liczba pomyłek. Możesz zdobyć 3 gwiazdki!", "levelsSub": "Każda plansza ma więcej klocków. Ułóż jedną, żeby odblokować następną.", "close": "Zamknij", "record": "Nowy rekord!", "next": "Następna plansza", "again": "Jeszcze raz", "rotateAria": "Obróć urządzenie", "rotateTitle": "Obróć urządzenie poziomo", "rotateNote": "W poziomie lepiej widać klocki, pole budowy i wzór.", "rotateOk": "Graj mimo to", "chip": "Plansza {n} · {name} · {diff}", "startTitle": "Plansza {n}: {name}", "startCount": "Klocków do ułożenia: {n}", "lookEasy": "Popatrz na wzór – tak ma wyglądać budowla.", "lookMedium": "Wzór jest szary: widać kształt, ale nie widać, gdzie który klocek.", "lookHard": "Zapamiętaj wzór poniżej. W trakcie gry go nie zobaczysz!", "moveMouse": "Przeciągnij klocek myszką na pole budowy, w to samo miejsce co na wzorze.", "moveTouch": "Przeciągnij klocek palcem na pole budowy albo dotknij klocka, a potem miejsca na polu.", "mysteryTitle": "Buduj z pamięci", "mysteryNote": "Wzór był widoczny tylko przed startem.", "hello": "Cześć! Zbudujmy razem {acc}.", "startTouch": "Zacznij od dołu! Przeciągnij klocek na pole albo dotknij go, a potem jego miejsca.", "startMouse": "Zacznij od tego, co leży na samym dole. Przeciągnij klocek na pole!", "pickBlock": "Wybierz klocek: przeciągnij go albo dotknij.", "tapSpot": "Teraz dotknij pola w miejscu, gdzie ma stanąć: {label}.", "allPlaced": "Wszystkie klocki na miejscu!", "order": "Dobre miejsce, ale za wcześnie! Najpierw połóż to, co jest pod spodem.", "placeEasy": "Ten klocek pasuje gdzie indziej. Zerknij na wzór!", "placeMedium": "Ten klocek pasuje gdzie indziej. Popatrz na szary kształt!", "placeHard": "Ten klocek pasuje gdzie indziej. Przypomnij sobie wzór!", "hint": "Podpowiedź: weź świecący klocek ({label}) i połóż go w migającym miejscu.", "hooray": "Hura! {ready}!", "winAll": "Brawo! Wszystkie plansze ułożone!", "winLevel": "Brawo! {ready}!", "best": "Najlepszy wynik ({diff}): {time} · pomyłki: {m} · gwiazdki: {s}/3", "master": "Mistrzowska budowa!", "tileAria": "Plansza {n}: {name}", "locked": " (zablokowana)", "blockAria": "Klocek: {label}"},en:{"wSub": "Build houses, vehicles, animals and much more out of blocks!", "wHow": "How to play", "w1": "Choose a category and a level.", "w2": "Look at the pattern – that's what you will build.", "w3": "Drag a block onto the board, or tap a block and then its spot.", "w4": "Build from the bottom up – every block needs something to stand on.", "w5": "Fast and without mistakes = 3 stars!", "wPlay": "Play!", "chooseCat": "Choose a category", "catsSub": "Every category has 10 levels – from the easiest to the hardest.", "backCats": "← Categories", "soon": "Coming soon", "inProgress": "In progress", "winCat": "Great job! You finished the whole category!", "catCount": "{cat} · Blocks to place: {n}", "doneOf": "{d}/{all} done", "time": "Time", "mistakes": "Mistakes", "levels": "Levels", "chooseLevel": "Choose a level", "sounds": "Sounds", "mute": "Mute sounds", "unmute": "Turn sounds on", "restart": "Start over", "langSwitch": "Change language (PL/EN)", "langAria": "Language", "trayAria": "Blocks to choose from", "blocks": "Blocks", "dockTip": "↔ swipe · ↑ drag to build", "board": "Building area", "pattern": "Pattern", "noteLong": "Build from the bottom up. A block stays on the board once the block it rests on is in place.", "noteShort": "Build from the bottom up!", "step3": "Build from the bottom up. Wrong order? The block jumps back.", "diffAria": "Difficulty", "diffShort": "Difficulty", "easy": "Easy", "medium": "Medium", "hard": "Hard", "easySub": "color pattern", "mediumSub": "gray shape", "hardSub": "no pattern", "memo": "Remember what it looks like! The pattern disappears when you start.", "starsInfo": "Time and mistakes count. You can earn 3 stars!", "levelsSub": "Every level has more blocks. Finish one to unlock the next.", "close": "Close", "record": "New record!", "next": "Next level", "again": "Play again", "rotateAria": "Rotate your device", "rotateTitle": "Turn your device sideways", "rotateNote": "In landscape the blocks, the building area and the pattern are easier to see.", "rotateOk": "Play anyway", "chip": "Level {n} · {name} · {diff}", "startTitle": "Level {n}: {name}", "startCount": "Blocks to place: {n}", "lookEasy": "Look at the pattern – that's what you will build.", "lookMedium": "The pattern is gray: you can see the shape, but not where each block goes.", "lookHard": "Remember the pattern below. You won't see it during the game!", "moveMouse": "Drag a block with the mouse onto the building area, to the same spot as in the pattern.", "moveTouch": "Drag a block with your finger onto the building area, or tap a block and then tap its spot.", "mysteryTitle": "Build from memory", "mysteryNote": "The pattern was only shown before the start.", "hello": "Hi! Let's build {acc} together.", "startTouch": "Start at the bottom! Drag a block onto the board, or tap it and then its spot.", "startMouse": "Start with what goes at the very bottom. Drag a block onto the board!", "pickBlock": "Pick a block: drag it or tap it.", "tapSpot": "Now tap the spot on the board where the {label} goes.", "allPlaced": "All blocks in place!", "order": "Right spot, but too early! First place what goes underneath.", "placeEasy": "This block goes somewhere else. Take a look at the pattern!", "placeMedium": "This block goes somewhere else. Look at the gray shape!", "placeHard": "This block goes somewhere else. Try to remember the pattern!", "hint": "Hint: take the glowing block ({label}) and put it in the flashing spot.", "hooray": "Hooray! {ready}!", "winAll": "Great job! You finished every level!", "winLevel": "Great job! {ready}!", "best": "Best score ({diff}): {time} · mistakes: {m} · stars: {s}/3", "master": "Master builder!", "tileAria": "Level {n}: {name}", "locked": " (locked)", "blockAria": "Block: {label}"}};
+const LABELS_EN={"deska": "deck", "drążek": "stem", "kierownica": "handlebar", "belka ramy": "frame bar", "rama": "frame", "siodełko": "seat", "widelec": "fork", "silnik": "engine", "obudowa": "body", "bak": "fuel tank", "rura wydechowa": "exhaust pipe", "nadwozie": "bus body", "tablica": "route sign", "lusterko": "mirror", "lądowisko": "helipad", "płoza": "skid", "wspornik": "strut", "belka ogonowa": "tail boom", "śmigło ogonowe": "tail rotor", "łopata wirnika": "rotor blade", "piasta": "rotor hub", "rękaw wiatrowy": "windsock", "pas startowy": "runway", "kadłub samolotu": "fuselage", "nos samolotu": "nose", "kokpit": "cockpit", "skrzydło samolotu": "wing", "ster wysokości": "tailplane", "podwozie": "chassis", "skrzynia wozu": "truck body", "światła alarmowe": "siren lights", "zderzak": "bumper", "zwijadło węża": "hose reel", "schowek": "locker", "podstawa drabiny": "ladder base", "drabina": "big ladder", "budka": "birdhouse", "otwór": "entrance hole", "patyczek": "perch", "namiot": "tent", "wejście do namiotu": "tent door", "drewno": "firewood", "ogień": "fire", "choinka": "pine tree", "śnieg": "snow", "igloo": "igloo", "tunel": "entrance tunnel", "wejście": "entrance", "dół bałwana": "snowman base", "brzuch bałwana": "snowman middle", "głowa bałwana": "snowman head", "kapelusz": "hat", "nos-marchewka": "carrot nose", "płatek śniegu": "snowflake", "domek": "little house", "piasek": "sand", "warstwa piramidy": "pyramid layer", "szczyt piramidy": "pyramid top", "pas ze znakami": "carved band", "pień palmy": "palm trunk", "liść palmy": "palm leaf", "kokos": "coconut", "mała piramida": "small pyramid", "kaktus": "cactus", "ramię kaktusa": "cactus arm", "antenka": "antenna", "autko": "toy car", "bagażnik": "roof rack", "balkon": "balcony", "beczka": "barrel", "bela siana": "hay bale", "belka": "beam", "blanki muru": "wall battlements", "blanki wieży": "tower battlements", "brama": "gate", "brzeg": "riverbank", "bulaj": "porthole", "chmurka": "cloud", "chorągiewka": "pennant", "czubek": "nose cone", "dach": "roof", "dach autka": "car roof", "dach kabiny": "cab roof", "dach stodoły": "barn roof", "dach wieży": "tower roof", "dach wieży głównej": "main tower roof", "daszek": "cabin roof", "deska płotu": "fence rail", "drabinka": "ladder", "droga": "road", "drzwi": "door", "dym": "smoke", "filar": "pillar", "flaga": "flag", "gwiazdka": "star", "kabina": "cabin", "kadłub": "hull", "kadłub rakiety": "rocket body", "kajuta": "cabin", "karoseria": "car body", "kocioł": "boiler", "komin": "chimney", "kopuła": "dome", "kopuła silosu": "silo dome", "kopułka": "little dome", "korona drzewa": "treetop", "koło": "wheel", "koło ratunkowe": "life ring", "krzak": "bush", "księżyc": "moon", "kulka": "little ball", "kwiatek": "flower", "kółko": "small wheel", "lampa": "lamp", "lampion": "lantern", "lampka": "light", "lampka tylna": "tail light", "maszt": "mast", "mała chmurka": "small cloud", "mały żagiel": "small sail", "mewa": "seagull", "morze": "sea", "mur": "wall", "okienko": "small window", "okienko strychu": "loft window", "okno": "window", "okno wieży": "tower window", "okrągłe okno": "round window", "oś": "hub", "paczka": "parcel", "pasek": "stripe", "pień": "trunk", "piętro latarni": "lighthouse level", "piłka": "ball", "podest": "platform", "podwozie lokomotywy": "engine base", "podwozie wagonu": "wagon base", "poręcz": "railing", "przyczółek": "bank support", "przęsło": "bridge deck", "ptaszek": "bird", "płyta startowa": "launch pad", "ramię": "arm", "reflektor": "headlight", "rybka": "fish", "rzeka": "river", "silos": "silo", "skały": "rocks", "skrzydło": "sail blade", "skrzynia": "crate", "statecznik": "fin", "stodoła": "barn", "sztandar": "banner", "szyba": "window", "słońce": "sun", "słupek": "post", "torba": "bag", "tory": "tracks", "trawa": "grass", "wagon": "wagon", "walizka": "suitcase", "wiatrowskaz": "weather vane", "wieża": "tower", "wieża główna": "main tower", "wieża młyna": "mill tower", "wieża startowa": "launch tower", "woda": "water", "wrota": "barn door", "łódka": "boat", "łącznik": "coupling", "ściana": "wall", "ścieżka": "path", "światło": "light beam", "żagiel": "sail"};
+const LVL_EN={"hulajnoga": ["Scooter", "a scooter"], "rower": ["Bike", "a bike"], "motocykl": ["Motorbike", "a motorbike"], "autobus": ["Bus", "a bus"], "helikopter": ["Helicopter", "a helicopter"], "samolot": ["Airplane", "an airplane"], "wozstrazacki": ["Fire truck", "a fire truck"], "budka": ["Birdhouse", "a birdhouse"], "namiot": ["Tent", "a tent"], "igloo": ["Igloo", "an igloo"], "drzewo": ["Treehouse", "a treehouse"], "piramida": ["Pyramid", "a pyramid"], "domek": ["House", "a house"], "samochod": ["Car", "a car"], "lodka": ["Boat", "a boat"], "rakieta": ["Rocket", "a rocket"], "wiatrak": ["Windmill", "a windmill"], "pociag": ["Train", "a train"], "latarnia": ["Lighthouse", "a lighthouse"], "farma": ["Barn", "a barn"], "most": ["Bridge", "a bridge"], "zamek": ["Castle", "a castle"]};
 let lang='pl';
 try{const s=localStorage.getItem('quickbuilder-lang');if(s==='pl'||s==='en')lang=s;else if(!/^pl/i.test(navigator.language||'pl'))lang='en'}catch(e){}
 function tt(k,v){const s=(T[lang][k]??T.pl[k]??k);return s.replace(/\{(\w+)\}/g,(m,x)=>v&&v[x]!==undefined?v[x]:m)}
@@ -988,7 +1278,8 @@ const cheers=()=>lang==='en'?['Super!','It fits!','Great job!','Awesome!','Brill
 /* ================= STAN GRY ================= */
 const $=s=>document.querySelector(s);
 const boardEl=$('#board'),previewEl=$('#preview'),trayEl=$('#tray'),msgEl=$('#msg'),mascot=$('#mascot');
-let li=0,level=LEVELS[0];
+const LV={};LEVELS.forEach(l=>LV[l.id]=l);
+let ci=0,li=0,level=LV[CATS[0].levels[0]]; // ci = kategoria, li = miejsce w kategorii (0–9)
 const st={filled:new Set(),mistakes:0,streak:0,start:0,running:false,timer:null,hint:null};
 const keyOf=p=>[p.shape,p.w,p.h,p.color,p.inset||0].join('|');
 const byId=id=>level.pieces.find(p=>p.id===id);
@@ -1027,7 +1318,11 @@ const bestKey=(id,d)=>'klockowo-best-'+id+DIFFS[d||diff].suffix;
 function readBest(id,d){const k=bestKey(id,d);try{const v=localStorage.getItem(k);if(v)return JSON.parse(v)}catch(e){}return mem[k]||null}
 function writeBest(id,v){const k=bestKey(id);mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 const doneAny=id=>Object.keys(DIFFS).some(d=>readBest(id,d));
-const unlocked=i=>i===0||doneAny(LEVELS[i-1].id);
+const catName=c=>CATS[c][lang]||CATS[c].pl;
+const catComplete=c=>CATS[c].levels.every(Boolean);
+// plansza otwarta: w pełnej kategorii po kolei (albo już kiedyś ułożona), w kategorii „w budowie” – każda gotowa
+function slotOpen(c,s){const ids=CATS[c].levels;if(!ids[s])return false;if(!catComplete(c))return true;return s===0||doneAny(ids[s-1])||doneAny(ids[s])}
+function nextSlot(c,s){const ids=CATS[c].levels;for(let t=s+1;t<ids.length;t++)if(ids[t])return t;return -1}
 
 // sylwetka: każdy klocek w jednym szarym kolorze, bez obrysów i ozdób – widać kształt, nie widać podziału na klocki
 const SIL='#c3bbd8';
@@ -1049,14 +1344,16 @@ function renderPattern(el,L,mode){
   if(mode==='medium'){const w=document.createElement('div');w.className='sil-wrap';L.pieces.forEach(p=>w.appendChild(silEl(p,L)));el.appendChild(w);return}
   L.pieces.forEach(p=>el.appendChild(pieceEl(p,L)));
 }
+// na telefonie w poziomie krótsza etykieta, żeby zmieściła się w wąskiej kolumnie
+function updateChip(){$('#level-chip').textContent=landscapeCompact.matches?`${li+1}. ${lvName(level)} · ${tt(diff)}`:tt('chip',{n:li+1,name:lvName(level),diff:tt(diff)})}
 function refreshDiffUI(){
   document.querySelectorAll('.diff [data-diff]').forEach(b=>b.setAttribute('aria-checked',b.dataset.diff===diff?'true':'false'));
   renderPattern(previewEl,level,diff);
   const memoOn=diff==='hard';$('#start-memo').hidden=!memoOn;
   if(memoOn){const mb=$('#memo-board');mb.style.setProperty('--cols',level.cols);mb.style.setProperty('--rows',level.rows);renderPattern(mb,level,'easy')}
-  $('#level-chip').textContent=tt('chip',{n:li+1,name:lvName(level),diff:tt(diff)});
+  updateChip();
   $('#start-title').textContent=tt('startTitle',{n:li+1,name:lvName(level)});
-  $('#start-count').textContent=tt('startCount',{n:level.pieces.length});
+  $('#start-count').textContent=tt('catCount',{cat:catName(ci),n:level.pieces.length});
   $('#step-look').textContent=tt(diff==='easy'?'lookEasy':diff==='medium'?'lookMedium':'lookHard');
 }
 function setDiff(d){
@@ -1070,8 +1367,9 @@ function setDiff(d){
 }
 document.querySelectorAll('.diff [data-diff]').forEach(b=>b.addEventListener('click',()=>setDiff(b.dataset.diff)));
 
-function setLevel(i){
-  li=i;level=LEVELS[i];
+function setLevel(c,s){
+  ci=c;li=s;level=LV[CATS[c].levels[s]];
+  try{localStorage.setItem('quickbuilder-last',level.id)}catch(e){}
   [boardEl,previewEl].forEach(b=>{b.style.setProperty('--cols',level.cols);b.style.setProperty('--rows',level.rows)});
   refreshDiffUI();
   newGame(false);
@@ -1092,8 +1390,8 @@ function buildTray(){
 function sizeTray(){
   const n=level.pieces.length,docked=isDocked(),phone=innerWidth<=700,compact=landscapeCompact.matches;
   const W=docked?Math.min(300,innerWidth*.7):compact?Math.max(70,trayEl.clientWidth-14):Math.max(150,trayEl.clientWidth-24);
-  const maxH=compact?58:docked?(phone?72:100):100;
-  const s0=compact?(n<=14?15:n<=20?13:12):docked?(phone?18:26):(n<=14?24:n<=20?21:18);
+  const maxH=compact?74:docked?(phone?72:100):100;
+  const s0=compact?(n<=14?22:n<=20?20:18):docked?(phone?18:26):(n<=14?24:n<=20?22:20);
   trayEl.querySelectorAll('.tray-item').forEach(it=>{
     const p=byId(it.dataset.pid),s=Math.min(s0,W/p.w,maxH/p.h),pv=it.firstElementChild;
     pv.style.width=p.w*s+'px';pv.style.height=p.h*s+'px';
@@ -1367,13 +1665,13 @@ function win(){
     $('#stars').innerHTML=starRow(stars);
     renderWin();
     $('#win-overlay').hidden=false;
-    (li===LEVELS.length-1?$('#btn-again'):$('#btn-next')).focus();
+    (nextSlot(ci,li)<0?$('#btn-again'):$('#btn-next')).focus();
   },1300);
 }
 let lastWin=null;
 function renderWin(){
-  if(!lastWin)return;const w=lastWin,last=li===LEVELS.length-1,b=w.best,c=starCfg();
-  $('#win-title').textContent=last?tt('winAll'):tt('winLevel',{ready:lvReady(level)});
+  if(!lastWin)return;const w=lastWin,last=nextSlot(ci,li)<0,b=w.best,c=starCfg();
+  $('#win-title').textContent=last&&catComplete(ci)?tt('winCat'):tt('winLevel',{ready:lvReady(level)});
   $('#win-time').textContent=fmt(w.ms);
   $('#win-mistakes').textContent=w.mistakes;
   $('#win-record').hidden=!w.record;
@@ -1386,24 +1684,52 @@ function renderWin(){
 }
 
 /* ================= WYBÓR PLANSZ ================= */
-function openLevels(){
-  const grid=$('#level-grid');grid.innerHTML='';
-  LEVELS.forEach((L,i)=>{
-    const open=unlocked(i),best=readBest(L.id);
-    const b=document.createElement('button');b.type='button';b.className='level-tile'+(i===li?' current':'');b.disabled=!open;
-    b.setAttribute('aria-label',tt('tileAria',{n:i+1,name:lvName(L)})+(open?'':tt('locked')));
-    const mini=document.createElement('div');mini.className='board mini';
-    mini.style.setProperty('--cols',L.cols);mini.style.setProperty('--rows',L.rows);
-    renderPattern(mini,L,diff==='easy'?'easy':'medium');
-    b.appendChild(mini);
-    b.insertAdjacentHTML('beforeend',`<div class="lt-name">${i+1}. ${lvName(L)}</div><div class="lt-meta"><span>${L.pieces.length} ${blocksWord(L.pieces.length)}</span><span class="mini-stars">${starRow(best?best.stars:0)}</span></div>`+
-      (open?'':`<svg class="lock" viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="6" fill="#d9ccff" stroke="#8a78c4" stroke-width="3"/><path d="M15 19v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#8a78c4" stroke-width="3.5" stroke-linecap="round"/><circle cx="22" cy="28" r="3" fill="#4a3f6b"/></svg>`));
-    b.addEventListener('click',()=>{sfx.unlock();setLevel(i)});
-    grid.appendChild(b);
-  });
-  $('#levels-overlay').hidden=false;
-  const cur=grid.querySelector('.current');if(cur)cur.focus();
+let pickerView='levels',pickerCat=0;
+function miniBoard(L){
+  const mini=document.createElement('div');mini.className='board mini';
+  mini.style.setProperty('--cols',(L&&L.cols)||14);mini.style.setProperty('--rows',(L&&L.rows)||12);
+  if(L)renderPattern(mini,L,diff==='easy'?'easy':'medium');else mini.innerHTML='<div class="mini-q">?</div>';
+  return mini;
 }
+// view: 'cats' (kategorie) albo 'levels' (plansze jednej kategorii); bez argumentów – odśwież obecny widok
+function openLevels(view,c){
+  if(view)pickerView=view;if(c!==undefined)pickerCat=c;
+  const cg=$('#cat-grid'),lg=$('#level-grid');cg.innerHTML='';lg.innerHTML='';
+  const cats=pickerView==='cats';
+  cg.hidden=!cats;lg.hidden=cats;$('#btn-cats').hidden=cats;
+  $('#levels-title').textContent=cats?tt('chooseCat'):catName(pickerCat);
+  $('#levels-sub').textContent=cats?tt('catsSub'):tt('levelsSub');
+  if(cats){
+    CATS.forEach((C,k)=>{
+      const ready=C.levels.filter(Boolean),done=ready.filter(id=>doneAny(id)).length;
+      const stars=ready.reduce((a,id)=>a+((readBest(id)||{}).stars||0),0);
+      const b=document.createElement('button');b.type='button';b.className='level-tile cat-tile'+(k===ci?' current':'')+(ready.length?'':' soon');b.disabled=!ready.length;
+      b.setAttribute('aria-label',catName(k)+(ready.length?'':' – '+tt('soon')));
+      b.appendChild(miniBoard(ready.length?LV[ready[ready.length-1]]:null));
+      b.insertAdjacentHTML('beforeend',`<div class="lt-name">${k+1}. ${catName(k)}</div><div class="lt-meta"><span>${ready.length?tt('doneOf',{d:done,all:ready.length}):''}</span>${ready.length?`<span>★ ${stars}</span>`:''}</div>`+
+        (!ready.length?`<span class="soon-badge">${tt('soon')}</span>`:!catComplete(k)?`<span class="prog-badge">${tt('inProgress')}</span>`:''));
+      if(ready.length)b.addEventListener('click',()=>{sfx.pick();openLevels('levels',k)});
+      cg.appendChild(b);
+    });
+  } else {
+    const C=CATS[pickerCat];
+    C.levels.forEach((id,s)=>{
+      const L=id&&LV[id],open=slotOpen(pickerCat,s),best=L&&readBest(id);
+      const name=L?lvName(L):(C.plan[lang]||C.plan.pl)[s];
+      const b=document.createElement('button');b.type='button';b.className='level-tile'+(pickerCat===ci&&s===li?' current':'')+(L?'':' soon');b.disabled=!open;
+      b.setAttribute('aria-label',tt('tileAria',{n:s+1,name})+(L?(open?'':tt('locked')):' – '+tt('soon')));
+      b.appendChild(miniBoard(L));
+      b.insertAdjacentHTML('beforeend',`<div class="lt-name">${s+1}. ${name}</div><div class="lt-meta">`+
+        (L?`<span>${L.pieces.length} ${blocksWord(L.pieces.length)}</span><span class="mini-stars">${starRow(best?best.stars:0)}</span>`:`<span>${tt('soon')}</span>`)+`</div>`+
+        (L&&!open?'<svg class="lock" viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="6" fill="#d9ccff" stroke="#8a78c4" stroke-width="3"/><path d="M15 19v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#8a78c4" stroke-width="3.5" stroke-linecap="round"/><circle cx="22" cy="28" r="3" fill="#4a3f6b"/></svg>':''));
+      if(open)b.addEventListener('click',()=>{sfx.unlock();setLevel(pickerCat,s)});
+      lg.appendChild(b);
+    });
+  }
+  $('#levels-overlay').hidden=false;
+  const cur=(cats?cg:lg).querySelector('.current');if(cur)cur.focus();
+}
+$('#btn-cats').addEventListener('click',()=>openLevels('cats'));
 function closeLevels(){
   $('#levels-overlay').hidden=true;
   // jeśli gra nie trwa i nie ma wygranej na ekranie – wróć do ekranu startu
@@ -1432,11 +1758,11 @@ function confetti(){
 /* ================= PRZYCISKI ================= */
 $('#btn-start').addEventListener('click',()=>{sfx.unlock();startRun()});
 $('#btn-again').addEventListener('click',()=>{sfx.unlock();newGame(true)});
-$('#btn-next').addEventListener('click',()=>{sfx.unlock();setLevel(Math.min(li+1,LEVELS.length-1))});
+$('#btn-next').addEventListener('click',()=>{sfx.unlock();const n=nextSlot(ci,li);if(n>=0)setLevel(ci,n)});
 $('#btn-restart').addEventListener('click',()=>{sfx.unlock();newGame(true)});
-$('#btn-levels').addEventListener('click',()=>{if(drag)return;$('#start-overlay').hidden=true;$('#win-overlay').hidden=true;openLevels()});
-$('#btn-start-levels').addEventListener('click',()=>{$('#start-overlay').hidden=true;openLevels()});
-$('#btn-win-levels').addEventListener('click',()=>{$('#win-overlay').hidden=true;openLevels()});
+$('#btn-levels').addEventListener('click',()=>{if(drag)return;$('#start-overlay').hidden=true;$('#win-overlay').hidden=true;openLevels('levels',ci)});
+$('#btn-start-levels').addEventListener('click',()=>{$('#start-overlay').hidden=true;openLevels('levels',ci)});
+$('#btn-win-levels').addEventListener('click',()=>{$('#win-overlay').hidden=true;openLevels(nextSlot(ci,li)<0?'cats':'levels',ci)});
 $('#btn-levels-close').addEventListener('click',closeLevels);
 $('#btn-sound').addEventListener('click',e=>{
   const m=sfx.toggle(),b=e.currentTarget;
@@ -1454,7 +1780,7 @@ function layoutMode(){
   if(c)map.forEach(([el,dest])=>{if(!el.__home)el.__home={p:el.parentNode,n:el.nextSibling};dest.appendChild(el)});
   else map.slice().reverse().forEach(([el])=>{if(el.__home)el.__home.p.insertBefore(el,el.__home.n)});
 }
-function onResize(){layoutMode();sizeTray()}
+function onResize(){layoutMode();sizeTray();updateChip()}
 window.addEventListener('resize',onResize);
 if(landscapeCompact.addEventListener)landscapeCompact.addEventListener('change',onResize);
 layoutMode();
@@ -1482,11 +1808,18 @@ document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',(
 $('#btn-lang').addEventListener('click',()=>setLang(lang==='pl'?'en':'pl'));
 
 // start: pierwsza odblokowana, jeszcze nieukończona plansza
-let startAt=0;
-for(let i=0;i<LEVELS.length;i++){if(unlocked(i))startAt=i;if(!doneAny(LEVELS[i].id))break}
-setLevel(startAt);
+let startC=0,startS=0;
+(function(){
+  let last=null;try{last=localStorage.getItem('quickbuilder-last')}catch(e){}
+  for(let c=0;c<CATS.length;c++){const s=CATS[c].levels.indexOf(last);if(last&&s>=0){startC=c;startS=s;return}}
+  const ids=CATS[0].levels;for(let s=0;s<ids.length;s++){if(slotOpen(0,s))startS=s;if(!doneAny(ids[s]))break}
+})();
+setLevel(startC,startS);
 applyLang();
-window.__quickBuilder={LEVELS};
+/* ---- ekran powitalny po otwarciu gry → potem wybór kategorii ---- */
+$('#start-overlay').hidden=true;$('#welcome-overlay').hidden=false;
+$('#btn-play').addEventListener('click',()=>{sfx.unlock();sfx.pick();$('#welcome-overlay').hidden=true;openLevels('cats')});
+window.__quickBuilder={LEVELS,CATS};
 })();
 </script>
 
