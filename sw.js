@@ -1,9 +1,10 @@
 // Quick Builder – tryb offline
-const CACHE='quick-builder-096f7bafaa';
+const CACHE='quick-builder-0415382f19';
 const ASSETS=["./", "index.html", "manifest.webmanifest", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "fonts/grandstander-latin-600-normal.woff2", "fonts/grandstander-latin-800-normal.woff2", "fonts/grandstander-latin-ext-600-normal.woff2", "fonts/grandstander-latin-ext-800-normal.woff2", "fonts/nunito-latin-600-normal.woff2", "fonts/nunito-latin-700-normal.woff2", "fonts/nunito-latin-800-normal.woff2", "fonts/nunito-latin-ext-600-normal.woff2", "fonts/nunito-latin-ext-700-normal.woff2", "fonts/nunito-latin-ext-800-normal.woff2"];
 
 self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));
+  // cache:'reload' – z serwera, z pominięciem pamięci HTTP przeglądarki (inaczej nowa wersja mogłaby zapisać stary index.html)
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()));
 });
 self.addEventListener('activate',e=>{
   e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('quick-builder-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
