@@ -3119,12 +3119,12 @@ function setDiff(d){
 }
 document.querySelectorAll('.diff [data-diff]').forEach(b=>b.addEventListener('click',()=>setDiff(b.dataset.diff)));
 
-function setLevel(c,s){
+function setLevel(c,s,autoStart){
   ci=c;li=s;level=LV[CATS[c].levels[s]];
   try{localStorage.setItem('quickbuilder-last',level.id)}catch(e){}
   [boardEl,previewEl].forEach(b=>boardVars(b,level));
   refreshDiffUI();
-  newGame(false);
+  newGame(!!autoStart);
 }
 
 function buildTray(){
@@ -3516,7 +3516,7 @@ function confetti(){
 /* ================= PRZYCISKI ================= */
 $('#btn-start').addEventListener('click',()=>{sfx.unlock();startRun()});
 $('#btn-again').addEventListener('click',()=>{sfx.unlock();newGame(true)});
-$('#btn-next').addEventListener('click',()=>{sfx.unlock();const n=nextSlot(ci,li);if(n>=0)setLevel(ci,n)});
+$('#btn-next').addEventListener('click',()=>{sfx.unlock();const n=nextSlot(ci,li);if(n>=0)setLevel(ci,n,true)});
 $('#btn-restart').addEventListener('click',()=>{sfx.unlock();newGame(true)});
 $('#btn-levels').addEventListener('click',()=>{if(drag)return;$('#start-overlay').hidden=true;$('#win-overlay').hidden=true;openLevels('levels',ci)});
 $('#btn-start-levels').addEventListener('click',()=>{$('#start-overlay').hidden=true;openLevels('levels',ci)});
