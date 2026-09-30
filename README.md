@@ -16,7 +16,7 @@
 
 ## Co jest w grze
 
-- **Kategorie po 10 plansz**, od najłatwiejszej (ok. 8 klocków) do najtrudniejszej (ok. 27 klocków). Plansze w kategorii odblokowują się po kolei.
+- **10 kategorii po 10 plansz (100 plansz)**, od najłatwiejszej (8 klocków) do najtrudniejszej (27 klocków). Plansze w kategorii odblokowują się po kolei.
 - **3 poziomy trudności:**
   - Łatwy – kolorowy wzór;
   - Średni – szara sylwetka, bez podziału na klocki;
@@ -26,20 +26,20 @@
 - **Aplikacja (PWA):** instaluje się jednym przyciskiem na iPhonie, iPadzie, Androidzie i komputerze. Działa na pełnym ekranie i bez internetu, sama się aktualizuje, nie zbiera ani nie wysyła żadnych danych.
 - Dźwięki, konfetti, rekordy i gwiazdki dla każdej planszy.
 
-## Kategorie
+## Kategorie (10 × 10 = 100 plansz)
 
-| # | Kategoria | Stan |
+| # | Kategoria | Plansze (od najłatwiejszej) |
 |---|---|---|
-| 1 | Budowle | ✅ 10/10 |
-| 2 | Maszyny budowlane | wkrótce |
-| 3 | Pojazdy | ✅ 10/10 |
-| 4 | Farma | 1/10 |
-| 5 | Zoo i dzikie zwierzęta | wkrótce |
-| 6 | Podwodny świat | wkrótce |
-| 7 | Kosmos | 1/10 |
-| 8 | Plac zabaw i park | wkrótce |
-| 9 | Miasto | wkrótce |
-| 10 | Dinozaury | wkrótce |
+| 1 | Budowle | Budka dla ptaków, Namiot, Domek, Igloo … Most, Zamek |
+| 2 | Maszyny budowlane | Taczka, Betoniarka, Walec … Dźwig, Gruszka do betonu, Plac budowy |
+| 3 | Pojazdy | Hulajnoga, Rower, Motocykl … Pociąg, Samolot, Wóz strażacki |
+| 4 | Farma | Kaczka, Kura, Świnka … Kurnik, Stodoła, Pasieka |
+| 5 | ZOO | Ślimak, Żółw, Sowa … Słoń, Żyrafa, Brama ZOO |
+| 6 | Podwodny świat | Rybka, Meduza, Krab … Łódź podwodna, Rafa koralowa, Skrzynia skarbów |
+| 7 | Kosmos | Planeta z pierścieniem, Księżyc z flagą … Baza na Księżycu, Układ Słoneczny |
+| 8 | Instrumenty | Bębenek, Marakasy, Cymbałki … Pianino, Perkusja, Scena koncertowa |
+| 9 | Miasto | Sygnalizator, Budka z lodami, Sklepik … Ratusz z zegarem, Wieżowiec, Ulica miasta |
+| 10 | Słodkości | Lizak, Lody w rożku, Babeczka … Tort urodzinowy, Domek z piernika, Cukiernia |
 
 <p>
   <img src="screenshots/phone.png" alt="Gra na telefonie w poziomie" width="49%">
@@ -56,8 +56,6 @@ Otwórz https://mjwawa.github.io/quick-builder/ i stuknij **Zainstaluj grę na e
 
 Uruchom grę raz z internetem – potem działa także offline.
 
-Postęp (odblokowane plansze, gwiazdki) zapisuje się na danym urządzeniu. Usunięcie ikony z ekranu usuwa też postęp.
-
 ## Pliki w repozytorium
 
 | Plik | Po co |
@@ -72,9 +70,20 @@ Postęp (odblokowane plansze, gwiazdki) zapisuje się na danym urządzeniu. Usun
 
 ## Publikacja i aktualizacja (GitHub Pages)
 
-1. Wrzuć pliki do repozytorium `quick-builder` (gałąź `main`, folder główny).
-2. **Settings → Pages** → *Deploy from a branch* → `main` / `(root)` → **Save**.
-3. Przy każdej nowej wersji podmień pliki w repozytorium. Zainstalowana apka pobierze nową wersję w tle i pokaże komunikat „Jest nowa wersja gry! – Odśwież”.
+1. Na github.com kliknij **New repository** → nazwa `quick-builder` → **Public** → **Create repository**.
+2. Kliknij **uploading an existing file** i przeciągnij **zawartość** folderu z grą – wszystkie pliki i foldery (`icons`, `fonts`, `splash`, `screenshots`), nie sam folder. To 68 plików, GitHub przyjmuje do 100 naraz. Nie wrzucaj ukrytego pliku `.DS_Store`.
+3. Kliknij **Commit changes**.
+4. **Settings → Pages** → *Source*: **Deploy from a branch** → *Branch*: `main`, folder `/ (root)` → **Save**.
+5. Po 1–2 minutach gra działa pod adresem https://mjwawa.github.io/quick-builder/.
+6. Przy każdej nowej wersji podmień pliki w repozytorium. Zainstalowana apka pobierze nową wersję w tle i pokaże komunikat „Jest nowa wersja gry! – Odśwież”.
+
+Zamiast GitHuba można użyć Netlify: przeciągnij folder na app.netlify.com/drop i załóż darmowe konto, żeby strona została na stałe.
+
+## Warto wiedzieć
+
+- Każde urządzenie ma własny postęp (odblokowane plansze, gwiazdki). Usunięcie ikony z ekranu usuwa też postęp.
+- W trakcie gry ekran nie gaśnie (gaśnie normalnie po 2 minutach bez dotyku).
+- Na iPhonie nie działają wibracje – to ograniczenie Apple dla aplikacji webowych.
 
 ---
 
@@ -84,7 +93,7 @@ Postęp (odblokowane plansze, gwiazdki) zapisuje się na danym urządzeniu. Usun
 
 ▶️ **Play:** https://mjwawa.github.io/quick-builder/
 
-- Categories with 10 levels each, from about 8 to about 27 blocks.
+- 10 categories × 10 levels = 100 levels (buildings, machines, vehicles, farm, zoo, underwater, space, instruments, city, sweets), from 8 to 27 blocks.
 - 3 difficulty modes: color pattern, gray silhouette, or build from memory.
 - Polish and English, with a language switch in the game.
 - Works with a mouse or a finger. On phones, play in landscape.
