@@ -500,13 +500,15 @@ body{overscroll-behavior-y:none}
 #levels-overlay .diff button{display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:8px;align-items:center;text-align:left;padding:5px 16px 5px 10px;border-radius:14px}
 #levels-overlay .diff button svg{grid-row:1 / 3;width:32px;height:27px}
 #levels-overlay .diff button[aria-checked="true"]{box-shadow:0 3px 0 #cdbcff;transform:translateY(-1px)}
-#levels-overlay .level-grid{grid-column:1 / -1;grid-row:4;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr) auto auto);gap:0 14px;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 2px 6px}
+#levels-overlay .level-grid{grid-column:1 / -1;grid-row:4;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:12px 14px;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 2px 6px}
 #levels-overlay .level-grid[hidden]{display:none}
-#levels-overlay .level-tile{grid-row:span 3;display:grid;grid-template-rows:subgrid;gap:6px;margin-bottom:12px;min-height:0}
-#levels-overlay .level-tile:nth-child(n+6){margin-bottom:0}
-.lt-pic{position:relative;min-height:0;container-type:size;display:grid;place-items:center}
-.lt-pic .board.mini{width:min(100cqw,calc(100cqh * var(--cols,14) / var(--rows,12)));height:auto}
-.lt-pic .lock{top:50%;width:min(44px,60cqh);height:min(44px,60cqh)}
+#levels-overlay .level-tile{display:flex;flex-direction:column;gap:6px;min-height:0;overflow:hidden}
+#levels-overlay .lt-meta{margin-top:auto}
+.lt-pic{position:relative;flex:none;display:flex;justify-content:center}
+.lt-pic .board.mini{width:var(--pw,100%);flex:none}
+.lt-pic .lock{top:50%;width:min(44px,calc(var(--pw,88px) * .5));height:min(44px,calc(var(--pw,88px) * .5))}
+#levels-overlay .level-grid.measure .lt-pic{flex:1 1 0;min-height:0}
+#levels-overlay .level-grid.measure .board.mini{display:none}
 .lt-name{align-self:start}
 .lt-short{display:none}
 @media (min-height:860px) and (min-width:1021px){#levels-overlay #levels-sub{display:block}}
@@ -519,16 +521,22 @@ body{overscroll-behavior-y:none}
   #levels-overlay .card>.lang button{padding:3px 9px;font-size:13px}
   #levels-overlay #btn-levels-close{font-size:13.5px;padding:4px 12px;box-shadow:0 3px 0 var(--shadow)}
   #levels-overlay .diff button{padding:2px 12px 2px 8px;border-radius:11px;column-gap:6px}
+  /* na telefonie trudność wybiera się na karcie startu – tu więcej miejsca na obrazki */
+  #levels-overlay .card.wide .diff{display:none}
+  #levels-overlay .card.wide{grid-template-rows:auto auto auto minmax(0,1fr)}
   #levels-overlay .diff button small{display:none}
   #levels-overlay .diff button b{font-size:14px}
   #levels-overlay .diff button svg{width:22px;height:18px}
-  #levels-overlay .level-grid{gap:0 8px}
-  #levels-overlay .level-tile{padding:5px 6px;gap:2px;border-radius:13px;border-width:2px;margin-bottom:7px;box-shadow:0 3px 0 var(--shadow)}
-  #levels-overlay .level-tile:nth-child(n+6){margin-bottom:0}
+  #levels-overlay .level-grid{gap:7px 8px}
+  #levels-overlay .level-tile{padding:5px 6px;gap:2px;border-radius:13px;border-width:2px;box-shadow:0 3px 0 var(--shadow)}
   #levels-overlay .lt-name{font-size:12.5px;line-height:1.1}
   #levels-overlay .lt-meta{font-size:11px;gap:0 4px;flex-wrap:nowrap}
   #levels-overlay .lt-full,#levels-overlay .lt-count{display:none}
   #levels-overlay .lt-short{display:inline}
+  #levels-overlay .cat-tile .lt-num{display:none}
+  #levels-overlay .lt-name{text-align:center;align-self:stretch}
+  #levels-overlay .lt-meta{justify-content:center;gap:0 8px;margin-top:0}
+  #levels-overlay .level-tile{justify-content:center}
   #levels-overlay .mini-stars svg{width:12px;height:12px}
   #levels-overlay .soon-badge,#levels-overlay .prog-badge{font-size:9px;top:5px;right:5px;padding:0 5px}
 }
@@ -542,13 +550,13 @@ body{overscroll-behavior-y:none}
   #levels-overlay .card.wide .diff{grid-row:3}
   #levels-overlay .diff button small{display:none}
   #levels-overlay .level-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:max-content;gap:10px}
-  #levels-overlay .level-tile{grid-row:auto;display:flex;margin:0;min-height:auto}
-  #levels-overlay .lt-pic{container-type:normal;display:block;flex:none}
+  #levels-overlay .level-tile{min-height:auto;overflow:visible}
+  #levels-overlay .lt-pic{display:block;flex:none!important}
   #levels-overlay .card.wide .diff{justify-self:stretch;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
   #levels-overlay .diff button{padding:4px 6px;column-gap:4px;justify-content:center}
   #levels-overlay .diff button b{font-size:14px}
   #levels-overlay .diff button svg{width:22px;height:18px}
-  #levels-overlay .lt-pic .board.mini{width:100%}
+  #levels-overlay .lt-pic .board.mini{width:100%!important;display:block!important}
   #levels-overlay .lt-pic .lock{width:44px;height:44px}
 }
 </style>
@@ -3441,6 +3449,21 @@ function boardVars(el,L){
   el.style.setProperty('--cols',(L&&L.cols)||14);el.style.setProperty('--rows',(L&&L.rows)||12);
   ['--board-top','--board-bottom','--board-edge'].forEach((v,i)=>{if(L&&L.bg)el.style.setProperty(v,L.bg[i]);else el.style.removeProperty(v)});
 }
+// rozmiar obrazków w kafelkach: jeden wspólny rozmiar, żeby wszystko zmieściło się bez przewijania
+function fitPics(){
+  const g=document.querySelector('#levels-overlay .level-grid:not([hidden])');if(!g||$('#levels-overlay').hidden)return;
+  const tiles=[...g.querySelectorAll('.level-tile')];
+  if(matchMedia('(orientation:portrait) and (max-width:700px)').matches){tiles.forEach(t=>t.style.removeProperty('--pw'));return}
+  g.classList.add('measure');const rows=new Map();
+  tiles.forEach(t=>{const p=t.querySelector('.lt-pic'),w=p.clientWidth,h=p.clientHeight,k=Math.round(t.offsetTop);
+    if(w>0)rows.set(k,Math.min(rows.has(k)?rows.get(k):Infinity,w,h*14/12))});
+  g.classList.remove('measure');
+  // ten sam rozmiar w całym rzędzie, żeby kafelki wyglądały równo
+  tiles.forEach(t=>{const v=rows.get(Math.round(t.offsetTop));if(v&&isFinite(v))t.style.setProperty('--pw',Math.max(40,Math.floor(v))+'px')});
+}
+if(window.ResizeObserver)new ResizeObserver(()=>fitPics()).observe($('#levels-overlay'));
+addEventListener('resize',fitPics);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitPics);
 function picOf(L){const d=document.createElement('div');d.className='lt-pic';d.appendChild(miniBoard(L));return d}
 function miniBoard(L){
   const mini=document.createElement('div');mini.className='board mini';
@@ -3463,7 +3486,7 @@ function openLevels(view,c){
       const b=document.createElement('button');b.type='button';b.className='level-tile cat-tile'+(k===ci?' current':'')+(ready.length?'':' soon');b.disabled=!ready.length;
       b.setAttribute('aria-label',catName(k)+(ready.length?'':' – '+tt('soon')));
       b.appendChild(picOf(ready.length?LV[ready[0]]:null));
-      b.insertAdjacentHTML('beforeend',`<div class="lt-name">${k+1}. ${catName(k)}</div><div class="lt-meta"><span>${ready.length?`<span class="lt-full">${tt('doneOf',{d:done,all:ready.length})}</span><span class="lt-short">✓ ${done}/${ready.length}</span>`:''}</span>${ready.length?`<span>★ ${stars}</span>`:''}</div>`+
+      b.insertAdjacentHTML('beforeend',`<div class="lt-name"><span class="lt-num">${k+1}. </span>${catName(k)}</div><div class="lt-meta"><span>${ready.length?`<span class="lt-full">${tt('doneOf',{d:done,all:ready.length})}</span><span class="lt-short">✓ ${done}/${ready.length}</span>`:''}</span>${ready.length?`<span>★ ${stars}</span>`:''}</div>`+
         (!ready.length?`<span class="soon-badge">${tt('soon')}</span>`:!catComplete(k)?`<span class="prog-badge">${tt('inProgress')}</span>`:''));
       if(ready.length)b.addEventListener('click',()=>{sfx.pick();openLevels('levels',k)});
       cg.appendChild(b);
@@ -3476,7 +3499,7 @@ function openLevels(view,c){
       const b=document.createElement('button');b.type='button';b.className='level-tile'+(pickerCat===ci&&s===li?' current':'')+(L?'':' soon');b.disabled=!open;
       b.setAttribute('aria-label',tt('tileAria',{n:s+1,name})+(L?(open?'':tt('locked')):' – '+tt('soon')));
       const pic=picOf(L);b.appendChild(pic);
-      b.insertAdjacentHTML('beforeend',`<div class="lt-name">${s+1}. ${name}</div><div class="lt-meta">`+
+      b.insertAdjacentHTML('beforeend',`<div class="lt-name"><span class="lt-num">${s+1}. </span>${name}</div><div class="lt-meta">`+
         (L?`<span class="lt-count">${L.pieces.length} ${blocksWord(L.pieces.length)}</span><span class="mini-stars">${starRow(best?best.stars:0)}</span>`:`<span>${tt('soon')}</span>`)+`</div>`+
         '');
       if(L&&!open)pic.insertAdjacentHTML('beforeend','<svg class="lock" viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="20" rx="6" fill="#d9ccff" stroke="#8a78c4" stroke-width="3"/><path d="M15 19v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#8a78c4" stroke-width="3.5" stroke-linecap="round"/><circle cx="22" cy="28" r="3" fill="#4a3f6b"/></svg>');
@@ -3484,7 +3507,7 @@ function openLevels(view,c){
       lg.appendChild(b);
     });
   }
-  $('#levels-overlay').hidden=false;
+  $('#levels-overlay').hidden=false;fitPics();
   const cur=(cats?cg:lg).querySelector('.current');if(cur)cur.focus();
 }
 $('#btn-cats').addEventListener('click',()=>openLevels('cats'));
