@@ -504,11 +504,10 @@ body{overscroll-behavior-y:none}
 #levels-overlay .level-grid[hidden]{display:none}
 #levels-overlay .level-tile{display:flex;flex-direction:column;gap:6px;min-height:0;overflow:hidden}
 #levels-overlay .lt-meta{margin-top:auto}
-.lt-pic{position:relative;flex:none;display:flex;justify-content:center}
-.lt-pic .board.mini{width:var(--pw,100%);flex:none}
+.lt-pic{position:relative;flex:none;display:block}
+.lt-pic .board.mini{display:block;width:var(--pw,100%);height:var(--ph,auto);margin:0 auto}
 .lt-pic .lock{top:50%;width:min(44px,calc(var(--pw,88px) * .5));height:min(44px,calc(var(--pw,88px) * .5))}
-#levels-overlay .level-grid.measure .lt-pic{flex:1 1 0;min-height:0}
-#levels-overlay .level-grid.measure .board.mini{display:none}
+
 .lt-name{align-self:start}
 .lt-short{display:none}
 @media (min-height:860px) and (min-width:1021px){#levels-overlay #levels-sub{display:block}}
@@ -556,7 +555,6 @@ body{overscroll-behavior-y:none}
   #levels-overlay .diff button{padding:4px 6px;column-gap:4px;justify-content:center}
   #levels-overlay .diff button b{font-size:14px}
   #levels-overlay .diff button svg{width:22px;height:18px}
-  #levels-overlay .lt-pic .board.mini{width:100%!important;display:block!important}
   #levels-overlay .lt-pic .lock{width:44px;height:44px}
 }
 </style>
@@ -3452,14 +3450,16 @@ function boardVars(el,L){
 // rozmiar obrazków w kafelkach: jeden wspólny rozmiar, żeby wszystko zmieściło się bez przewijania
 function fitPics(){
   const g=document.querySelector('#levels-overlay .level-grid:not([hidden])');if(!g||$('#levels-overlay').hidden)return;
-  const tiles=[...g.querySelectorAll('.level-tile')];
-  if(matchMedia('(orientation:portrait) and (max-width:700px)').matches){tiles.forEach(t=>t.style.removeProperty('--pw'));return}
-  g.classList.add('measure');const rows=new Map();
-  tiles.forEach(t=>{const p=t.querySelector('.lt-pic'),w=p.clientWidth,h=p.clientHeight,k=Math.round(t.offsetTop);
-    if(w>0)rows.set(k,Math.min(rows.has(k)?rows.get(k):Infinity,w,h*14/12))});
-  g.classList.remove('measure');
-  // ten sam rozmiar w całym rzędzie, żeby kafelki wyglądały równo
-  tiles.forEach(t=>{const v=rows.get(Math.round(t.offsetTop));if(v&&isFinite(v))t.style.setProperty('--pw',Math.max(40,Math.floor(v))+'px')});
+  const tiles=[...g.querySelectorAll('.level-tile')],px=v=>parseFloat(v)||0;
+  const free=matchMedia('(orientation:portrait) and (max-width:700px)').matches; // pion: lista przewijana, obrazek na całą szerokość
+  const rows=new Map(),size=new Map();
+  // wymiary liczone z wysokości kafelka (bez aspect-ratio / flex – Safari na iPadzie potrafił zwinąć obrazek do zera)
+  tiles.forEach(t=>{const cs=getComputedStyle(t),name=t.querySelector('.lt-name'),meta=t.querySelector('.lt-meta');
+    const w=t.clientWidth-px(cs.paddingLeft)-px(cs.paddingRight);
+    const h=t.clientHeight-px(cs.paddingTop)-px(cs.paddingBottom)-(name?name.offsetHeight:0)-(meta?meta.offsetHeight:0)-2*px(cs.rowGap||cs.gap);
+    const v=free?w:Math.min(w,h*14/12);size.set(t,v);const k=Math.round(t.offsetTop);rows.set(k,Math.min(rows.has(k)?rows.get(k):Infinity,v))});
+  tiles.forEach(t=>{let v=free?size.get(t):rows.get(Math.round(t.offsetTop));if(!(v>0)||!isFinite(v))v=100;v=Math.max(40,Math.floor(v));
+    t.style.setProperty('--pw',v+'px');t.style.setProperty('--ph',Math.round(v*12/14)+'px')});
 }
 if(window.ResizeObserver)new ResizeObserver(()=>fitPics()).observe($('#levels-overlay'));
 addEventListener('resize',fitPics);
