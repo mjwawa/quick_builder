@@ -2,7 +2,7 @@
 
 **Kolorowa gra w układanie klocków dla dzieci (7–9 lat).** Dziecko patrzy na wzór i przeciąga klocki na pole budowy. Buduje od dołu do góry, na czas i bez pomyłek.
 
-▶️ **Zagraj:** https://mjwawa.github.io/quick-builder/
+▶️ **Zagraj:** https://mjwawa.github.io/quick_builder/
 
 ![Quick Builder – gra na komputerze](screenshots/desktop.png)
 
@@ -48,7 +48,7 @@
 
 ## Instalacja
 
-Otwórz https://mjwawa.github.io/quick-builder/ i stuknij **Zainstaluj grę na ekranie** na ekranie powitalnym.
+Otwórz https://mjwawa.github.io/quick_builder/ i stuknij **Zainstaluj grę na ekranie** na ekranie powitalnym.
 
 - **Android, komputer (Chrome/Edge):** otworzy się systemowe okno instalacji.
 - **iPhone/iPad (Safari):** **Udostępnij** (albo najpierw **⋯**) → **Do ekranu początkowego** → **Dodaj**.
@@ -70,11 +70,11 @@ Uruchom grę raz z internetem – potem działa także offline.
 
 ## Publikacja i aktualizacja (GitHub Pages)
 
-1. Na github.com kliknij **New repository** → nazwa `quick-builder` → **Public** → **Create repository**.
+1. Na github.com kliknij **New repository** → nazwa `quick_builder` → **Public** → **Create repository**.
 2. Kliknij **uploading an existing file** i przeciągnij **zawartość** folderu z grą – wszystkie pliki i foldery (`icons`, `fonts`, `splash`, `screenshots`), nie sam folder. To 68 plików, GitHub przyjmuje do 100 naraz. Nie wrzucaj ukrytego pliku `.DS_Store`.
 3. Kliknij **Commit changes**.
 4. **Settings → Pages** → *Source*: **Deploy from a branch** → *Branch*: `main`, folder `/ (root)` → **Save**.
-5. Po 1–2 minutach gra działa pod adresem https://mjwawa.github.io/quick-builder/.
+5. Po 1–2 minutach gra działa pod adresem https://mjwawa.github.io/quick_builder/.
 6. Przy każdej nowej wersji podmień pliki w repozytorium. Zainstalowana apka pobierze nową wersję w tle i pokaże komunikat „Jest nowa wersja gry! – Odśwież”.
 
 Zamiast GitHuba można użyć Netlify: przeciągnij folder na app.netlify.com/drop i załóż darmowe konto, żeby strona została na stałe.
@@ -91,7 +91,7 @@ Zamiast GitHuba można użyć Netlify: przeciągnij folder na app.netlify.com/dr
 
 **Quick Builder is a colorful block-building game for kids aged 7–9.** Look at the pattern, drag the blocks onto the building area and build from the bottom up: fast and without mistakes.
 
-▶️ **Play:** https://mjwawa.github.io/quick-builder/
+▶️ **Play:** https://mjwawa.github.io/quick_builder/
 
 - 10 categories × 10 levels = 100 levels (buildings, machines, vehicles, farm, zoo, underwater, space, instruments, city, sweets), from 8 to 27 blocks.
 - 3 difficulty modes: color pattern, gray silhouette, or build from memory.
