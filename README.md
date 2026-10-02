@@ -22,7 +22,7 @@
   - Łatwy – kolorowy wzór;
   - Średni – szara sylwetka, bez podziału na klocki;
   - Trudny – wzór widać tylko przed startem, trzeba go zapamiętać.
-- **Języki:** polski, angielski, francuski, hiszpański i niemiecki – do wyboru z listy w grze. Przy pierwszym uruchomieniu gra włącza język przeglądarki (nieobsługiwany = angielski).
+- **Języki:** polski, angielski, francuski, hiszpański, niemiecki i portugalski (brazylijski) – do wyboru z listy w grze. Przy pierwszym uruchomieniu gra włącza język przeglądarki (nieobsługiwany = angielski).
 - **Komputer, tablet i telefon:** myszka albo palec. Na telefonie gra działa w poziomie.
 - **Aplikacja (PWA):** instaluje się jednym przyciskiem na iPhonie, iPadzie, Androidzie i komputerze. Działa na pełnym ekranie i bez internetu, sama się aktualizuje, nie zbiera ani nie wysyła żadnych danych.
 - Dźwięki, konfetti, rekordy, gwiazdki dla każdej planszy i licznik wszystkich zdobytych gwiazdek.
@@ -105,7 +105,7 @@ Zamiast GitHuba można użyć Netlify: przeciągnij folder na app.netlify.com/dr
 - 10 categories × 10 levels = 100 levels (buildings, machines, vehicles, farm, zoo, underwater, space, instruments, city, sweets), from 8 to 27 blocks.
 - Bonus category „Fairy-tale world” with 10 extra levels, unlocked by collecting stars (stars from every difficulty level add up).
 - 3 difficulty modes: color pattern, gray silhouette, or build from memory.
-- Polish, English, French, Spanish and German, chosen from a language list in the game (the browser language is used on first start).
+- Polish, English, French, Spanish, German and Portuguese (Brazil), chosen from a language list in the game (the browser language is used on first start).
 - Works with a mouse or a finger. On phones, play in landscape.
 - Installable web app (PWA): one-tap install on iPhone, iPad, Android and desktop; full screen, works offline, updates itself, collects no data.
 
