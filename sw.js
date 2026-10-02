@@ -1,5 +1,5 @@
 // Quick Builder – tryb offline
-const CACHE='quick-builder-22f09364cd';
+const CACHE='quick-builder-b8b32c51b4';
 const ASSETS=["./", "index.html", "manifest.webmanifest", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "fonts/grandstander-latin-600-normal.woff2", "fonts/grandstander-latin-800-normal.woff2", "fonts/grandstander-latin-ext-600-normal.woff2", "fonts/grandstander-latin-ext-800-normal.woff2", "fonts/nunito-latin-600-normal.woff2", "fonts/nunito-latin-700-normal.woff2", "fonts/nunito-latin-800-normal.woff2", "fonts/nunito-latin-ext-600-normal.woff2", "fonts/nunito-latin-ext-700-normal.woff2", "fonts/nunito-latin-ext-800-normal.woff2"];
 
 self.addEventListener('install',e=>{

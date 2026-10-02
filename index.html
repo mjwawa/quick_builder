@@ -544,15 +544,14 @@ body{overscroll-behavior-y:none}
   #levels-overlay #star-chip{font-size:12.5px;padding:1px 9px;border-width:2px}
   #levels-overlay #bonus-banner{padding:3px 12px;gap:8px;border-width:2px;border-radius:13px;box-shadow:0 3px 0 #e6c862}
   #levels-overlay .bn-icon{font-size:17px}
-  #levels-overlay #bonus-banner{grid-template-columns:auto auto minmax(0,1fr) auto;grid-template-areas:'icon text pics prog';row-gap:0}
-  #levels-overlay .bn-pics{gap:4px}
-  #levels-overlay .bn-pic .board{border-width:1px;border-radius:5px}
-  #levels-overlay .bn-text{flex-direction:row;align-items:baseline;gap:8px}
+  /* jeden rząd: nazwa nad licznikiem, a cała reszta szerokości na miniatury plansz */
+  #levels-overlay #bonus-banner{grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:'icon text pics' 'icon prog pics';row-gap:0;column-gap:10px}
+  #levels-overlay .bn-pics{gap:5px;align-self:center}
+  #levels-overlay .bn-pic .board{border-width:1.5px;border-radius:6px}
   #levels-overlay .bn-text b{font-size:14px}
-  #levels-overlay .bn-text small{font-size:11px}
-  #levels-overlay .bn-prog{flex-direction:row;align-items:center;gap:8px}
+  #levels-overlay .bn-text small,#levels-overlay .bn-bar{display:none}
+  #levels-overlay .bn-prog{align-items:flex-start}
   #levels-overlay .bn-stars{font-size:12.5px}
-  #levels-overlay .bn-bar{width:80px;height:7px}
   #levels-overlay .card>.lang button{padding:3px 9px;font-size:13px}
   #levels-overlay #btn-levels-close{font-size:13.5px;padding:4px 12px;box-shadow:0 3px 0 var(--shadow)}
   #levels-overlay .diff button{padding:2px 12px 2px 8px;border-radius:11px;column-gap:6px}
