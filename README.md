@@ -17,6 +17,7 @@
 ## Co jest w grze
 
 - **10 kategorii po 10 plansz (100 plansz)**, od najłatwiejszej (8 klocków) do najtrudniejszej (27 klocków). Plansze w kategorii odblokowują się po kolei.
+- **Kategoria bonusowa „Bajkowy świat”** – 10 dodatkowych plansz (od 10 do 28 klocków), które odblokowuje się zbieraniem gwiazdek. Liczą się gwiazdki z każdego poziomu trudności osobno, więc opłaca się zagrać też na Średnim i Trudnym.
 - **3 poziomy trudności:**
   - Łatwy – kolorowy wzór;
   - Średni – szara sylwetka, bez podziału na klocki;
@@ -24,7 +25,7 @@
 - **Dwa języki:** polski i angielski, z przełącznikiem w grze.
 - **Komputer, tablet i telefon:** myszka albo palec. Na telefonie gra działa w poziomie.
 - **Aplikacja (PWA):** instaluje się jednym przyciskiem na iPhonie, iPadzie, Androidzie i komputerze. Działa na pełnym ekranie i bez internetu, sama się aktualizuje, nie zbiera ani nie wysyła żadnych danych.
-- Dźwięki, konfetti, rekordy i gwiazdki dla każdej planszy.
+- Dźwięki, konfetti, rekordy, gwiazdki dla każdej planszy i licznik wszystkich zdobytych gwiazdek.
 
 ## Kategorie (10 × 10 = 100 plansz)
 
@@ -40,6 +41,14 @@
 | 8 | Instrumenty | Bębenek, Marakasy, Cymbałki … Pianino, Perkusja, Scena koncertowa |
 | 9 | Miasto | Sygnalizator, Budka z lodami, Sklepik … Ratusz z zegarem, Wieżowiec, Ulica miasta |
 | 10 | Słodkości | Lizak, Lody w rożku, Babeczka … Tort urodzinowy, Domek z piernika, Cukiernia |
+
+### Kategoria bonusowa: Bajkowy świat
+
+Plansze odblokowują się, gdy łączna liczba gwiazdek (ze wszystkich poziomów trudności) osiągnie próg. Po przekroczeniu progu gra pokazuje komunikat „Nowa plansza bonusowa!”.
+
+| Plansza | Grzybkowy domek | Czarodziejski kociołek | Latający dywan | Karoca z dyni | Jednorożec | Chatka na kurzej nóżce | Wieża Roszpunki | Statek piracki | Smok | Zamek w chmurach |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Próg | 10 ★ | 25 ★ | 50 ★ | 80 ★ | 120 ★ | 160 ★ | 210 ★ | 270 ★ | 340 ★ | 420 ★ |
 
 <p>
   <img src="screenshots/phone.png" alt="Gra na telefonie w poziomie" width="49%">
@@ -94,6 +103,7 @@ Zamiast GitHuba można użyć Netlify: przeciągnij folder na app.netlify.com/dr
 ▶️ **Play:** https://mjwawa.github.io/quick_builder/
 
 - 10 categories × 10 levels = 100 levels (buildings, machines, vehicles, farm, zoo, underwater, space, instruments, city, sweets), from 8 to 27 blocks.
+- Bonus category „Fairy-tale world” with 10 extra levels, unlocked by collecting stars (stars from every difficulty level add up).
 - 3 difficulty modes: color pattern, gray silhouette, or build from memory.
 - Polish and English, with a language switch in the game.
 - Works with a mouse or a finger. On phones, play in landscape.
