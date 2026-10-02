@@ -1,6 +1,6 @@
 // Quick Builder – tryb offline
-const CACHE='quick-builder-2f12a19fbd';
-const ASSETS=["./", "index.html", "manifest.webmanifest", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "fonts/grandstander-latin-600-normal.woff2", "fonts/grandstander-latin-800-normal.woff2", "fonts/grandstander-latin-ext-600-normal.woff2", "fonts/grandstander-latin-ext-800-normal.woff2", "fonts/nunito-latin-600-normal.woff2", "fonts/nunito-latin-700-normal.woff2", "fonts/nunito-latin-800-normal.woff2", "fonts/nunito-latin-ext-600-normal.woff2", "fonts/nunito-latin-ext-700-normal.woff2", "fonts/nunito-latin-ext-800-normal.woff2"];
+const CACHE='quick-builder-ce61993925';
+const ASSETS=["./", "index.html", "manifest.webmanifest", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "fonts/grandstander-latin-600-normal.woff2", "fonts/grandstander-latin-800-normal.woff2", "fonts/grandstander-latin-ext-600-normal.woff2", "fonts/grandstander-latin-ext-800-normal.woff2", "fonts/nunito-latin-600-normal.woff2", "fonts/nunito-latin-700-normal.woff2", "fonts/nunito-latin-800-normal.woff2", "fonts/nunito-latin-ext-600-normal.woff2", "fonts/nunito-latin-ext-700-normal.woff2", "fonts/nunito-latin-ext-800-normal.woff2", "fonts/nunito-cyrillic-600-normal.woff2", "fonts/nunito-cyrillic-700-normal.woff2", "fonts/nunito-cyrillic-800-normal.woff2", "fonts/comfortaa-cyrillic-700-normal.woff2"];
 
 self.addEventListener('install',e=>{
   // cache:'reload' – z serwera, z pominięciem pamięci HTTP przeglądarki (inaczej nowa wersja mogłaby zapisać stary index.html)

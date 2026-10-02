@@ -22,7 +22,7 @@
   - Łatwy – kolorowy wzór;
   - Średni – szara sylwetka, bez podziału na klocki;
   - Trudny – wzór widać tylko przed startem, trzeba go zapamiętać.
-- **Języki:** polski, angielski, francuski, hiszpański, niemiecki, portugalski (brazylijski) i włoski – do wyboru z listy w grze. Przy pierwszym uruchomieniu gra włącza język przeglądarki (nieobsługiwany = angielski).
+- **Języki:** polski, angielski, francuski, hiszpański, niemiecki, portugalski (brazylijski), włoski i rosyjski – do wyboru z listy w grze. Przy pierwszym uruchomieniu gra włącza język przeglądarki (nieobsługiwany = angielski).
 - **Komputer, tablet i telefon:** myszka albo palec. Na telefonie gra działa w poziomie.
 - **Aplikacja (PWA):** instaluje się jednym przyciskiem na iPhonie, iPadzie, Androidzie i komputerze. Działa na pełnym ekranie i bez internetu, sama się aktualizuje, nie zbiera ani nie wysyła żadnych danych.
 - Dźwięki, konfetti, rekordy, gwiazdki dla każdej planszy i licznik wszystkich zdobytych gwiazdek.
@@ -73,7 +73,7 @@ Uruchom grę raz z internetem – potem działa także offline.
 | `manifest.webmanifest` | nazwa, ikona i ustawienia apki |
 | `sw.js` | tryb offline (pamięć podręczna plików gry) |
 | `icons/` | ikony apki (180, 192, 512 px + wersja 1024 px) |
-| `fonts/` | czcionki Grandstander i Nunito wbudowane w grę |
+| `fonts/` | czcionki Grandstander, Nunito i Comfortaa (tytuły po rosyjsku) wbudowane w grę |
 | `splash/` | ekrany startowe iPhone/iPad |
 | `screenshots/` | zrzuty ekranu do tego opisu |
 
